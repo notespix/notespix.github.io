@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Settings — NotesPix</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css"><link rel="stylesheet" href="css/dashboard.css"><link rel="stylesheet" href="css/theme.css"><link rel="stylesheet" href="css/settings.css">
+  <script src="js/theme.js" defer></script><script src="js/settings.js" defer></script>
+  <link rel="stylesheet" href="css/profile.css">
+  <script src="js/profile.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/supabase-config.js"></script>
+  <script>if(window.matchMedia&&window.matchMedia('(max-width: 767px)').matches)document.documentElement.classList.add('mobile-auth-pending');</script>
+  <script src="js/mobile-auth-gate.js" defer></script>
+  <script src="js/supabase-session-ui.js" defer></script>
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body class="dashboard-page settings-page">
+  <div class="dashboard-shell">
+    <aside class="dashboard-sidebar" id="dashboardSidebar" aria-label="Student dashboard navigation">
+      <a class="brand sidebar-brand" href="index.html"><span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 8.5 12 4l9 4.5-9 4.5L3 8.5Z"/><path d="M6.5 10.5v5.2c3.3 2.5 7.7 2.5 11 0v-5.2M21 9v6"/></svg></span><span>Notes<span class="brand-accent">Pix</span></span></a>
+      <div class="sidebar-label">WORKSPACE</div>
+      <nav class="sidebar-nav"><a class="sidebar-link" href="dashboard.html"><span class="side-icon">▦</span> Dashboard</a><a class="sidebar-link" href="explore.html"><span class="side-icon">⌕</span> Explore resources</a><a class="sidebar-link" href="my-uploads.html"><span class="side-icon">↥</span> My uploads</a><a class="sidebar-link" href="saved-notes.html"><span class="side-icon">♡</span> Saved notes</a><a class="sidebar-link" href="my-activity.html"><span class="side-icon">◷</span> My activity</a></nav>
+      <div class="sidebar-label sidebar-label-spaced">PERSONAL</div>
+      <nav class="sidebar-nav"><a class="sidebar-link" href="profile.html"><span class="side-icon">◎</span> My profile</a><a class="sidebar-link selected" href="settings.html" aria-current="page"><span class="side-icon">⚙</span> Settings</a></nav>
+      <div class="sidebar-spacer"></div>
+      <a class="sidebar-profile" href="profile.html"><span class="profile-avatar" data-profile-initials>S</span><span class="profile-copy"><strong data-profile-fullname>Student</strong><small>Student account</small></span><span class="profile-more">···</span></a>
+    </aside>
+    <div class="dashboard-main-wrap">
+      <header class="dashboard-topbar"><button class="dashboard-menu-toggle" id="dashboardMenuToggle" aria-label="Toggle sidebar" aria-expanded="false" aria-controls="dashboardSidebar">☰</button><div class="breadcrumb"><a href="index.html">Home</a><span>/</span><a href="dashboard.html">Dashboard</a><span>/</span><strong>Settings</strong></div><div class="topbar-actions"><button class="theme-toggle" type="button" data-theme-toggle aria-pressed="false"><span class="theme-toggle-icon">☾</span><span class="theme-toggle-label">Dark mode</span></button><a class="topbar-avatar" href="profile.html" aria-label="Open your profile" data-profile-initials>S</a></div></header>
+      <main class="dashboard-main settings-main">
+        <section class="welcome-row"><div><div class="dashboard-eyebrow"><span></span> PERSONALIZE YOUR SPACE</div><h1>Settings</h1><p>Make NotesPix feel comfortable for you.</p></div><a class="button button-primary upload-cta" href="dashboard.html">← Back to dashboard</a></section>
+        <section class="settings-layout">
+          <nav class="settings-nav" aria-label="Settings sections">
+            <a class="settings-nav-link active" href="#appearance">Appearance</a>
+            <a class="settings-nav-link" href="#preferences">Preferences</a>
+            <a class="settings-nav-link" href="#studyhub">Your NotesPix</a>
+            <a class="settings-nav-link" href="#support">Support</a>
+            <a class="settings-nav-link" href="#about-studyhub">About</a>
+          </nav>
+          <div class="settings-content">
+            <section class="settings-card" id="appearance"><div class="settings-card-heading"><div><h2>Appearance</h2><p>Choose the look that feels easiest on your eyes.</p></div><span class="settings-heading-icon">◐</span></div>
+              <div class="theme-choice-row"><div class="theme-choice-copy"><strong>Display theme</strong><small>Switch between light and dark mode across NotesPix pages.</small><span class="theme-status" data-theme-status>Light mode is on</span></div><button class="theme-toggle settings-theme-toggle" type="button" data-theme-toggle aria-pressed="false"><span class="theme-toggle-icon">☾</span><span class="theme-toggle-label">Dark mode</span></button></div>
+              <div class="theme-previews"><button class="theme-preview preview-light" type="button" data-select-theme="light" aria-pressed="false"><span class="preview-window"><i></i><i></i><i></i><b></b><b></b><b></b></span><span>Light</span><span class="preview-radio"></span></button><button class="theme-preview preview-dark" type="button" data-select-theme="dark" aria-pressed="false"><span class="preview-window"><i></i><i></i><i></i><b></b><b></b><b></b></span><span>Dark</span><span class="preview-radio"></span></button></div>
+
+            </section>
+            <section class="settings-card" id="preferences">
+              <div class="settings-card-heading"><div><h2>Dashboard preferences</h2><p>Choose which helpful panels appear in your student dashboard.</p></div><span class="settings-heading-icon">☷</span></div>
+              <label class="settings-toggle-row"><span><strong>Study tips</strong><small>Show or hide the NotesPix learning tips panel on your dashboard.</small></span><input id="prefStudyTips" type="checkbox"></label>
+              <label class="settings-toggle-row"><span><strong>Weekly activity summary</strong><small>Show or hide your seven-day activity chart on your dashboard.</small></span><input id="prefWeeklyActivity" type="checkbox"></label>
+
+            </section>
+
+            <section class="settings-card settings-link-card" id="studyhub">
+              <div class="settings-card-heading"><div><h2>Your NotesPix</h2><p>Quick access to the places where you manage your learning.</p></div><span class="settings-heading-icon">▦</span></div>
+              <div class="settings-link-list">
+                <a class="settings-link-row" href="profile.html"><span class="settings-link-icon">◎</span><span><strong>My Profile</strong><small>View your profile and manage account details.</small></span><span class="settings-link-arrow">↗</span></a>
+                <a class="settings-link-row" href="my-uploads.html"><span class="settings-link-icon">↥</span><span><strong>My Uploads</strong><small>Manage the study resources you have shared.</small></span><span class="settings-link-arrow">↗</span></a>
+                <a class="settings-link-row" href="saved-notes.html"><span class="settings-link-icon">♡</span><span><strong>Saved Notes</strong><small>Return to resources you have bookmarked.</small></span><span class="settings-link-arrow">↗</span></a>
+                <a class="settings-link-row" href="my-activity.html"><span class="settings-link-icon">◷</span><span><strong>My Activity</strong><small>Review your recent NotesPix activity.</small></span><span class="settings-link-arrow">↗</span></a>
+              </div>
+            </section>
+
+            <section class="settings-card settings-link-card" id="support">
+              <div class="settings-card-heading"><div><h2>Help &amp; Support</h2><p>Find answers or contact the NotesPix team when something is not working.</p></div><span class="settings-heading-icon">?</span></div>
+              <div class="settings-link-list">
+                <a class="settings-link-row" href="help.html"><span class="settings-link-icon">⌕</span><span><strong>Help Centre</strong><small>Browse frequently asked questions and guides.</small></span><span class="settings-link-arrow">↗</span></a>
+                <a class="settings-link-row" href="help.html#helpForm"><span class="settings-link-icon">✉</span><span><strong>Contact Support</strong><small>Send a support request about your account or the site.</small></span><span class="settings-link-arrow">↗</span></a>
+                <a class="settings-link-row" href="explore.html"><span class="settings-link-icon">⚑</span><span><strong>Explore &amp; Report Resources</strong><small>Open a resource to find its report option.</small></span><span class="settings-link-arrow">↗</span></a>
+              </div>
+            </section>
+
+            <section class="settings-card settings-link-card" id="about-studyhub">
+              <div class="settings-card-heading"><div><h2>About NotesPix</h2><p>Learn more about the platform and the guidelines that keep it useful for students.</p></div><span class="settings-heading-icon">ⓘ</span></div>
+              <div class="settings-link-list">
+                <a class="settings-link-row" href="about.html"><span class="settings-link-icon">✦</span><span><strong>About Us</strong><small>Our purpose and student-first approach.</small></span><span class="settings-link-arrow">↗</span></a>
+                <a class="settings-link-row" href="terms.html"><span class="settings-link-icon">▤</span><span><strong>Terms of Service</strong><small>Read the terms for using NotesPix.</small></span><span class="settings-link-arrow">↗</span></a>
+                <a class="settings-link-row" href="privacy-policy.html"><span class="settings-link-icon">◇</span><span><strong>Privacy Policy</strong><small>Understand how account and platform data is handled.</small></span><span class="settings-link-arrow">↗</span></a>
+                <a class="settings-link-row" href="how-it-works.html"><span class="settings-link-icon">↗</span><span><strong>How it Works</strong><small>See how to discover, save and share resources.</small></span><span class="settings-link-arrow">↗</span></a>
+              </div>
+            </section>
+</div>
+        </section>
+        <footer class="dashboard-footer"><span>© 2026 NotesPix. Built for students, together.</span><span><a href="explore.html">Explore</a><a href="index.html">Home</a></span></footer>
+      </main>
+    </div>
+  </div>
+  <div class="dashboard-overlay" id="dashboardOverlay"></div><div class="dashboard-toast" id="dashboardToast" role="status" aria-live="polite"></div>
+  <script src="js/admin-nav.js" defer></script>
+  <script src="js/responsive-nav.js" defer></script>
+</body>
+</html>

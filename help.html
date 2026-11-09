@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Get help using NotesPix, managing your account, finding resources, saving notes, and uploading study materials.">
+  <title>Help &amp; Support — NotesPix</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css"><link rel="stylesheet" href="css/theme.css"><link rel="stylesheet" href="css/profile.css"><link rel="stylesheet" href="css/about-help.css">
+  <script src="js/theme.js" defer></script><script src="js/profile.js" defer></script><script src="js/about-help.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/supabase-config.js"></script>
+  <script>if(window.matchMedia&&window.matchMedia('(max-width: 767px)').matches)document.documentElement.classList.add('mobile-auth-pending');</script>
+  <script src="js/mobile-auth-gate.js" defer></script>
+  <script src="js/supabase-data.js" defer></script>
+  <script src="js/supabase-session-ui.js" defer></script>
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body class="phase3-page info-page">
+<header class="site-header"><div class="header-inner container">
+  <a class="brand" href="index.html" aria-label="NotesPix home"><span class="brand-mark" aria-hidden="true">▰</span><span>Notes<span class="brand-accent">Pix</span></span></a>
+  <nav class="primary-nav phase3-nav" aria-label="Main navigation"><a class="nav-link" href="index.html">Home</a><a class="nav-link" href="explore.html">Explore resources</a><a class="nav-link" href="upload.html">Upload</a><a class="nav-link" href="how-it-works.html">How it works</a></nav>
+  <div class="header-actions"><button class="theme-toggle" type="button" data-theme-toggle aria-pressed="false"><span class="theme-toggle-icon">☾</span><span class="theme-toggle-label">Dark mode</span></button>
+  <a class="login-link" href="login.html">Log in</a><a class="button button-primary button-small" href="signup.html">Join NotesPix ↗</a>
+  <div class="profile-menu" data-profile-menu><button class="profile-trigger" type="button" data-profile-trigger aria-expanded="false" aria-haspopup="true"><span class="profile-avatar" data-profile-initials>S</span><span class="profile-trigger-name" data-profile-name>Student</span><span class="profile-chevron">▾</span></button>
+  <div class="profile-dropdown" role="menu"><a href="dashboard.html" role="menuitem">▦ &nbsp; Dashboard</a><a href="profile.html" role="menuitem">◎ &nbsp; My Profile</a><a href="my-uploads.html" role="menuitem">↥ &nbsp; My Uploads</a><a href="saved-notes.html" role="menuitem">♡ &nbsp; Saved Notes</a><a href="my-activity.html" role="menuitem">◷ &nbsp; My Activity</a><a href="settings.html" role="menuitem">⚙ &nbsp; Settings</a><button type="button" class="profile-logout" data-profile-logout role="menuitem">↪ &nbsp; Log out</button></div></div></div>
+</div></header>
+<main class="container info-main">
+<section class="info-hero"><div class="eyebrow"><span class="eyebrow-dot"></span> HELP &amp; SUPPORT</div><h1>How can we <span>help you?</span></h1><p class="hero-description">Find answers about your NotesPix account, shared resources, uploads, and saved notes.</p></section>
+<section class="help-layout">
+ <div class="help-intro">
+  <h2>Frequently asked questions</h2><p>Choose a question to see the answer.</p>
+  <div class="faq-list">
+   <details class="faq-item"><summary>How do I find study resources?</summary><p>Open <a href="explore.html">Explore Resources</a> to browse published resources. Use the search box and available filters to find materials by title, subject, or format. Open a resource to view its details.</p></details>
+   <details class="faq-item"><summary>How do I save a resource?</summary><p>Open the resource details page and select <strong>Save</strong>. You can find your saved items later in <a href="saved-notes.html">Saved Notes</a>. You need to be signed in to save resources.</p></details>
+   <details class="faq-item"><summary>How do I upload and publish a resource?</summary><p>Sign in, open <a href="upload.html">Upload</a>, complete the required resource details, choose an allowed document, and submit it. NotesPix stores the resource record in its database and the file in NotesPix Storage. Published resources can be discovered by other students.</p></details>
+   <details class="faq-item"><summary>Which file types and sizes are supported?</summary><p>The current NotesPix upload setup accepts PDF, DOC/DOCX, PPT/PPTX, and XLS/XLSX files, with a maximum file size of 10 MB per upload. Upload availability can also depend on the storage quota of the NotesPix project.</p></details>
+   <details class="faq-item"><summary>Who can see the resources I publish?</summary><p>Resources marked as published are visible in Explore Resources. Do not upload private documents, personal records, copyrighted material you do not have permission to share, or files containing sensitive information.</p></details>
+   <details class="faq-item"><summary>Where can I manage my account?</summary><p>Open <a href="profile.html">My Profile</a> to view your account information and account actions. Use <a href="settings.html">Settings</a> to change your appearance and dashboard display preferences.</p></details>
+   <details class="faq-item"><summary>How do I change my password?</summary><p>Open your profile or account settings and use the password-change option. If you cannot access your account, use the password recovery option on the login page, if available.</p></details>
+   <details class="faq-item"><summary>How do I report a resource or a problem?</summary><p>Use the report option on the relevant resource page to report a resource. For account, upload, or website problems, send a support request using the form on this page. Include the page name and what you expected to happen.</p></details>
+  </div>
+ </div>
+ <aside class="help-contact">
+  <div class="info-icon">✉</div><h2>Contact NotesPix support</h2>
+  <p>Send a support request from your signed-in account. Your request will be saved securely with your account details.</p>
+  <form id="helpForm" class="help-form">
+   <label for="helpTopic">What do you need help with?</label>
+   <select id="helpTopic" name="topic" required>
+    <option value="">Choose a topic</option>
+    <option value="Login or profile">Login or profile</option>
+    <option value="Finding resources">Finding resources</option>
+    <option value="Upload issue">Upload issue</option>
+    <option value="Saved notes">Saved notes</option>
+    <option value="Report a resource">Report a resource</option>
+    <option value="Other">Other</option>
+   </select>
+   <label for="helpMessage">Describe the issue</label>
+   <textarea id="helpMessage" name="message" rows="5" maxlength="5000" placeholder="Tell us what happened, which page you were using, and what you expected..." required></textarea>
+   <button class="button button-primary" id="helpSubmit" type="submit">Send support request</button>
+   <p class="form-feedback" id="helpFeedback" role="status" aria-live="polite"></p>
+   <p class="help-signin-note">You must be signed in to submit a support request. <a href="login.html">Log in</a></p>
+  </form>
+ </aside>
+</section>
+</main>
+<footer class="site-footer"><div class="container footer-main">
+ <div class="footer-brand"><a class="brand brand-light" href="index.html"><span class="brand-mark" aria-hidden="true">▰</span><span>Notes<span class="brand-accent">Pix</span></span></a><p>A little more support for every student's journey.</p></div>
+ <div class="footer-column"><strong>Explore</strong><a href="explore.html">Resources</a><a href="how-it-works.html">How it works</a><a href="upload.html">Upload a resource</a></div>
+ <div class="footer-column"><strong>NotesPix</strong><a href="about.html">About us</a><a href="help.html">Help &amp; support</a><a href="terms.html">Terms &amp; Conditions</a><a href="privacy-policy.html">Privacy Policy</a></div>
+ </div><div class="container footer-bottom"><span>© <span id="currentYear">2026</span> NotesPix. Built for students.</span><span>Learn smarter, together.</span></div></footer>
+  <script src="js/responsive-nav.js" defer></script>
+</body></html>

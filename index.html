@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="NotesPix helps students discover notes, study resources and tools in one place.">
+  <title>NotesPix — Learn smarter, together</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/supabase-config.js"></script>
+  <script>if(window.matchMedia&&window.matchMedia('(max-width: 767px)').matches)document.documentElement.classList.add('mobile-auth-pending');</script>
+  <script src="js/mobile-auth-gate.js" defer></script>
+  <script src="js/supabase-session-ui.js" defer></script>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/app.js" defer></script>
+  <script src="js/homepage-real.js" defer></script>
+  <link rel="stylesheet" href="css/theme.css">
+  <script src="js/theme.js" defer></script>
+  <link rel="stylesheet" href="css/profile.css">
+  <script src="js/profile.js" defer></script>
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="header-inner container">
+      <a class="brand" href="index.html" aria-label="NotesPix home">
+        <span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 8.5 12 4l9 4.5-9 4.5L3 8.5Z"/><path d="M6.5 10.5v5.2c3.3 2.5 7.7 2.5 11 0v-5.2M21 9v6"/></svg></span>
+        <span>Notes<span class="brand-accent">Pix</span></span>
+      </a>
+
+      <button class="mobile-menu-toggle icon-button" id="mobileMenuToggle" aria-label="Open navigation" aria-expanded="false" aria-controls="primaryNav">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+
+      <nav class="primary-nav" id="primaryNav" aria-label="Main navigation">
+        <a class="nav-link active" href="index.html" aria-current="page">Home</a>
+        <a class="nav-link" href="explore.html">Explore resources</a>
+        <a class="nav-link" href="upload.html">Upload</a>
+        <a class="nav-link" href="how-it-works.html">How it works</a>
+      </nav>
+
+      <div class="header-actions">
+        <button class="theme-toggle" type="button" data-theme-toggle aria-pressed="false"><span class="theme-toggle-icon">☾</span><span class="theme-toggle-label">Dark mode</span></button>
+        <a class="login-link" href="login.html" data-demo-link="login">Log in</a>
+        <a class="button button-primary button-small" href="signup.html" data-demo-link="signup" data-auth-aware-cta>Join NotesPix <span aria-hidden="true">↗</span></a>
+      <div class="profile-menu" data-profile-menu>
+          <button class="profile-trigger" type="button" data-profile-trigger aria-expanded="false" aria-haspopup="true"><span class="profile-avatar" data-profile-initials> S </span><span class="profile-trigger-name" data-profile-name>Student</span><span class="profile-chevron">▾</span></button>
+          <div class="profile-dropdown" role="menu"><div class="profile-dropdown-head"><span class="profile-avatar" data-profile-initials>S</span><div><strong data-profile-fullname>Student</strong><small>Student account</small></div></div><a href="dashboard.html" role="menuitem">▦ &nbsp; Dashboard</a><a href="profile.html" role="menuitem">◎ &nbsp; My Profile</a><a href="my-uploads.html" role="menuitem">↥ &nbsp; My Uploads</a><a href="saved-notes.html" role="menuitem">♡ &nbsp; Saved Notes</a><a href="my-activity.html" role="menuitem">◷ &nbsp; My Activity</a><a href="settings.html" role="menuitem">⚙ &nbsp; Settings</a><button type="button" class="profile-logout" data-profile-logout role="menuitem">↪ &nbsp; Log out</button></div>
+        </div></div>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero-section">
+      <div class="hero-glow hero-glow-one" aria-hidden="true"></div>
+      <div class="hero-glow hero-glow-two" aria-hidden="true"></div>
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <div class="eyebrow"><span class="eyebrow-dot"></span> YOUR LEARNING COMMUNITY</div>
+          <h1>Make your next<br>big <span>breakthrough.</span></h1>
+          <p class="hero-description">Discover notes, share what you know, and find the resources that make studying feel a little easier.</p>
+          <div class="hero-actions">
+            <a class="button button-primary button-large" href="explore.html">Explore resources <span aria-hidden="true">→</span></a>
+            <a class="button button-secondary button-large" href="upload.html">↥ Upload a resource</a>
+          </div>
+          <div class="hero-proof">
+            <div class="avatar-stack" aria-hidden="true"><span>R</span><span>A</span><span>M</span><span>+</span></div>
+            <div><strong>A community built by students</strong><small>Learn together. Grow together.</small></div>
+          </div>
+        </div>
+
+        <div class="hero-visual" aria-label="Illustration of a student studying with learning resources">
+          <div class="visual-orbit orbit-one"></div>
+          <div class="visual-orbit orbit-two"></div>
+          <div class="student-illustration">
+            <div class="student-hair"></div>
+            <div class="student-face"><span class="eye eye-left"></span><span class="eye eye-right"></span><span class="smile"></span></div>
+            <div class="student-neck"></div>
+            <div class="student-body"><span class="shirt-line"></span></div>
+            <div class="student-arm arm-left"></div>
+            <div class="student-arm arm-right"></div>
+            <div class="book book-left"><span></span><span></span><span></span></div>
+            <div class="book book-right"><span></span><span></span><span></span></div>
+          </div>
+          <div class="floating-card floating-notes"><span class="floating-icon icon-blue">▤</span><span><strong>Study notes</strong><small>Ready when you are</small></span><span class="floating-check">✓</span></div>
+          <div class="floating-card floating-progress"><span class="progress-symbol">↗</span><span><strong>One step at a time</strong><small>Keep making progress</small></span></div>
+          <div class="floating-card floating-community"><span class="community-symbol">✦</span><span><strong>Learn together</strong><small>Share knowledge</small></span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="quick-search-section" aria-label="Find study resources">
+      <div class="container">
+        <form class="search-panel" id="resourceSearch">
+          <div class="search-heading">
+            <span class="search-heading-icon" aria-hidden="true">⌕</span>
+            <div><strong>What are you studying today?</strong><small>Find resources to help you move forward.</small></div>
+          </div>
+          <label class="search-input-wrap">
+            <span class="sr-only">Search resources</span>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 4.5 4.5"/></svg>
+            <input id="searchInput" type="search" placeholder="Search by title, subject, class, year or unit..." autocomplete="off">
+          </label>
+          <label class="sr-only" for="homeEducationFilter">Education level</label>
+          <select id="homeEducationFilter" class="search-select">
+            <option value="all">All classes / years</option>
+            <option value="school">School classes</option>
+            <option value="college">College / university</option>
+          </select>
+          <label class="sr-only" for="categoryFilter">Resource category</label>
+          <select id="categoryFilter" class="search-select">
+            <option value="all">All file formats</option>
+            <option value="PDF">PDF</option>
+            <option value="DOC">Word documents</option>
+            <option value="PPT">PowerPoint</option>
+          </select>
+          <button class="button button-primary search-button" type="submit">Search <span aria-hidden="true">→</span></button>
+        </form>
+      </div>
+    </section>
+
+    <section class="section section-levels" id="browse-levels">
+      <div class="container">
+        <div class="section-heading compact-heading">
+          <div><span class="section-kicker">BROWSE BY CLASS / YEAR</span><h2>Find your learning level.</h2><p>Choose your school class or college year to see relevant study material.</p></div>
+          <a class="text-link" href="explore.html">Browse all <span aria-hidden="true">→</span></a>
+        </div>
+        <div class="level-list" id="homeLevelList" aria-live="polite"><p class="home-level-loading">Loading classes and years…</p></div>
+      </div>
+    </section>
+
+    <section class="section section-resources" id="resources">
+      <div class="container">
+        <div class="section-heading">
+          <div><span class="section-kicker">YOUR STUDY SPACE</span><h2>Recently shared resources.</h2><p>A small selection of the latest student uploads. Explore the full library anytime.</p></div>
+          <a class="text-link" href="explore.html" data-demo-link="explore">Explore all resources <span aria-hidden="true">→</span></a>
+        </div>
+
+        <div class="resource-grid" id="resourceGrid" aria-live="polite">
+          <div class="home-resource-loading" id="homeResourcesLoading">Loading published resources…</div>
+        </div>
+        <p class="empty-state" id="emptyState" hidden>No published resources match your search. Try another keyword or format.</p>
+      </div>
+    </section>
+
+    <section class="section section-subjects" id="subjects">
+      <div class="container">
+        <div class="section-heading compact-heading">
+          <div><span class="section-kicker">BROWSE BY SUBJECT</span><h2>Find resources by subject.</h2><p>Subjects appear here as students share new resources.</p></div>
+          <a class="text-link" href="explore.html" data-demo-link="explore">All subjects <span aria-hidden="true">→</span></a>
+        </div>
+        <div class="subject-list" id="homeSubjectList" aria-live="polite">
+          <p class="home-subject-loading" id="homeSubjectsLoading">Loading available subjects…</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="community-section" id="how-it-works">
+      <div class="container community-panel">
+        <div class="community-copy">
+          <span class="section-kicker section-kicker-light">BETTER, TOGETHER</span>
+          <h2>Your notes could<br>help someone <span>shine.</span></h2>
+          <p>NotesPix is built around students helping students. Share what you've learned and make the next person's journey a little easier.</p>
+          <a href="upload.html" class="button button-white">Become a contributor <span aria-hidden="true">→</span></a>
+        </div>
+        <div class="community-art" aria-hidden="true">
+          <div class="community-circle circle-back"></div><div class="community-circle circle-front"></div>
+          <div class="community-person person-one"><span>R</span></div><div class="community-person person-two"><span>A</span></div><div class="community-person person-three"><span>S</span></div><div class="community-person person-four"><span>M</span></div>
+          <div class="community-note note-one">✦ Share knowledge</div><div class="community-note note-two">↗ Grow together</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="final-cta">
+      <div class="container final-cta-inner"><div><span class="section-kicker">YOUR NEXT CHAPTER STARTS HERE</span><h2>Ready to study smarter?</h2><p>Find a resource. Share an idea. Keep moving forward.</p></div><a class="button button-primary button-large" href="signup.html" data-demo-link="signup" data-auth-aware-cta>Join the community <span aria-hidden="true">→</span></a></div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-main">
+      <div class="footer-brand"><a class="brand brand-light" href="index.html"><span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 8.5 12 4l9 4.5-9 4.5L3 8.5Z"/><path d="M6.5 10.5v5.2c3.3 2.5 7.7 2.5 11 0v-5.2M21 9v6"/></svg></span><span>Notes<span class="brand-accent">Pix</span></span></a><p>A little more support for every student's journey.</p></div>
+      <div class="footer-column"><strong>Explore</strong><a href="explore.html">Resources</a><a href="how-it-works.html">How it works</a></div>
+      <div class="footer-column"><strong>NotesPix</strong><a href="about.html">About us</a><a href="help.html">Help & support</a><a href="login.html" data-demo-link="login">Student login</a></div>
+    </div>
+    <div class="container footer-bottom"><span>© <span id="currentYear">2026</span> NotesPix. Built for students.</span><span>Learn smarter, together.</span></div>
+  </footer>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="js/responsive-nav.js" defer></script>
+</body>
+</html>

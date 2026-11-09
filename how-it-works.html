@@ -1,0 +1,43 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>How it works — NotesPix</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="css/style.css"><link rel="stylesheet" href="css/theme.css"><link rel="stylesheet" href="css/profile.css"><script src="js/theme.js" defer></script><script src="js/profile.js" defer></script>  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/supabase-config.js"></script>
+  <script>if(window.matchMedia&&window.matchMedia('(max-width: 767px)').matches)document.documentElement.classList.add('mobile-auth-pending');</script>
+  <script src="js/mobile-auth-gate.js" defer></script>
+  <script src="js/supabase-session-ui.js" defer></script>
+<link rel="stylesheet" href="css/how-it-works.css">  <link rel="stylesheet" href="css/responsive.css">
+</head><body class="phase3-page"><header class="site-header"><div class="header-inner container"><a class="brand" href="index.html" aria-label="NotesPix home"><span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 8.5 12 4l9 4.5-9 4.5L3 8.5Z"/><path d="M6.5 10.5v5.2c3.3 2.5 7.7 2.5 11 0v-5.2M21 9v6"/></svg></span><span>Notes<span class="brand-accent">Pix</span></span></a><nav class="primary-nav phase3-nav" aria-label="Main navigation"><a class="nav-link" href="index.html">Home</a><a class="nav-link" href="explore.html">Explore resources</a><a class="nav-link" href="upload.html">Upload</a><a class="nav-link active" href="how-it-works.html" aria-current="page">How it works</a></nav><div class="header-actions"><button class="theme-toggle" type="button" data-theme-toggle aria-pressed="false"><span class="theme-toggle-icon">☾</span><span class="theme-toggle-label">Dark mode</span></button><a class="login-link" href="login.html">Log in</a><a class="button button-primary button-small" href="signup.html">Join NotesPix ↗</a><div class="profile-menu" data-profile-menu><button class="profile-trigger" type="button" data-profile-trigger aria-expanded="false" aria-haspopup="true"><span class="profile-avatar" data-profile-initials>S</span><span class="profile-trigger-name" data-profile-name>Student</span><span class="profile-chevron">▾</span></button><div class="profile-dropdown" role="menu"><a href="dashboard.html" role="menuitem">▦ &nbsp; Dashboard</a><a href="profile.html" role="menuitem">◎ &nbsp; My Profile</a><a href="settings.html" role="menuitem">⚙ &nbsp; Settings</a><button type="button" class="profile-logout" data-profile-logout role="menuitem">↪ &nbsp; Log out</button></div></div></div></div></header><main class="container how-page">
+  <section class="how-hero">
+    <div class="how-copy">
+      <div class="eyebrow"><span class="eyebrow-dot"></span> YOUR LEARNING JOURNEY</div>
+      <h1>Learn together.<br><span>Grow together.</span></h1>
+      <p class="hero-description">NotesPix makes it easy to find useful study material, share what you know, and build a personal library that stays with you.</p>
+      <div class="hero-actions">
+        <a class="button button-primary button-large" href="explore.html">Explore resources <span aria-hidden="true">→</span></a>
+        <a class="button button-secondary button-large" href="upload.html">Share a resource <span aria-hidden="true">↗</span></a>
+      </div>
+      <div class="how-trust"><span class="trust-dot"></span> Built for students, powered by sharing</div>
+    </div>
+    <div class="how-visual" aria-label="NotesPix learning journey illustration">
+      <div class="visual-ring ring-a"></div><div class="visual-ring ring-b"></div>
+      <div class="journey-node node-explore"><span>⌕</span><b>Explore</b><small>Find resources</small></div>
+      <div class="journey-node node-share"><span>↑</span><b>Share</b><small>Help a student</small></div>
+      <div class="journey-node node-save"><span>♡</span><b>Save</b><small>Keep learning</small></div>
+      <div class="journey-center"><strong>SH</strong><small>NOTESPIX</small></div>
+      <div class="journey-spark spark-one">✦</div><div class="journey-spark spark-two">✧</div>
+    </div>
+  </section>
+
+  <section class="how-steps-section">
+    <div class="how-section-heading"><span class="section-kicker">A SIMPLE 3-STEP FLOW</span><h2>From curious to confident.</h2><p>Everything you need to make the most of shared learning.</p></div>
+    <div class="how-steps">
+      <article class="how-step"><div class="step-top"><span class="step-number">01</span><span class="step-icon">⌕</span></div><h3>Discover something useful</h3><p>Browse student-published notes and study material. Narrow things down by subject, format, or search.</p><a href="explore.html">Explore the library <span>→</span></a></article>
+      <article class="how-step featured-step"><div class="step-top"><span class="step-number">02</span><span class="step-icon">↑</span></div><h3>Share what you know</h3><p>Upload your notes or helpful study files. After a successful upload, your resource is published automatically.</p><a href="upload.html">Upload a resource <span>→</span></a></article>
+      <article class="how-step"><div class="step-top"><span class="step-number">03</span><span class="step-icon">♡</span></div><h3>Save it for later</h3><p>Bookmark resources you want to revisit and find them anytime in your personal Saved Notes library.</p><a href="login.html">Open your library <span>→</span></a></article>
+    </div>
+  </section>
+
+  <section class="how-community">
+    <div><span class="section-kicker">BETTER TOGETHER</span><h2>One helpful upload can make someone’s day.</h2><p>Every resource you share can save another student time, make a difficult topic clearer, or help someone prepare with confidence.</p></div>
+    <a class="button button-primary button-large" href="upload.html">Contribute to NotesPix ↗</a>
+  </section>
+</main>  <script src="js/responsive-nav.js" defer></script>
+</body></html>
