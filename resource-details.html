@@ -12,6 +12,8 @@
   <script>if(window.matchMedia&&window.matchMedia('(max-width: 767px)').matches)document.documentElement.classList.add('mobile-auth-pending');</script>
   <script src="js/mobile-auth-gate.js" defer></script><script src="js/supabase-session-ui.js" defer></script>
   <link rel="stylesheet" href="css/responsive.css">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <meta name="theme-color" content="#071638">
 </head>
 <body class="phase3-page resource-details-page">
 <header class="site-header"><div class="header-inner container">
@@ -27,7 +29,7 @@
   <section id="resourceError" class="resource-state" role="alert" hidden><div class="state-icon">!</div><h1 id="errorTitle">Resource unavailable</h1><p id="errorMessage">This resource could not be loaded.</p><a class="button button-primary" href="explore.html">Browse resources</a></section>
   <div id="resourceContent" class="detail-layout" hidden>
     <section class="detail-primary">
-      <div class="detail-cover" aria-hidden="true"><div class="cover-orbit cover-orbit-one"></div><div class="cover-orbit cover-orbit-two"></div><div class="cover-document"><div class="cover-file-icon" id="coverFormat">FILE</div><div class="cover-line long"></div><div class="cover-line"></div><div class="cover-line short"></div><div class="cover-graphic"><span>SH</span><i></i><i></i><i></i></div><div class="cover-line long"></div><div class="cover-line"></div></div><span class="cover-caption">STUDY SMARTER, TOGETHER</span></div>
+      <div class="detail-cover" aria-hidden="true"><div class="cover-orbit cover-orbit-one"></div><div class="cover-orbit cover-orbit-two"></div><div class="cover-document"><div class="cover-file-icon" id="coverFormat">FILE</div><div class="cover-line long"></div><div class="cover-line"></div><div class="cover-line short"></div><div class="cover-graphic"><span>N</span><i></i><i></i><i></i></div><div class="cover-line long"></div><div class="cover-line"></div></div><span class="cover-caption">STUDY SMARTER, TOGETHER</span></div>
       <div class="detail-title-row"><div class="detail-heading"><div class="detail-tags"><span class="detail-tag tag-blue" id="resourceSubject">RESOURCE</span><span class="detail-tag neutral-tag" id="resourceFormatTag">DOCUMENT</span></div><h1 id="resourceTitle"></h1><p class="detail-subtitle" id="resourceSubtitle"></p></div><div class="detail-actions"><button class="save-button" id="saveResource" type="button" aria-pressed="false"><span>♡</span> Save</button><button type="button" id="reportResource" class="report-link report-top-action">⚑ Report</button></div></div>
       <div class="detail-stats" id="resourceFacts"></div>
       <section class="detail-section" id="descriptionSection"><h2>About this resource</h2><p id="resourceDescription"></p></section>
@@ -39,7 +41,7 @@
         <div class="file-info"><span>File format</span><strong id="fileFormat"></strong></div><div class="file-info"><span>File size</span><strong id="fileSize">Checking…</strong></div><div class="file-info"><span>Published</span><strong id="publishedDate"></strong></div><div class="file-info optional-info" id="educationInfo" hidden><span>Class / year</span><strong id="educationValue"></strong></div><div class="file-info optional-info" id="unitInfo" hidden><span>Unit / topic</span><strong id="unitValue"></strong></div>
         <button class="button button-primary download-button" id="downloadResource" type="button">↓ &nbsp; Download resource</button><small class="download-note" id="downloadNote">Your download will open in a new tab.</small>
       </div>
-      <div class="author-panel"><span class="author-avatar" id="authorAvatar">SH</span><div><span class="author-label">SHARED BY</span><strong id="authorName">NotesPix student</strong><small>Student contributor</small></div><span class="author-badge">✦</span></div>
+      <div class="author-panel"><span class="author-avatar" id="authorAvatar">N</span><div><span class="author-label">SHARED BY</span><strong id="authorName">NotesPix student</strong><small>Student contributor</small></div><span class="author-badge">✦</span></div>
       <div class="safety-panel"><span>🛡️</span><div><strong>Community first</strong><p>Help keep NotesPix useful by reporting broken or inappropriate resources.</p><button type="button" class="report-link" id="reportResourceSide">Report this resource</button></div></div>
     </aside>
   </div>
