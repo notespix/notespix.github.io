@@ -1,40 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <script async src="https://www.googletagmanager.com/gtm.js?id=GTM-MSJ7TPD4"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-  </script>
+  <script src="js/analytics.js"></script>
 
   <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta http-equiv="Content-Security-Policy" content="object-src 'none'; base-uri 'self'; form-action 'self'">
   <meta name="description" content="Explore student-shared study notes and learning resources on NotesPix.">
   <title>Explore Resources — NotesPix</title>
   <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css"><link rel="stylesheet" href="css/phase3.css"><link rel="stylesheet" href="css/explore.css">
-  <script src="js/supabase-data.js" defer></script>
+  <link rel="stylesheet" href="css/style.css"><link rel="stylesheet" href="css/pages.css"><link rel="stylesheet" href="css/explore.css">
+  <script src="js/supabase-data.js"></script>
   <script src="js/explore.js" defer></script>
   <link rel="stylesheet" href="css/theme.css">
   <script src="js/theme.js" defer></script>
   <link rel="stylesheet" href="css/profile.css">
   <script src="js/profile.js" defer></script>
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/vendor/supabase.js"></script>
   <script src="js/supabase-config.js"></script>
-  <script>if(window.matchMedia&&window.matchMedia('(max-width: 767px)').matches)document.documentElement.classList.add('mobile-auth-pending');</script>
+  <script src="js/mobile-auth-init.js"></script>
   <script src="js/mobile-auth-gate.js" defer></script>
   <script src="js/supabase-session-ui.js" defer></script>
   <link rel="stylesheet" href="css/responsive.css">
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <meta name="theme-color" content="#071638">
 </head>
-<body class="phase3-page explore-page">
+<body class="page-shell explore-page">
   <header class="site-header">
     <div class="header-inner container">
       <a class="brand" href="index.html" aria-label="NotesPix home"><span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 8.5 12 4l9 4.5-9 4.5L3 8.5Z"/><path d="M6.5 10.5v5.2c3.3 2.5 7.7 2.5 11 0v-5.2M21 9v6"/></svg></span><span>Notes<span class="brand-accent">Pix</span></span></a>
       <button class="mobile-menu-toggle icon-button" id="mobileMenuToggle" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="primaryNav"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
-      <nav class="primary-nav phase3-nav" id="primaryNav" aria-label="Main navigation"><a class="nav-link" href="index.html">Home</a><a class="nav-link active" href="explore.html" aria-current="page">Explore resources</a><a class="nav-link" href="upload.html">Upload</a><a class="nav-link" href="how-it-works.html">How it works</a></nav>
+      <nav class="primary-nav page-nav" id="primaryNav" aria-label="Main navigation"><a class="nav-link" href="index.html">Home</a><a class="nav-link active" href="explore.html" aria-current="page">Explore resources</a><a class="nav-link" href="upload.html">Upload</a><a class="nav-link" href="how-it-works.html">How it works</a></nav>
       <div class="header-actions">
         <button class="theme-toggle" type="button" data-theme-toggle aria-pressed="false"><span class="theme-toggle-icon">☾</span><span class="theme-toggle-label">Dark mode</span></button><a class="login-link" href="login.html">Log in</a><a class="button button-primary button-small" href="signup.html" data-auth-aware-cta>Join NotesPix <span>↗</span></a><div class="profile-menu" data-profile-menu>
           <button class="profile-trigger" type="button" data-profile-trigger aria-expanded="false" aria-haspopup="true"><span class="profile-avatar" data-profile-initials> S </span><span class="profile-trigger-name" data-profile-name>Student</span><span class="profile-chevron">▾</span></button>
@@ -122,8 +119,8 @@
     </div>
     <section class="explore-bottom-cta"><div><span class="cta-spark">✦</span><h2>Have notes that could help someone?</h2><p>Share what you've learned and make studying a little easier for another student.</p></div><a class="button button-primary" href="signup.html" data-auth-aware-cta>Join the community <span>→</span></a></section>
   </main>
-  <footer class="phase3-footer"><div class="container"><span>© 2026 NotesPix. Built for students, together.</span><span><a href="index.html">Home</a><a href="login.html">Log in</a><a href="signup.html" data-auth-aware-cta>Join NotesPix</a></span></div></footer>
-  <div class="phase3-toast" id="phase3Toast" role="status" aria-live="polite"></div>
+  <footer class="page-footer"><div class="container"><span>© 2026 NotesPix. Built for students, together.</span><span><a href="index.html">Home</a><a href="login.html">Log in</a><a href="signup.html" data-auth-aware-cta>Join NotesPix</a></span></div></footer>
+  <div class="page-toast" id="pageToast" role="status" aria-live="polite"></div>
   <script src="js/responsive-nav.js" defer></script>
 </body>
 </html>

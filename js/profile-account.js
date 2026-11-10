@@ -4,20 +4,20 @@
   const form = $('profilePasswordForm');
   const message = $('profilePasswordMessage');
   const save = $('saveProfilePassword');
-  const USER_KEY = 'studyhub-demo-user';
 
   function client() {
-    if (!window.supabase?.createClient || !window.STUDYHUB_SUPABASE_URL || !window.STUDYHUB_SUPABASE_PUBLISHABLE_KEY) {
+    if (window.NotesPixData?.client) return window.NotesPixData.client();
+    if (!window.supabase?.createClient || !window.NOTESPIX_SUPABASE_URL || !window.NOTESPIX_SUPABASE_PUBLISHABLE_KEY) {
       throw new Error('NotesPix authentication is unavailable. Please refresh and try again.');
     }
-    if (!window.studyHubSupabaseClient) {
-      window.studyHubSupabaseClient = window.supabase.createClient(
-        window.STUDYHUB_SUPABASE_URL,
-        window.STUDYHUB_SUPABASE_PUBLISHABLE_KEY,
+    if (!window.notesPixSupabaseClient) {
+      window.notesPixSupabaseClient = window.supabase.createClient(
+        window.NOTESPIX_SUPABASE_URL,
+        window.NOTESPIX_SUPABASE_PUBLISHABLE_KEY,
         { auth: { persistSession: true, autoRefreshToken: true, detectSessionInUrl: true } }
       );
     }
-    return window.studyHubSupabaseClient;
+    return window.notesPixSupabaseClient;
   }
   const initials = value => String(value || 'S').trim().split(/\s+/).filter(Boolean).slice(0,2).map(x => x[0]).join('').toUpperCase() || 'S';
   function setMessage(text, state='') {
@@ -58,6 +58,7 @@
     const password = $('profileNewPassword').value;
     const confirm = $('profileConfirmPassword').value;
     if (password.length < 8) { setMessage('Use at least 8 characters for your password.', 'error'); return; }
+    if (password.length > 72) { setMessage('Please keep your password under 72 characters.', 'error'); return; }
     if (password !== confirm) { setMessage('The passwords do not match.', 'error'); return; }
     save.disabled = true;
     save.textContent = 'Updating…';
@@ -69,7 +70,7 @@
       form.hidden = true;
       setMessage('Your password has been updated successfully.', 'success');
     } catch (error) {
-      setMessage(error.message || 'Could not update your password. Please try again.', 'error');
+      setMessage(window.NotesPixData?.friendlyError(error, 'Could not update your password. Please try again.'), 'error');
     } finally {
       save.disabled = false;
       save.innerHTML = 'Update password <span aria-hidden="true">→</span>';
@@ -82,12 +83,11 @@
     try {
       const { error } = await client().auth.signOut();
       if (error) throw error;
-      try { localStorage.removeItem(USER_KEY); } catch (_) {}
       window.location.replace('index.html');
     } catch (error) {
       button.disabled = false;
       button.textContent = 'Sign out';
-      setMessage(error.message || 'Could not sign out. Please try again.', 'error');
+      setMessage(window.NotesPixData?.friendlyError(error, 'Could not sign out. Please try again.'), 'error');
     }
   });
 
@@ -131,15 +131,14 @@
       });
       if (error) throw error;
       try {
-        localStorage.removeItem(USER_KEY);
-        localStorage.removeItem('studyhub-dashboard-preferences');
+        localStorage.removeItem('notespix-preferences');
       } catch (_) {}
       await auth.auth.signOut();
       window.location.replace('index.html?account_deleted=1');
     } catch (error) {
       console.error('NotesPix account deletion failed:', error);
       if (deleteMessage) {
-        deleteMessage.textContent = error.message || 'Account could not be deleted. Please try again.';
+        deleteMessage.textContent = window.NotesPixData?.friendlyError(error, 'Account could not be deleted. Please try again.');
         deleteMessage.hidden = false;
         deleteMessage.dataset.state = 'error';
       }
@@ -151,6 +150,6 @@
   loadAccount().catch(error => {
     console.error('Could not load NotesPix account:', error);
     $('accountDisplayName').textContent = 'Account unavailable';
-    $('accountEmail').textContent = error.message || 'Please refresh and sign in again.';
+    $('accountEmail').textContent = window.NotesPixData?.friendlyError(error, 'Please refresh and sign in again.');
   });
 })();

@@ -1,4 +1,4 @@
-/* NotesPix Phase 2 — student dashboard */
+/* NotesPix student dashboard */
 .dashboard-page{background:#f6f8fc;color:#18243a;min-height:100vh}
 .dashboard-page *{box-sizing:border-box}
 .dashboard-shell{min-height:100vh;display:flex}
@@ -77,7 +77,7 @@ html[data-theme="dark"] .dashboard-page .goal-progress-copy strong{color:#e7ecf6
 .dashboard-page .sidebar-brand .brand-mark svg { width:23px; height:23px; fill:none; stroke:currentColor; stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round; }
 .dashboard-page .sidebar-brand-name { color:#e7ecf6; }
 .dashboard-page .sidebar-brand-name .brand-accent { color:#82a5ff; }
-.phase6-card-actions { display:flex; align-items:center; justify-content:flex-end; gap:10px; flex-wrap:wrap; }
+.workspace-card-actions { display:flex; align-items:center; justify-content:flex-end; gap:10px; flex-wrap:wrap; }
 .upload-delete-button { appearance:none; border:1px solid rgba(239,94,105,.35); background:transparent; color:#e87983; border-radius:9px; padding:9px 13px; font-family:inherit; font-size:12px; font-weight:600; cursor:pointer; }
 .upload-delete-button:hover { background:rgba(239,94,105,.10); border-color:#e87983; }
 .upload-delete-button:disabled { opacity:.6; cursor:wait; }

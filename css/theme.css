@@ -22,15 +22,15 @@ html[data-theme="dark"] .auth-form select,
 html[data-theme="dark"] .save-button,
 html[data-theme="dark"] .search-field,
 html[data-theme="dark"] .sort-select select,
-html[data-theme="dark"] .phase3-footer{background:var(--sh-surface)!important;border-color:var(--sh-border)!important;color:var(--sh-text)!important}
+html[data-theme="dark"] .page-footer{background:var(--sh-surface)!important;border-color:var(--sh-border)!important;color:var(--sh-text)!important}
 html[data-theme="dark"] .dashboard-page,
-html[data-theme="dark"] .phase3-page,
+html[data-theme="dark"] .page-shell,
 html[data-theme="dark"] .explore-page,
 html[data-theme="dark"] .auth-page{background:var(--sh-bg)!important;color:var(--sh-text)!important}
 html[data-theme="dark"] .dashboard-topbar,
 html[data-theme="dark"] .dashboard-sidebar,
 html[data-theme="dark"] .site-header,
-html[data-theme="dark"] .phase3-footer{border-color:var(--sh-border)!important}
+html[data-theme="dark"] .page-footer{border-color:var(--sh-border)!important}
 html[data-theme="dark"] .dashboard-page h1,
 html[data-theme="dark"] .dashboard-page h2,
 html[data-theme="dark"] .dashboard-page h3,
@@ -38,9 +38,9 @@ html[data-theme="dark"] .dashboard-page .stat-value,
 html[data-theme="dark"] .dashboard-page .continue-info h3,
 html[data-theme="dark"] .dashboard-page .community-resource strong,
 html[data-theme="dark"] .dashboard-page .breadcrumb strong,
-html[data-theme="dark"] .phase3-page h1,
-html[data-theme="dark"] .phase3-page h2,
-html[data-theme="dark"] .phase3-page h3,
+html[data-theme="dark"] .page-shell h1,
+html[data-theme="dark"] .page-shell h2,
+html[data-theme="dark"] .page-shell h3,
 html[data-theme="dark"] .explore-page h1,
 html[data-theme="dark"] .explore-page h2,
 html[data-theme="dark"] .explore-page h3,
@@ -55,7 +55,7 @@ html[data-theme="dark"] .dashboard-page .community-resource small,
 html[data-theme="dark"] .dashboard-page .muted-cell,
 html[data-theme="dark"] .dashboard-page .section-heading-row p,
 html[data-theme="dark"] .dashboard-page .panel-heading p,
-html[data-theme="dark"] .phase3-page p,
+html[data-theme="dark"] .page-shell p,
 html[data-theme="dark"] .explore-page p,
 html[data-theme="dark"] .explore-page .filter-check,
 html[data-theme="dark"] .explore-page .filter-note p,
@@ -70,7 +70,7 @@ html[data-theme="dark"] .dashboard-page .sidebar-help,
 html[data-theme="dark"] .dashboard-page .dashboard-tip,
 html[data-theme="dark"] .explore-page .explore-bottom-cta,
 html[data-theme="dark"] .explore-page .filter-note,
-html[data-theme="dark"] .phase3-page .resource-notice{background:#202b40!important;border-color:var(--sh-border)!important}
+html[data-theme="dark"] .page-shell .resource-notice{background:#202b40!important;border-color:var(--sh-border)!important}
 html[data-theme="dark"] .dashboard-page .community-table-head{background:#1c2638!important}
 html[data-theme="dark"] .dashboard-page .community-row,
 html[data-theme="dark"] .dashboard-page .detail-stats,
@@ -80,18 +80,18 @@ html[data-theme="dark"] .dashboard-page .resource-open-button,
 html[data-theme="dark"] .dashboard-page .table-action,
 html[data-theme="dark"] .dashboard-page .notification-button,
 html[data-theme="dark"] .dashboard-page .more-button{background:#1b2538!important;border-color:var(--sh-border)!important;color:#a9b7cf!important}
-html[data-theme="dark"] .phase3-page .detail-breadcrumb,
-html[data-theme="dark"] .phase3-page .detail-breadcrumb strong,
-html[data-theme="dark"] .phase3-page .detail-subtitle,
-html[data-theme="dark"] .phase3-page .detail-stats strong,
-html[data-theme="dark"] .phase3-page .detail-stats small,
-html[data-theme="dark"] .phase3-page .topic-list strong,
-html[data-theme="dark"] .phase3-page .file-info span,
-html[data-theme="dark"] .phase3-page .file-info strong,
-html[data-theme="dark"] .phase3-page .download-note{color:var(--sh-muted)!important}
-html[data-theme="dark"] .phase3-page .topic-list>div,
-html[data-theme="dark"] .phase3-page .file-info{border-color:var(--sh-border)!important}
-html[data-theme="dark"] .phase3-page .save-button.saved{background:#25365b!important;color:#b1c6ff!important}
+html[data-theme="dark"] .page-shell .detail-breadcrumb,
+html[data-theme="dark"] .page-shell .detail-breadcrumb strong,
+html[data-theme="dark"] .page-shell .detail-subtitle,
+html[data-theme="dark"] .page-shell .detail-stats strong,
+html[data-theme="dark"] .page-shell .detail-stats small,
+html[data-theme="dark"] .page-shell .topic-list strong,
+html[data-theme="dark"] .page-shell .file-info span,
+html[data-theme="dark"] .page-shell .file-info strong,
+html[data-theme="dark"] .page-shell .download-note{color:var(--sh-muted)!important}
+html[data-theme="dark"] .page-shell .topic-list>div,
+html[data-theme="dark"] .page-shell .file-info{border-color:var(--sh-border)!important}
+html[data-theme="dark"] .page-shell .save-button.saved{background:#25365b!important;color:#b1c6ff!important}
 html[data-theme="dark"] .explore-page .filter-heading,
 html[data-theme="dark"] .explore-page .filter-group,
 html[data-theme="dark"] .explore-page .explore-card-meta{border-color:var(--sh-border)!important}
@@ -113,12 +113,12 @@ html[data-theme="dark"] .auth-page .password-label-row label{color:#c5cee0}
 html[data-theme="dark"] .auth-page .auth-mobile-brand{color:var(--sh-text)}
 html[data-theme="dark"] .auth-page .auth-divider:before,
 html[data-theme="dark"] .auth-page .auth-divider:after{background:var(--sh-border)}
-html[data-theme="dark"] .phase3-page .site-header .brand,
-html[data-theme="dark"] .phase3-page .site-header .nav-link,
-html[data-theme="dark"] .phase3-page .site-header .login-link,
-html[data-theme="dark"] .phase3-footer a,
-html[data-theme="dark"] .phase3-footer span{color:var(--sh-muted)}
-html[data-theme="dark"] .phase3-page .site-header .brand-accent{color:#82a5ff}
+html[data-theme="dark"] .page-shell .site-header .brand,
+html[data-theme="dark"] .page-shell .site-header .nav-link,
+html[data-theme="dark"] .page-shell .site-header .login-link,
+html[data-theme="dark"] .page-footer a,
+html[data-theme="dark"] .page-footer span{color:var(--sh-muted)}
+html[data-theme="dark"] .page-shell .site-header .brand-accent{color:#82a5ff}
 html[data-theme="dark"] .auth-page .auth-form input:focus,
 html[data-theme="dark"] .auth-page .auth-form select:focus{border-color:#6488f0!important;box-shadow:0 0 0 3px #6488f018!important}
 html[data-theme="dark"] .explore-page .search-field input{color:var(--sh-text)}
@@ -152,12 +152,12 @@ html[data-theme="dark"] .explore-page .explore-card-bottom{color:var(--sh-muted)
 html[data-theme="dark"] .explore-page .explore-card-bottom a{color:#9eb8ff}
 html[data-theme="dark"] .explore-page .explore-card-body h3 a:hover{color:#9eb8ff}
 html[data-theme="dark"] .explore-page .explore-card-tags .mini-tag{filter:brightness(.85)}
-html[data-theme="dark"] .phase3-page .resource-notice strong{color:#e6d4a6}
-html[data-theme="dark"] .phase3-page .resource-notice p{color:#c0b18b}
-html[data-theme="dark"] .phase3-page .safety-panel strong{color:#c5d4f7}
-html[data-theme="dark"] .phase3-page .safety-panel p{color:#aab9d8}
-html[data-theme="dark"] .phase3-page .verified-label{background:#203c38!important;color:#8de0be!important}
-html[data-theme="dark"] .phase3-page .download-panel .file-info{border-color:var(--sh-border)}
+html[data-theme="dark"] .page-shell .resource-notice strong{color:#e6d4a6}
+html[data-theme="dark"] .page-shell .resource-notice p{color:#c0b18b}
+html[data-theme="dark"] .page-shell .safety-panel strong{color:#c5d4f7}
+html[data-theme="dark"] .page-shell .safety-panel p{color:#aab9d8}
+html[data-theme="dark"] .page-shell .verified-label{background:#203c38!important;color:#8de0be!important}
+html[data-theme="dark"] .page-shell .download-panel .file-info{border-color:var(--sh-border)}
 html[data-theme="dark"] .auth-page .auth-back-link a{color:var(--sh-muted)}
 html[data-theme="dark"] .auth-page .auth-legal{color:var(--sh-muted-2)!important}
 html[data-theme="dark"] .auth-page .checkbox-row{color:var(--sh-muted)}
@@ -171,46 +171,43 @@ html[data-theme="dark"] .theme-toggle{background:#1b2538;border-color:#34415a;co
 
 /* Navbar contrast fix: keep Log in readable in dark mode on every public page. */
 html[data-theme="dark"] .site-header .login-link,
-html[data-theme="dark"] .phase3-page .site-header .login-link { color: #e7ecf6 !important; }
+html[data-theme="dark"] .page-shell .site-header .login-link { color: #e7ecf6 !important; }
 html[data-theme="dark"] .site-header .login-link:hover,
-html[data-theme="dark"] .phase3-page .site-header .login-link:hover { color: #85a5ff !important; }
+html[data-theme="dark"] .page-shell .site-header .login-link:hover { color: #85a5ff !important; }
 
-/* Phase 6 contrast pass: student pages and upload form in both themes. */
-.phase6-page .phase6-toolbar h2,
-.phase6-page .phase6-resource h3,
-.phase6-page .phase6-empty h3,
-.phase6-page .phase6-activity h3,
-.phase6-page .phase6-saved-card h3 { color: #1d2b43; }
-.phase6-page .phase6-toolbar p,
-.phase6-page .phase6-resource p,
-.phase6-page .phase6-empty p,
-.phase6-page .phase6-activity p,
-.phase6-page .phase6-saved-card p { color: #66758c; }
-html[data-theme="dark"] .phase6-page .phase6-toolbar h2,
-html[data-theme="dark"] .phase6-page .phase6-resource h3,
-html[data-theme="dark"] .phase6-page .phase6-empty h3,
-html[data-theme="dark"] .phase6-page .phase6-activity h3,
-html[data-theme="dark"] .phase6-page .phase6-saved-card h3 { color: var(--sh-text) !important; }
-html[data-theme="dark"] .phase6-page .phase6-toolbar p,
-html[data-theme="dark"] .phase6-page .phase6-resource p,
-html[data-theme="dark"] .phase6-page .phase6-empty p,
-html[data-theme="dark"] .phase6-page .phase6-activity p,
-html[data-theme="dark"] .phase6-page .phase6-saved-card p,
-html[data-theme="dark"] .phase6-page .phase6-activity time { color: var(--sh-muted) !important; }
-html[data-theme="dark"] .phase3-page .upload-demo-form label { color: var(--sh-text) !important; }
-html[data-theme="dark"] .phase3-page .upload-demo-form input,
-html[data-theme="dark"] .phase3-page .upload-demo-form select { background: var(--sh-input) !important; border-color: var(--sh-border) !important; color: var(--sh-text) !important; }
-html[data-theme="dark"] .phase3-page .upload-demo-form input::placeholder { color: var(--sh-muted-2) !important; }
-html[data-theme="dark"] .phase3-page .upload-file-note,
-html[data-theme="dark"] .phase3-page .upload-form-message,
-html[data-theme="dark"] .phase3-page .upload-demo-notice { color: var(--sh-muted) !important; }
-html[data-theme="dark"] .phase3-page .upload-demo-notice,
-html[data-theme="dark"] .phase3-page .upload-form-message:not(:empty) { background: var(--sh-surface-2) !important; border: 1px solid var(--sh-border); }
-html[data-theme="dark"] .phase3-page .upload-demo-notice a { color: #a9c1ff !important; }
-html[data-theme="dark"] .phase3-page .upload-demo-actions .button-secondary { background: var(--sh-surface-2) !important; color: var(--sh-text) !important; border-color: var(--sh-border) !important; }
-html[data-theme="dark"] .phase3-page .profile-dropdown { background: var(--sh-surface) !important; border-color: var(--sh-border) !important; }
-html[data-theme="dark"] .phase3-page .profile-dropdown a,
-html[data-theme="dark"] .phase3-page .profile-dropdown button { color: var(--sh-text) !important; }
+/* Student pages and upload form in both themes. */
+.workspace-page .workspace-toolbar h2,
+.workspace-page .workspace-resource h3,
+.workspace-page .workspace-empty h3,
+.workspace-page .workspace-activity h3,
+.workspace-page .workspace-saved-card h3 { color: #1d2b43; }
+.workspace-page .workspace-toolbar p,
+.workspace-page .workspace-resource p,
+.workspace-page .workspace-empty p,
+.workspace-page .workspace-activity p,
+.workspace-page .workspace-saved-card p { color: #66758c; }
+html[data-theme="dark"] .workspace-page .workspace-toolbar h2,
+html[data-theme="dark"] .workspace-page .workspace-resource h3,
+html[data-theme="dark"] .workspace-page .workspace-empty h3,
+html[data-theme="dark"] .workspace-page .workspace-activity h3,
+html[data-theme="dark"] .workspace-page .workspace-saved-card h3 { color: var(--sh-text) !important; }
+html[data-theme="dark"] .workspace-page .workspace-toolbar p,
+html[data-theme="dark"] .workspace-page .workspace-resource p,
+html[data-theme="dark"] .workspace-page .workspace-empty p,
+html[data-theme="dark"] .workspace-page .workspace-activity p,
+html[data-theme="dark"] .workspace-page .workspace-saved-card p,
+html[data-theme="dark"] .workspace-page .workspace-activity time { color: var(--sh-muted) !important; }
+html[data-theme="dark"] .page-shell .upload-form label { color: var(--sh-text) !important; }
+html[data-theme="dark"] .page-shell .upload-form input,
+html[data-theme="dark"] .page-shell .upload-form select { background: var(--sh-input) !important; border-color: var(--sh-border) !important; color: var(--sh-text) !important; }
+html[data-theme="dark"] .page-shell .upload-form input::placeholder { color: var(--sh-muted-2) !important; }
+html[data-theme="dark"] .page-shell .upload-file-note,
+html[data-theme="dark"] .page-shell .upload-form-message { color: var(--sh-muted) !important; }
+html[data-theme="dark"] .page-shell .upload-form-message:not(:empty) { background: var(--sh-surface-2) !important; border: 1px solid var(--sh-border); }
+html[data-theme="dark"] .page-shell .upload-form-actions .button-secondary { background: var(--sh-surface-2) !important; color: var(--sh-text) !important; border-color: var(--sh-border) !important; }
+html[data-theme="dark"] .page-shell .profile-dropdown { background: var(--sh-surface) !important; border-color: var(--sh-border) !important; }
+html[data-theme="dark"] .page-shell .profile-dropdown a,
+html[data-theme="dark"] .page-shell .profile-dropdown button { color: var(--sh-text) !important; }
 
 /* Dark-mode contrast pass: public home page */
 html[data-theme="dark"] .site-header{background:rgba(16,21,34,.94)!important;border-color:var(--sh-border)!important}
@@ -235,7 +232,6 @@ html[data-theme="dark"] .site-footer{background:#0b1020!important;color:var(--sh
 html[data-theme="dark"] .site-footer .footer-column strong,html[data-theme="dark"] .site-footer .footer-brand p{color:var(--sh-text)!important}
 html[data-theme="dark"] .site-footer a,html[data-theme="dark"] .site-footer .footer-bottom{color:var(--sh-muted)!important}
 html[data-theme="dark"] .site-footer a:hover{color:#a9c1ff!important}
-html[data-theme="dark"] .demo-note{color:#a0abc0!important}
 html[data-theme="dark"] .login-link{color:#e7ecf6!important}
 
 

@@ -9,7 +9,7 @@
   const authNotice = document.getElementById('uploadAuthNotice');
   const syncUploadAccess = async () => {
     try {
-      const supabase = window.StudyHubData?.client?.();
+      const supabase = window.NotesPixData?.client?.();
       if (!supabase) throw new Error('NotesPix authentication is unavailable.');
       const { data, error } = await supabase.auth.getSession();
       if (error) throw error;
@@ -74,7 +74,7 @@
   form.addEventListener('submit', async event => {
     event.preventDefault();
     try {
-      const supabase = window.StudyHubData?.client?.();
+      const supabase = window.NotesPixData?.client?.();
       const { data, error } = await supabase.auth.getSession();
       if (error) throw error;
       if (!data.session) {
@@ -97,6 +97,10 @@
     const unitTopic = (education === 'school' ? schoolTopicInput?.value : unitTopicInput?.value || '').trim();
     const file = fileInput?.files?.[0];
     if (!title || !subject || !format || !file || !education || !academic) { setMessage('Please add the title, subject, class/year, file format, and choose a file.'); return; }
+    if (title.length > 100) { setMessage('Please keep the title under 100 characters.'); return; }
+    if (subject.length > 60) { setMessage('Please keep the subject under 60 characters.'); return; }
+    if (description.length > 500) { setMessage('Please keep the description under 500 characters.'); return; }
+    if (unitTopic.length > 100) { setMessage('Please keep the topic under 100 characters.'); return; }
     const ext = (file.name.split('.').pop() || '').toLowerCase();
     if (!mimeByExt[ext] || file.size > MAX) { setMessage('Choose a supported document of 10 MB or smaller.'); return; }
     const normalizedFormat = ({pdf:'PDF',doc:'DOCX',docx:'DOCX',ppt:'PPTX',pptx:'PPTX'})[ext];
@@ -105,7 +109,7 @@
     setMessage('Uploading file and publishing resource…');
     let uploadedPath = null;
     try {
-      const { supabase, user } = await window.StudyHubData.requireUser();
+      const { supabase, user } = await window.NotesPixData.requireUser();
       const safeName = file.name.normalize('NFKD').replace(/[^a-zA-Z0-9._-]+/g, '-').replace(/^-+|-+$/g, '').slice(-100) || `resource.${ext}`;
       uploadedPath = `${user.id}/${crypto.randomUUID()}-${safeName}`;
       const { error: storageError } = await supabase.storage.from('studyhub-resources').upload(uploadedPath, file, {
@@ -124,10 +128,7 @@
       window.location.href = 'my-uploads.html';
     } catch (error) {
       console.error('NotesPix resource upload failed:', error);
-      const raw = String(error?.message || 'Unknown error');
-      if (/row-level security|permission denied|not authorized/i.test(raw)) setMessage('Upload was blocked by Storage or database permissions. Please check the policies and try again.');
-      else if (/bucket not found/i.test(raw)) setMessage('The studyhub-resources Storage bucket was not found. Check the bucket name in Supabase.');
-      else setMessage(`Upload failed: ${raw}`);
+      setMessage(window.NotesPixData?.friendlyError(error, 'Upload failed. Please check your file and connection, then try again.'));
       submit.disabled = false;
     }
   });

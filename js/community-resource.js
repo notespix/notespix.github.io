@@ -1,4 +1,4 @@
-/* Resource details page: render only verified Supabase data; never show sample content. */
+/* Resource details page backed by Supabase data. */
 (() => {
   const $ = (selector, root = document) => root.querySelector(selector);
   const params = new URLSearchParams(location.search);
@@ -35,7 +35,7 @@
   };
   const prettyFormat = value => String(value || 'FILE').replace(/^application\//i, '').toUpperCase();
   const toast = message => {
-    const node = $('#phase3Toast');
+    const node = $('#pageToast');
     if (!node) return;
     node.textContent = message;
     node.classList.add('visible');
@@ -163,7 +163,7 @@
   async function loadResource() {
     if (!resourceId) { showError('This link does not contain a resource ID. Open a resource from Explore to view its details.'); return; }
     try {
-      const client = window.StudyHubData.client();
+      const client = window.NotesPixData.client();
       const { data, error } = await client.from('resources').select('*').eq('id', resourceId).maybeSingle();
       if (error) throw error;
       if (!data || !data.file_path) { showError('This resource may have been removed, or its file is no longer available.'); return; }
@@ -193,7 +193,7 @@
     saveBusy = true;
     const button = $('#saveResource'); button.disabled = true;
     try {
-      const { supabase, user } = await window.StudyHubData.requireUser();
+      const { supabase, user } = await window.NotesPixData.requireUser();
       if (savedByCurrentUser) {
         const { error } = await supabase.from('saved_resources').delete().eq('user_id', user.id).eq('resource_id', resource.id);
         if (error) throw error;
@@ -207,7 +207,7 @@
       }
       setSaveButton();
       await supabase.from('activity_log').insert({ user_id: user.id, action: savedByCurrentUser ? 'Saved resource' : 'Removed saved resource', resource_id: resource.id });
-    } catch (error) { toast(error.message || 'Please log in to save this resource.'); }
+    } catch (error) { toast(window.NotesPixData?.friendlyError(error, 'Please sign in to save this resource.')); }
     finally { saveBusy = false; button.disabled = false; }
   });
 
@@ -230,7 +230,7 @@
     reportBusy = true;
     const submit = reportForm.querySelector('[type="submit"]'); submit.disabled = true;
     try {
-      const { supabase, user } = await window.StudyHubData.requireUser();
+      const { supabase, user } = await window.NotesPixData.requireUser();
       const { error } = await supabase.from('resource_reports').insert({ reporter_id: user.id, resource_id: resource.id, reason, details });
       if (error) throw error;
       await supabase.from('activity_log').insert({ user_id: user.id, action: 'Resource reported', resource_id: resource.id });
@@ -238,7 +238,7 @@
       submit.textContent = 'Submitted';
       toast('Your report has been submitted.');
     } catch (error) {
-      reportMessage.textContent = error.message || 'Please log in and try again.';
+      reportMessage.textContent = window.NotesPixData?.friendlyError(error, 'Please sign in and try again.');
       submit.disabled = false;
     } finally { reportBusy = false; }
   });
@@ -246,7 +246,7 @@
   $('#downloadResource')?.addEventListener('click', () => {
     if (!resource?.file_path) return;
     try {
-      const client = window.StudyHubData.client();
+      const client = window.NotesPixData.client();
       const { data, error } = client.storage.from('studyhub-resources').getPublicUrl(resource.file_path);
       if (error || !data?.publicUrl) throw error || new Error('File URL unavailable');
       const link = document.createElement('a');
@@ -254,7 +254,7 @@
       link.target = '_blank';
       link.rel = 'noopener noreferrer';
       link.click();
-    } catch (error) { toast(error.message || 'Could not open the file.'); }
+    } catch (error) { toast(window.NotesPixData?.friendlyError(error, 'Could not open the file. Please try again.')); }
   });
 
   document.addEventListener('DOMContentLoaded', loadResource);

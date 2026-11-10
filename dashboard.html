@@ -1,15 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <script async src="https://www.googletagmanager.com/gtm.js?id=GTM-MSJ7TPD4"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-  </script>
+  <script src="js/analytics.js"></script>
 
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta http-equiv="Content-Security-Policy" content="object-src 'none'; base-uri 'self'; form-action 'self'">
+  <meta name="robots" content="noindex, nofollow">
   <meta name="description" content="Your NotesPix student dashboard.">
   <title>Dashboard — NotesPix</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -17,17 +15,16 @@
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/dashboard.css">
-  <script src="js/supabase-data.js" defer></script>
+  <script src="js/supabase-data.js"></script>
   <script src="js/dashboard.js" defer></script>
-  <link rel="stylesheet" href="css/phase6.css">
-  <script src="js/phase6.js" defer></script>
+  <link rel="stylesheet" href="css/workspace.css">
   <link rel="stylesheet" href="css/theme.css">
   <script src="js/theme.js" defer></script>
   <link rel="stylesheet" href="css/profile.css">
   <script src="js/profile.js" defer></script>
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/vendor/supabase.js"></script>
   <script src="js/supabase-config.js"></script>
-  <script>if(window.matchMedia&&window.matchMedia('(max-width: 767px)').matches)document.documentElement.classList.add('mobile-auth-pending');</script>
+  <script src="js/mobile-auth-init.js"></script>
   <script src="js/mobile-auth-gate.js" defer></script>
   <script src="js/supabase-session-ui.js" defer></script>
   <link rel="stylesheet" href="css/responsive.css">

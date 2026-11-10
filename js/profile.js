@@ -32,5 +32,5 @@
   });
 
   // Keep this helper available to older pages that render initials from local profile data.
-  window.studyHubInitials = initials;
+  window.notesPixInitials = initials;
 })();

@@ -1,39 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <script async src="https://www.googletagmanager.com/gtm.js?id=GTM-MSJ7TPD4"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-  </script>
+  <script src="js/analytics.js"></script>
 
   <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta http-equiv="Content-Security-Policy" content="object-src 'none'; base-uri 'self'; form-action 'self'">
   <meta name="description" content="View a student-shared NotesPix resource.">
   <title>Resource details — NotesPix</title>
   <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css"><link rel="stylesheet" href="css/phase3.css"><link rel="stylesheet" href="css/theme.css"><link rel="stylesheet" href="css/profile.css"><link rel="stylesheet" href="css/resource-details-real.css">
-  <script src="js/phase3.js" defer></script><script src="js/theme.js" defer></script><script src="js/profile.js" defer></script>
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="js/supabase-config.js"></script>
-  <script>if(window.matchMedia&&window.matchMedia('(max-width: 767px)').matches)document.documentElement.classList.add('mobile-auth-pending');</script>
+  <link rel="stylesheet" href="css/style.css"><link rel="stylesheet" href="css/pages.css"><link rel="stylesheet" href="css/theme.css"><link rel="stylesheet" href="css/profile.css"><link rel="stylesheet" href="css/resource-details-real.css"><script src="js/theme.js" defer></script><script src="js/profile.js" defer></script>
+  <script src="js/vendor/supabase.js"></script><script src="js/supabase-config.js"></script>
+  <script src="js/mobile-auth-init.js"></script>
   <script src="js/mobile-auth-gate.js" defer></script><script src="js/supabase-session-ui.js" defer></script>
   <link rel="stylesheet" href="css/responsive.css">
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <meta name="theme-color" content="#071638">
 </head>
-<body class="phase3-page resource-details-page">
+<body class="page-shell resource-details-page">
 <header class="site-header"><div class="header-inner container">
   <a class="brand" href="index.html" aria-label="NotesPix home"><span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 8.5 12 4l9 4.5-9 4.5L3 8.5Z"/><path d="M6.5 10.5v5.2c3.3 2.5 7.7 2.5 11 0v-5.2M21 9v6"/></svg></span><span>Notes<span class="brand-accent">Pix</span></span></a>
-  <nav class="primary-nav phase3-nav" aria-label="Main navigation"><a class="nav-link" href="index.html">Home</a><a class="nav-link" href="explore.html">Explore resources</a><a class="nav-link" href="upload.html">Upload</a><a class="nav-link" href="how-it-works.html">How it works</a></nav>
+  <nav class="primary-nav page-nav" aria-label="Main navigation"><a class="nav-link" href="index.html">Home</a><a class="nav-link" href="explore.html">Explore resources</a><a class="nav-link" href="upload.html">Upload</a><a class="nav-link" href="how-it-works.html">How it works</a></nav>
   <div class="header-actions"><button class="theme-toggle" type="button" data-theme-toggle aria-pressed="false"><span class="theme-toggle-icon">☾</span><span class="theme-toggle-label">Dark mode</span></button><a class="login-link" href="login.html">Log in</a><a class="button button-primary button-small" href="signup.html">Join NotesPix <span>↗</span></a>
     <div class="profile-menu" data-profile-menu><button class="profile-trigger" type="button" data-profile-trigger aria-expanded="false" aria-haspopup="true"><span class="profile-avatar" data-profile-initials>S</span><span class="profile-trigger-name" data-profile-name>Student</span><span class="profile-chevron">▾</span></button><div class="profile-dropdown" role="menu"><div class="profile-dropdown-head"><span class="profile-avatar" data-profile-initials>S</span><div><strong data-profile-fullname>Student</strong><small>Student account</small></div></div><a href="dashboard.html" role="menuitem">▦ &nbsp; Dashboard</a><a href="profile.html" role="menuitem">◎ &nbsp; My Profile</a><a href="my-uploads.html" role="menuitem">↥ &nbsp; My Uploads</a><a href="saved-notes.html" role="menuitem">♡ &nbsp; Saved Notes</a><a href="my-activity.html" role="menuitem">◷ &nbsp; My Activity</a><a href="settings.html" role="menuitem">⚙ &nbsp; Settings</a><button type="button" class="profile-logout" data-profile-logout role="menuitem">↪ &nbsp; Log out</button></div></div>
   </div>
 </div></header>
 <main class="detail-main container">
   <div class="detail-breadcrumb"><a href="index.html">Home</a><span>/</span><a href="explore.html">Explore resources</a><span>/</span><strong id="breadcrumbTitle">Resource</strong></div>
-  <section id="resourceLoading" class="resource-state" role="status"><span class="loading-spinner"></span><h1>Loading resource…</h1><p>Getting the latest details from NotesPix.</p></section>
-  <section id="resourceError" class="resource-state" role="alert" hidden><div class="state-icon">!</div><h1 id="errorTitle">Resource unavailable</h1><p id="errorMessage">This resource could not be loaded.</p><a class="button button-primary" href="explore.html">Browse resources</a></section>
+  <section id="resourceLoading" class="resource-state" role="status"><span class="loading-spinner"></span><h2>Loading resource…</h2><p>Getting the latest details from NotesPix.</p></section>
+  <section id="resourceError" class="resource-state" role="alert" hidden><div class="state-icon">!</div><h2 id="errorTitle">Resource unavailable</h2><p id="errorMessage">This resource could not be loaded.</p><a class="button button-primary" href="explore.html">Browse resources</a></section>
   <div id="resourceContent" class="detail-layout" hidden>
     <section class="detail-primary">
       <div class="detail-cover" aria-hidden="true"><div class="cover-orbit cover-orbit-one"></div><div class="cover-orbit cover-orbit-two"></div><div class="cover-document"><div class="cover-file-icon" id="coverFormat">FILE</div><div class="cover-line long"></div><div class="cover-line"></div><div class="cover-line short"></div><div class="cover-graphic"><span>N</span><i></i><i></i><i></i></div><div class="cover-line long"></div><div class="cover-line"></div></div><span class="cover-caption">STUDY SMARTER, TOGETHER</span></div>
@@ -53,9 +49,9 @@
     </aside>
   </div>
 </main>
-<footer class="phase3-footer"><div class="container"><span>© 2026 NotesPix. Built for students, together.</span><span><a href="index.html">Home</a><a href="explore.html">Explore</a><a href="help.html">Help</a></span></div></footer>
+<footer class="page-footer"><div class="container"><span>© 2026 NotesPix. Built for students, together.</span><span><a href="index.html">Home</a><a href="explore.html">Explore</a><a href="help.html">Help</a></span></div></footer>
 <dialog id="resourceReportDialog" class="report-dialog" aria-labelledby="reportDialogTitle"><form id="resourceReportForm"><div class="report-dialog-head"><div><span class="eyebrow-dot"></span> COMMUNITY SAFETY</div><button type="button" id="closeReportDialog" class="report-close" aria-label="Close report form">×</button></div><h2 id="reportDialogTitle">Report this resource</h2><p>Tell us what is wrong with this resource. Your report will be submitted to NotesPix.</p><label for="reportReason">Reason</label><select id="reportReason" required><option value="">Choose a reason</option><option>Incorrect or misleading content</option><option>Copyright concern</option><option>Spam or advertising</option><option>Inappropriate content</option><option>Broken or misleading resource details</option><option>Other</option></select><label for="reportDescription">Additional details (optional)</label><textarea id="reportDescription" rows="4" maxlength="500" placeholder="Add helpful context (up to 500 characters)"></textarea><p id="reportFormMessage" class="report-form-message" role="status" aria-live="polite"></p><div class="report-dialog-actions"><button type="button" id="cancelReport" class="button button-secondary">Cancel</button><button type="submit" class="button button-primary">Submit report</button></div></form></dialog>
-<div class="phase3-toast" id="phase3Toast" role="status" aria-live="polite"></div>
-<script src="js/supabase-data.js" defer></script><script src="js/community-resource.js" defer></script>
+<div class="page-toast" id="pageToast" role="status" aria-live="polite"></div>
+<script src="js/supabase-data.js"></script><script src="js/community-resource.js" defer></script>
   <script src="js/responsive-nav.js" defer></script>
 </body></html>

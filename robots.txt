@@ -1,0 +1,11 @@
+User-agent: *
+Allow: /
+Disallow: /admin.html
+Disallow: /dashboard.html
+Disallow: /profile.html
+Disallow: /settings.html
+Disallow: /my-uploads.html
+Disallow: /saved-notes.html
+Disallow: /my-activity.html
+Disallow: /login.html
+Disallow: /signup.html

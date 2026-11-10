@@ -1,34 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <script async src="https://www.googletagmanager.com/gtm.js?id=GTM-MSJ7TPD4"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-  </script>
+  <script src="js/analytics.js"></script>
 
   <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta http-equiv="Content-Security-Policy" content="object-src 'none'; base-uri 'self'; form-action 'self'">
   <meta name="description" content="Get help using NotesPix, managing your account, finding resources, saving notes, and uploading study materials.">
   <title>Help &amp; Support — NotesPix</title>
   <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css"><link rel="stylesheet" href="css/theme.css"><link rel="stylesheet" href="css/profile.css"><link rel="stylesheet" href="css/about-help.css">
   <script src="js/theme.js" defer></script><script src="js/profile.js" defer></script><script src="js/about-help.js" defer></script>
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/vendor/supabase.js"></script>
   <script src="js/supabase-config.js"></script>
-  <script>if(window.matchMedia&&window.matchMedia('(max-width: 767px)').matches)document.documentElement.classList.add('mobile-auth-pending');</script>
+  <script src="js/mobile-auth-init.js"></script>
   <script src="js/mobile-auth-gate.js" defer></script>
-  <script src="js/supabase-data.js" defer></script>
+  <script src="js/supabase-data.js"></script>
   <script src="js/supabase-session-ui.js" defer></script>
   <link rel="stylesheet" href="css/responsive.css">
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <meta name="theme-color" content="#071638">
 </head>
-<body class="phase3-page info-page">
+<body class="page-shell info-page">
 <header class="site-header"><div class="header-inner container">
   <a class="brand" href="index.html" aria-label="NotesPix home"><span class="brand-mark" aria-hidden="true">▰</span><span>Notes<span class="brand-accent">Pix</span></span></a>
-  <nav class="primary-nav phase3-nav" aria-label="Main navigation"><a class="nav-link" href="index.html">Home</a><a class="nav-link" href="explore.html">Explore resources</a><a class="nav-link" href="upload.html">Upload</a><a class="nav-link" href="how-it-works.html">How it works</a></nav>
+  <nav class="primary-nav page-nav" aria-label="Main navigation"><a class="nav-link" href="index.html">Home</a><a class="nav-link" href="explore.html">Explore resources</a><a class="nav-link" href="upload.html">Upload</a><a class="nav-link" href="how-it-works.html">How it works</a></nav>
   <div class="header-actions"><button class="theme-toggle" type="button" data-theme-toggle aria-pressed="false"><span class="theme-toggle-icon">☾</span><span class="theme-toggle-label">Dark mode</span></button>
   <a class="login-link" href="login.html">Log in</a><a class="button button-primary button-small" href="signup.html">Join NotesPix ↗</a>
   <div class="profile-menu" data-profile-menu><button class="profile-trigger" type="button" data-profile-trigger aria-expanded="false" aria-haspopup="true"><span class="profile-avatar" data-profile-initials>S</span><span class="profile-trigger-name" data-profile-name>Student</span><span class="profile-chevron">▾</span></button>

@@ -1,4 +1,4 @@
-// NotesPix shared homepage interactions (no demo resource data).
+// NotesPix shared homepage interactions.
 const toast = document.getElementById("toast");
 let toastTimer;
 function showToast(message) {

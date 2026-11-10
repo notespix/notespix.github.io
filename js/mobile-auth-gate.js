@@ -10,16 +10,11 @@
   const redirectToLogin = () => window.location.replace(new URL('login.html', window.location.href).href);
 
   try {
-    if (!window.supabase?.createClient || !window.STUDYHUB_SUPABASE_URL || !window.STUDYHUB_SUPABASE_PUBLISHABLE_KEY) {
+    if (!window.NotesPixData?.client) {
       reveal();
       return;
     }
-    const client = window.studyHubSupabaseClient || (window.studyHubSupabaseClient = window.supabase.createClient(
-      window.STUDYHUB_SUPABASE_URL,
-      window.STUDYHUB_SUPABASE_PUBLISHABLE_KEY,
-      { auth: { persistSession: true, autoRefreshToken: true, detectSessionInUrl: true } }
-    ));
-    client.auth.getSession().then(({ data, error }) => {
+    window.NotesPixData.client().auth.getSession().then(({ data, error }) => {
       if (error) throw error;
       if (!data.session?.user) redirectToLogin();
       else reveal();

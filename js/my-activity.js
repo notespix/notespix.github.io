@@ -2,13 +2,13 @@
   const list = document.getElementById('activityList');
   const clearButton = document.getElementById('clearActivity');
   const toast = message => {
-    const el = document.getElementById('phase6Toast');
+    const el = document.getElementById('workspaceToast');
     if (!el) return;
     el.textContent = message;
     el.classList.add('visible');
     window.setTimeout(() => el.classList.remove('visible'), 2800);
   };
-  const esc = value => window.StudyHubData?.escapeHtml(value) ?? String(value ?? '');
+  const esc = value => window.NotesPixData?.escapeHtml(value) ?? String(value ?? '');
   const icons = {
     'Saved resource': '♡',
     'Removed saved resource': '−',
@@ -18,7 +18,7 @@
     'Logged in': '↪'
   };
   function empty(message, detail) {
-    list.innerHTML = `<div class="phase6-empty"><div class="phase6-empty-icon">◷</div><h3>${esc(message)}</h3><p>${esc(detail)}</p><a class="button button-primary" href="explore.html">Explore resources</a></div>`;
+    list.innerHTML = `<div class="workspace-empty"><div class="workspace-empty-icon">◷</div><h3>${esc(message)}</h3><p>${esc(detail)}</p><a class="button button-primary" href="explore.html">Explore resources</a></div>`;
   }
   function render(items) {
     if (!items.length) {
@@ -30,17 +30,17 @@
       const title = item.resources?.title || (item.resource_id ? 'NotesPix resource' : 'Your NotesPix account');
       const date = item.created_at ? new Date(item.created_at) : null;
       const dateText = date && !Number.isNaN(date.getTime()) ? date.toLocaleString() : 'Recently';
-      return `<article class="phase6-activity"><div class="phase6-activity-icon">${esc(icons[action] || '•')}</div><div><h3>${esc(action)}</h3><p>${esc(title)}</p><time datetime="${esc(item.created_at || '')}">${esc(dateText)}</time></div></article>`;
+      return `<article class="workspace-activity"><div class="workspace-activity-icon">${esc(icons[action] || '•')}</div><div><h3>${esc(action)}</h3><p>${esc(title)}</p><time datetime="${esc(item.created_at || '')}">${esc(dateText)}</time></div></article>`;
     }).join('');
   }
   async function load() {
-    if (!window.StudyHubData) {
+    if (!window.NotesPixData) {
       empty('Could not connect to NotesPix', 'Please refresh the page and try again.');
       return;
     }
     list.innerHTML = '<p class="muted-note">Loading your activity…</p>';
     try {
-      const { supabase, user } = await window.StudyHubData.requireUser();
+      const { supabase, user } = await window.NotesPixData.requireUser();
       const { data, error } = await supabase.from('activity_log')
         .select('id,action,resource_id,created_at,resources(title)')
         .eq('user_id', user.id)
@@ -50,14 +50,14 @@
       render(data || []);
     } catch (error) {
       console.error('Could not load NotesPix activity:', error);
-      empty(error.message || 'Could not load activity', 'Please refresh the page or sign in again.');
+      empty('Could not load activity', window.NotesPixData?.friendlyError(error, 'Please refresh the page or sign in again.'));
     }
   }
   clearButton?.addEventListener('click', async () => {
     if (!window.confirm('Clear your activity history? This cannot be undone.')) return;
     clearButton.disabled = true;
     try {
-      const { supabase, user } = await window.StudyHubData.requireUser();
+      const { supabase, user } = await window.NotesPixData.requireUser();
       const { data: deletedRows, error } = await supabase.from('activity_log')
         .delete()
         .eq('user_id', user.id)
@@ -72,7 +72,7 @@
       await load();
     } catch (error) {
       console.error('Could not clear activity:', error);
-      toast(error.message || 'Could not clear activity history.');
+      toast(window.NotesPixData?.friendlyError(error, 'Could not clear activity history. Please try again.'));
     } finally {
       clearButton.disabled = false;
     }

@@ -1,13 +1,11 @@
-/* Show the Admin link only after the signed-in account is verified in admin_users. */
+/* Shows the Admin link only after the signed-in account is verified in admin_users. */
 (() => {
   document.addEventListener('DOMContentLoaded', async () => {
     const sidebar = document.querySelector('.dashboard-sidebar');
-    if (!sidebar || !window.supabase?.createClient || !window.STUDYHUB_SUPABASE_URL || !window.STUDYHUB_SUPABASE_PUBLISHABLE_KEY) return;
+    if (!sidebar) return;
     try {
-      const db = window.studyHubSupabaseClient || (window.studyHubSupabaseClient = window.supabase.createClient(
-        window.STUDYHUB_SUPABASE_URL, window.STUDYHUB_SUPABASE_PUBLISHABLE_KEY,
-        { auth: { persistSession: true, autoRefreshToken: true, detectSessionInUrl: true } }
-      ));
+      if (!window.NotesPixData?.client) return;
+      const db = window.NotesPixData.client();
       const { data: sessionData } = await db.auth.getSession();
       const user = sessionData.session?.user;
       if (!user) return;
@@ -20,7 +18,11 @@
       link.className = 'sidebar-link';
       link.href = 'admin.html';
       link.dataset.adminEntry = 'true';
-      link.innerHTML = '<span class="side-icon">♙</span> Admin dashboard';
+      const icon = document.createElement('span');
+      icon.className = 'side-icon';
+      icon.setAttribute('aria-hidden', 'true');
+      icon.textContent = '▦';
+      link.append(icon, document.createTextNode(' Admin dashboard'));
       target.appendChild(link);
     } catch (error) {
       console.warn('NotesPix admin navigation could not be initialized.', error);

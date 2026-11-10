@@ -1,4 +1,4 @@
-/* NotesPix Admin Console. Membership is verified against public.admin_users; never trust localStorage or user_metadata for admin access. */
+/* NotesPix admin console. Administrator status is verified against public.admin_users. */
 (() => {
   const $ = id => document.getElementById(id);
   let db, cache = { support: [], reports: [] };
@@ -11,14 +11,15 @@
   const statusLabel = value => ({open:'Open',in_progress:'In progress',reviewing:'Reviewing',resolved:'Resolved',dismissed:'Dismissed'}[value] || value || 'Open');
 
   function getClient() {
-    if (!window.supabase?.createClient || !window.STUDYHUB_SUPABASE_URL || !window.STUDYHUB_SUPABASE_PUBLISHABLE_KEY) {
-      throw new Error('Supabase is not configured. Please reload NotesPix.');
+    if (window.NotesPixData?.client) return window.NotesPixData.client();
+    if (!window.supabase?.createClient || !window.NOTESPIX_SUPABASE_URL || !window.NOTESPIX_SUPABASE_PUBLISHABLE_KEY) {
+      throw new Error('NotesPix could not connect. Please reload the page.');
     }
-    if (!window.studyHubSupabaseClient) window.studyHubSupabaseClient = window.supabase.createClient(
-      window.STUDYHUB_SUPABASE_URL, window.STUDYHUB_SUPABASE_PUBLISHABLE_KEY,
+    if (!window.notesPixSupabaseClient) window.notesPixSupabaseClient = window.supabase.createClient(
+      window.NOTESPIX_SUPABASE_URL, window.NOTESPIX_SUPABASE_PUBLISHABLE_KEY,
       { auth: { persistSession: true, autoRefreshToken: true, detectSessionInUrl: true } }
     );
-    return window.studyHubSupabaseClient;
+    return window.notesPixSupabaseClient;
   }
 
   async function requireAdmin() {
@@ -27,7 +28,7 @@
     const user = sessionData.session?.user;
     if (!user) { location.replace('login.html'); return false; }
     const { data, error } = await db.from('admin_users').select('user_id').eq('user_id', user.id).maybeSingle();
-    if (error) throw new Error('Could not verify admin access. Run sql/admin_panel_setup.sql in Supabase and confirm your account email was added as admin.');
+    if (error) throw new Error('Could not verify administrator access. Please try again.');
     if (!data) {
       notice('Access denied. This account is not registered as a NotesPix administrator.', 'error');
       document.querySelectorAll('[data-admin-tab], #adminRefresh').forEach(el => el.disabled = true);
@@ -61,11 +62,11 @@
   }
 
   async function loadStudents() {
-    const { data, error } = await db.from('profiles').select('*').order('created_at', { ascending: false }).limit(200);
+    const { data, error } = await db.from('profiles').select('id,full_name,created_at').order('created_at', { ascending: false }).limit(200);
     if (error) throw error;
     $('studentsRows').innerHTML = data?.length ? data.map(row => {
       const name = row.full_name || row.name || 'Student';
-      return `<tr><td><strong>${esc(name)}</strong><small>${esc(row.email || '')}</small></td><td><code>${esc(row.id)}</code></td><td>${esc(date(row.created_at))}</td></tr>`;
+      return `<tr><td><strong>${esc(name)}</strong></td><td><code>${esc(row.id)}</code></td><td>${esc(date(row.created_at))}</td></tr>`;
     }).join('') : '<tr><td colspan="3">No student profiles found.</td></tr>';
   }
 
@@ -126,7 +127,7 @@
       notice('Admin dashboard is up to date.', 'success');
     } catch (error) {
       console.error('Admin data refresh failed:', error);
-      notice(error.message || 'Could not load admin data. Check your database setup and RLS policies.', 'error');
+      notice(window.NotesPixData?.friendlyError(error, 'Could not load admin data. Please try again.'), 'error');
     }
   }
 
@@ -156,7 +157,7 @@
       notice('Status updated successfully.', 'success');
       await refreshAll();
     } catch (error) {
-      notice(error.message || 'Could not update status. Check admin RLS policies.', 'error');
+      notice(window.NotesPixData?.friendlyError(error, 'Could not update status. Please try again.'), 'error');
       select.disabled = false;
     }
   });
@@ -173,7 +174,7 @@
       activateTab(['overview','students','resources','support','reports'].includes(initialTab) ? initialTab : 'overview');
     } catch (error) {
       console.error('Admin initialization failed:', error);
-      notice(error.message || 'Could not initialize the admin dashboard.', 'error');
+      notice(window.NotesPixData?.friendlyError(error, 'Could not initialize the admin dashboard. Please reload the page.'), 'error');
     }
   });
 })();

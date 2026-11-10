@@ -17,7 +17,7 @@
     e.preventDefault(); showToast('Help and support is available from the Help page.');
   }));
 
-  const esc = value => window.StudyHubData?.escapeHtml(value) ?? String(value ?? '');
+  const esc = value => window.NotesPixData?.escapeHtml(value) ?? String(value ?? '');
   const setText = (id, value) => { const el = document.getElementById(id); if (el) el.textContent = value; };
   const formatDate = value => {
     const d = new Date(value);
@@ -82,8 +82,8 @@
     const savedHost = document.getElementById('dashboardSavedResources');
     const communityHost = document.getElementById('dashboardCommunityResources');
     try {
-      if (!window.StudyHubData) throw new Error('NotesPix data connection is not ready. Refresh the page.');
-      const { supabase, user } = await window.StudyHubData.requireUser();
+      if (!window.NotesPixData) throw new Error('NotesPix data connection is not ready. Refresh the page.');
+      const { supabase, user } = await window.NotesPixData.requireUser();
       const fullName = user.user_metadata?.full_name || user.email?.split('@')[0] || 'Student';
       const firstName = fullName.trim().split(/\s+/)[0];
       const greeting = document.getElementById('dashboardGreeting');
@@ -116,7 +116,7 @@
       renderWeeklyActivity(activityRes.data || []);
     } catch (error) {
       console.error('Could not load real NotesPix dashboard data:', error);
-      const message = error.message || 'Please refresh the page and try again.';
+      const message = window.NotesPixData?.friendlyError(error, 'Please refresh the page and try again.') || 'Please refresh the page and try again.';
       if (savedHost) savedHost.innerHTML = emptyState('Could not load your library', message, 'login.html', 'Sign in');
       if (communityHost) communityHost.innerHTML = emptyState('Could not load community resources', message, 'explore.html', 'Explore resources');
       ['savedCount','uploadCount','activityCount','monthlyUploadCount','contributionTotal','weeklyActivityTotal'].forEach(id => setText(id, '—'));

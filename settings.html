@@ -1,14 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <script async src="https://www.googletagmanager.com/gtm.js?id=GTM-MSJ7TPD4"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-  </script>
+  <script src="js/analytics.js"></script>
 
   <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta http-equiv="Content-Security-Policy" content="object-src 'none'; base-uri 'self'; form-action 'self'">
+  <meta name="robots" content="noindex, nofollow">
   <title>Settings — NotesPix</title>
   <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -16,9 +14,10 @@
   <script src="js/theme.js" defer></script><script src="js/settings.js" defer></script>
   <link rel="stylesheet" href="css/profile.css">
   <script src="js/profile.js" defer></script>
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/vendor/supabase.js"></script>
   <script src="js/supabase-config.js"></script>
-  <script>if(window.matchMedia&&window.matchMedia('(max-width: 767px)').matches)document.documentElement.classList.add('mobile-auth-pending');</script>
+  <script src="js/supabase-data.js"></script>
+  <script src="js/mobile-auth-init.js"></script>
   <script src="js/mobile-auth-gate.js" defer></script>
   <script src="js/supabase-session-ui.js" defer></script>
   <link rel="stylesheet" href="css/responsive.css">
@@ -44,9 +43,9 @@
           <nav class="settings-nav" aria-label="Settings sections">
             <a class="settings-nav-link active" href="#appearance">Appearance</a>
             <a class="settings-nav-link" href="#preferences">Preferences</a>
-            <a class="settings-nav-link" href="#studyhub">Your NotesPix</a>
+            <a class="settings-nav-link" href="#notespix">Your NotesPix</a>
             <a class="settings-nav-link" href="#support">Support</a>
-            <a class="settings-nav-link" href="#about-studyhub">About</a>
+            <a class="settings-nav-link" href="#about-notespix">About</a>
           </nav>
           <div class="settings-content">
             <section class="settings-card" id="appearance"><div class="settings-card-heading"><div><h2>Appearance</h2><p>Choose the look that feels easiest on your eyes.</p></div><span class="settings-heading-icon">◐</span></div>
@@ -61,7 +60,7 @@
 
             </section>
 
-            <section class="settings-card settings-link-card" id="studyhub">
+            <section class="settings-card settings-link-card" id="notespix">
               <div class="settings-card-heading"><div><h2>Your NotesPix</h2><p>Quick access to the places where you manage your learning.</p></div><span class="settings-heading-icon">▦</span></div>
               <div class="settings-link-list">
                 <a class="settings-link-row" href="profile.html"><span class="settings-link-icon">◎</span><span><strong>My Profile</strong><small>View your profile and manage account details.</small></span><span class="settings-link-arrow">↗</span></a>
@@ -80,7 +79,7 @@
               </div>
             </section>
 
-            <section class="settings-card settings-link-card" id="about-studyhub">
+            <section class="settings-card settings-link-card" id="about-notespix">
               <div class="settings-card-heading"><div><h2>About NotesPix</h2><p>Learn more about the platform and the guidelines that keep it useful for students.</p></div><span class="settings-heading-icon">ⓘ</span></div>
               <div class="settings-link-list">
                 <a class="settings-link-row" href="about.html"><span class="settings-link-icon">✦</span><span><strong>About Us</strong><small>Our purpose and student-first approach.</small></span><span class="settings-link-arrow">↗</span></a>

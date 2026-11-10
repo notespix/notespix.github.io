@@ -1,7 +1,7 @@
 /* NotesPix shared theme controller — one preference across every page. */
 (() => {
   "use strict";
-  const KEY = "studyhub-theme";
+  const KEY = "notespix-theme";
   const root = document.documentElement;
 
   function readTheme() {
@@ -35,7 +35,7 @@
     document.querySelectorAll("[data-select-theme]").forEach(button => {
       button.setAttribute("aria-pressed", String(button.dataset.selectTheme === safe));
     });
-    document.dispatchEvent(new CustomEvent("studyhub:theme-changed", { detail: { theme: safe } }));
+    document.dispatchEvent(new CustomEvent("notespix:theme-changed", { detail: { theme: safe } }));
   }
 
   // Apply immediately, before the page is interacted with.
@@ -61,5 +61,5 @@
     }
   });
 
-  window.StudyHubTheme = { apply: applyTheme, get: () => root.dataset.theme || readTheme() };
+  window.NotesPixTheme = { apply: applyTheme, get: () => root.dataset.theme || readTheme() };
 })();

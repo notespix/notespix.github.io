@@ -12,23 +12,23 @@
   const previewCardName = document.getElementById('profilePreviewCardName');
   const previewCardEmail = document.getElementById('profilePreviewCardEmail');
   const previewCardAvatar = document.getElementById('profilePreviewAvatar');
-  const USER_KEY = 'studyhub-demo-user';
   let supabase = null;
   let currentUser = null;
   let originalName = '';
 
   function getClient() {
-    if (!window.supabase?.createClient || !window.STUDYHUB_SUPABASE_URL || !window.STUDYHUB_SUPABASE_PUBLISHABLE_KEY) {
+    if (window.NotesPixData?.client) return window.NotesPixData.client();
+    if (!window.supabase?.createClient || !window.NOTESPIX_SUPABASE_URL || !window.NOTESPIX_SUPABASE_PUBLISHABLE_KEY) {
       throw new Error('NotesPix could not connect. Please refresh and try again.');
     }
-    if (!window.studyHubSupabaseClient) {
-      window.studyHubSupabaseClient = window.supabase.createClient(
-        window.STUDYHUB_SUPABASE_URL,
-        window.STUDYHUB_SUPABASE_PUBLISHABLE_KEY,
+    if (!window.notesPixSupabaseClient) {
+      window.notesPixSupabaseClient = window.supabase.createClient(
+        window.NOTESPIX_SUPABASE_URL,
+        window.NOTESPIX_SUPABASE_PUBLISHABLE_KEY,
         { auth: { persistSession: true, autoRefreshToken: true, detectSessionInUrl: true } }
       );
     }
-    return window.studyHubSupabaseClient;
+    return window.notesPixSupabaseClient;
   }
 
   function initialsFor(value) {
@@ -89,9 +89,6 @@
     nameInput.disabled = false;
     emailInput.disabled = false;
     saveButton.disabled = false;
-
-    const cached = { id: currentUser.id, name: profileName, email: currentUser.email || '', role: currentUser.user_metadata?.role || 'other' };
-    localStorage.setItem(USER_KEY, JSON.stringify(cached));
   }
 
   nameInput?.addEventListener('input', () => {
@@ -105,6 +102,11 @@
     const nextName = nameInput.value.trim();
     if (nextName.length < 2) {
       setMessage('Please enter a name with at least 2 characters.', 'error');
+      nameInput.focus();
+      return;
+    }
+    if (nextName.length > 60) {
+      setMessage('Please keep your name under 60 characters.', 'error');
       nameInput.focus();
       return;
     }
@@ -136,8 +138,6 @@
       }
 
       originalName = nextName;
-      const cached = { id: currentUser.id, name: nextName, email: currentUser.email || '', role: currentUser.user_metadata?.role || 'other' };
-      localStorage.setItem(USER_KEY, JSON.stringify(cached));
       paintName(nextName);
 
       if (publicProfileSynced) {
@@ -147,7 +147,7 @@
       }
     } catch (error) {
       console.error('NotesPix profile update failed:', error);
-      setMessage(error.message || 'We could not save your profile. Please try again.', 'error');
+      setMessage(window.NotesPixData?.friendlyError(error, 'We could not save your profile. Please try again.'), 'error');
     } finally {
       saveButton.disabled = false;
       saveButton.querySelector('span').textContent = 'Save changes';
@@ -163,7 +163,7 @@
       nameInput.disabled = true;
       emailInput.disabled = true;
       saveButton.disabled = true;
-      setMessage(error.message || 'Could not load your profile. Please refresh and try again.', 'error');
+      setMessage(window.NotesPixData?.friendlyError(error, 'Could not load your profile. Please refresh and try again.'), 'error');
     }
   })();
 })();

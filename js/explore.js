@@ -9,7 +9,7 @@
   const noResults = document.getElementById("noResults");
   const activeFilters = document.getElementById("activeFilters");
   let quickButtons = [];
-  const toast = document.getElementById("phase3Toast");
+  const toast = document.getElementById("pageToast");
   let toastTimer;
   const chosen = { subject: new Set(), type: new Set(), format: new Set() };
   const params = new URLSearchParams(window.location.search);
@@ -33,7 +33,7 @@
     toastTimer = window.setTimeout(() => toast.classList.remove("visible"), 2800);
   }
   function escapeHtml(value) {
-    return value.replace(/[&<>"']/g, char => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[char]));
+    return String(value ?? "").replace(/[&<>"']/g, char => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[char]));
   }
   function subjectKey(value) {
     return String(value || "").trim().replace(/\s+/g, " ").toLocaleLowerCase();
@@ -68,7 +68,7 @@
   function buildSubjectsFromResources(resources) {
     const grouped = new Map();
     (resources || []).forEach(item => {
-      const name = String(item.subject || "").trim().replace(/\\s+/g, " ");
+      const name = String(item.subject || "").trim().replace(/\s+/g, " ");
       if (!name) return;
       const key = subjectKey(name);
       if (!grouped.has(key)) grouped.set(key, { name, count: 0 });
@@ -107,10 +107,9 @@
     return true;
   }
   async function renderRealResources() {
-    // Real database resources replace the old hard-coded sample cards.
     grid.querySelectorAll('.explore-resource-card').forEach(card => card.remove());
     try {
-      const { supabase } = await window.StudyHubData.requireUser().catch(async () => ({ supabase: window.StudyHubData.client() }));
+      const { supabase } = await window.NotesPixData.requireUser().catch(async () => ({ supabase: window.NotesPixData.client() }));
       const { data, error } = await supabase.from('resources').select('id,title,description,subject,format,created_at,education_level,academic_level,semester,unit_topic').order('created_at', { ascending: false });
       if (error) throw error;
       buildSubjectsFromResources(data || []);
@@ -129,7 +128,7 @@
         card.dataset.popularity = '0';
         card.dataset.date = (item.created_at || new Date().toISOString()).slice(0,10);
         const details = `resource-details.html?id=${encodeURIComponent(item.id)}`;
-        card.innerHTML = `<a class="explore-card-visual visual-network" href="${details}" aria-label="View ${escapeHtml(item.title || 'student resource')}"><span class="visual-file">${escapeHtml((item.format || 'FILE').toUpperCase())}</span><span class="visual-chip">STUDENT RESOURCE</span><div class="visual-network-lines"><i></i><i></i><i></i><i></i><b>SH</b></div></a><div class="explore-card-body"><div class="explore-card-tags"><span class="mini-tag blue-tag">${escapeHtml(item.subject || 'GENERAL')}</span><span class="file-type">${escapeHtml((item.format || 'FILE').toUpperCase())}</span><span class="mini-tag">PUBLISHED</span></div><h3><a href="${details}">${escapeHtml(item.title || 'Student resource')}</a></h3><p>${escapeHtml(item.description || 'Shared by a NotesPix student.')}</p><div class="explore-card-meta"><span class="mini-avatar">SH</span><span>Student contributor</span><span class="meta-spacer"></span><span>Resource</span></div><div class="explore-card-bottom"><span>Added ${new Date(item.created_at || Date.now()).toLocaleDateString()}</span><a href="${details}">View resource <span>→</span></a></div></div>`;
+        card.innerHTML = `<a class="explore-card-visual visual-network" href="${details}" aria-label="View ${escapeHtml(item.title || 'student resource')}"><span class="visual-file">${escapeHtml((item.format || 'FILE').toUpperCase())}</span><span class="visual-chip">STUDENT RESOURCE</span><div class="visual-network-lines"><i></i><i></i><i></i><i></i><b>NP</b></div></a><div class="explore-card-body"><div class="explore-card-tags"><span class="mini-tag blue-tag">${escapeHtml(item.subject || 'GENERAL')}</span><span class="file-type">${escapeHtml((item.format || 'FILE').toUpperCase())}</span><span class="mini-tag">PUBLISHED</span></div><h3><a href="${details}">${escapeHtml(item.title || 'Student resource')}</a></h3><p>${escapeHtml(item.description || 'Shared by a NotesPix student.')}</p><div class="explore-card-meta"><span class="mini-avatar">NP</span><span>Student contributor</span><span class="meta-spacer"></span><span>Resource</span></div><div class="explore-card-bottom"><span>Added ${new Date(item.created_at || Date.now()).toLocaleDateString()}</span><a href="${details}">View resource <span>→</span></a></div></div>`;
         grid.appendChild(card);
       });
     } catch (error) {
@@ -155,7 +154,7 @@
       const [group, value] = node.dataset.filterCount.split("|");
       if (group === "type") {
         node.textContent = "—";
-        node.title = "Resource type is not stored in the current database schema yet.";
+        node.title = "Not applicable";
       } else node.textContent = String(countFor(group, value));
     });
   }
@@ -219,10 +218,7 @@
   document.getElementById("clearFilters")?.addEventListener("click", clearAll);
   document.getElementById("resetFromEmpty")?.addEventListener("click", clearAll);
   document.getElementById("loadMoreButton")?.addEventListener("click", () => showToast("You are viewing all resources currently published on NotesPix."));
-  document.querySelectorAll("[data-demo-action]").forEach(link => link.addEventListener("click", event => { event.preventDefault(); showToast(`${link.dataset.demoAction} will be available in a later phase.`); }));
 
-  // Support incoming ?q= and ?subject= links without relying on a backend.
-  
   const incomingQuery = params.get("q");
   if (incomingQuery && search) search.value = incomingQuery;
   const incomingFormat = params.get("format");
@@ -245,7 +241,7 @@
   renderRealResources();
 })();
 
-// Auth-aware public CTAs use the real Supabase session (not demo localStorage).
+// Keeps public call-to-action links in sync with the signed-in state.
 (() => {
   function updateAuthCTAs(isSignedIn) {
     document.querySelectorAll("[data-auth-aware-cta]").forEach(link => {
@@ -255,7 +251,7 @@
       if (isSignedIn) {
         link.href = "dashboard.html";
         if (/join the community/i.test(original)) link.innerHTML = 'Go to your dashboard <span aria-hidden="true">→</span>';
-        else if (/join studyhub/i.test(original)) link.innerHTML = 'Dashboard <span aria-hidden="true">↗</span>';
+        else if (/join notespix/i.test(original)) link.innerHTML = 'Dashboard <span aria-hidden="true">↗</span>';
       } else {
         link.href = link.dataset.authOriginalHref;
         link.textContent = original;
@@ -265,7 +261,7 @@
 
   async function syncAuthCTAs() {
     try {
-      const supabase = window.StudyHubData.client();
+      const supabase = window.NotesPixData.client();
       const { data, error } = await supabase.auth.getSession();
       if (error) throw error;
       updateAuthCTAs(Boolean(data.session));

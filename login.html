@@ -1,31 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
-<!DOCTYPE html>
-<html lang="en">
 <head>
-  <script async src="https://www.googletagmanager.com/gtm.js?id=GTM-MSJ7TPD4"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-  </script>
+  <script src="js/analytics.js"></script>
 
   <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>NotesPix — Welcome</title>
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta http-equiv="Content-Security-Policy" content="object-src 'none'; base-uri 'self'; form-action 'self'">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Log in — NotesPix</title>
   <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/vendor/supabase.js"></script>
   <script src="js/supabase-config.js"></script>
+  <script src="js/supabase-data.js"></script>
   <script src="js/supabase-session-ui.js" defer></script>
   <script src="js/supabase-auth.js" defer></script>
-  <link rel="stylesheet" href="css/style.css"><link rel="stylesheet" href="css/phase3.css"><script src="js/phase3.js" defer></script>
+  <link rel="stylesheet" href="css/style.css"><link rel="stylesheet" href="css/pages.css">
   <link rel="stylesheet" href="css/theme.css">
   <script src="js/theme.js" defer></script>
   <link rel="stylesheet" href="css/profile.css">
   <script src="js/profile.js" defer></script>
 
   <link rel="stylesheet" href="css/auth-switch.css">
-  <script src="js/auth-switch.js" defer></script>
+  <script src="js/auth-ui.js" defer></script>
   <link rel="stylesheet" href="css/responsive.css">
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <meta name="theme-color" content="#071638">
@@ -46,8 +43,8 @@
         <div class="auth-form-heading" id="loginHeading"><span class="auth-step-label">WELCOME BACK</span><h2>Log in to NotesPix</h2><p>Pick up where your learning left off.</p></div>
         <div class="auth-form-heading" id="signupHeading" hidden><span class="auth-step-label">GET STARTED — IT'S FREE</span><h2>Create your account</h2><p>Make your own space for learning and sharing.</p></div>
         <div id="loginPanel"><form class="auth-form" id="loginForm" novalidate>
-          <label for="loginEmail">Email address</label><input id="loginEmail" name="email" type="email" placeholder="you@example.com" autocomplete="email" required>
-          <div class="password-label-row"><label for="loginPassword">Password</label><a href="#" id="forgotPassword">Forgot password?</a></div><div class="password-field"><input id="loginPassword" name="password" type="password" placeholder="Enter your password" autocomplete="current-password" required minlength="6"><button type="button" class="password-toggle" data-toggle-password="loginPassword" aria-label="Show password">Show</button></div>
+          <label for="loginEmail">Email address</label><input id="loginEmail" name="email" type="email" placeholder="you@example.com" autocomplete="email" maxlength="254" required>
+          <div class="password-label-row"><label for="loginPassword">Password</label><a href="#" id="forgotPassword">Forgot password?</a></div><div class="password-field"><input id="loginPassword" name="password" type="password" placeholder="Enter your password" autocomplete="current-password" maxlength="72" required minlength="8"><button type="button" class="password-toggle" data-toggle-password="loginPassword" aria-label="Show password">Show</button></div>
           <div class="form-message" id="loginMessage" role="status" aria-live="polite"></div>
           <button class="button button-primary auth-submit" type="submit">Log in <span>→</span></button>
         </form>
@@ -56,12 +53,12 @@
           <p class="auth-legal">By continuing, you agree to our <a href="terms.html" target="_blank" rel="noopener">Terms &amp; Conditions</a> and <a href="privacy-policy.html" target="_blank" rel="noopener">Privacy Policy</a>.</p>
         </div>
         <div id="signupPanel" hidden><form class="auth-form" id="signupForm" novalidate>
-          <label for="signupName">Full name</label><input id="signupName" name="name" type="text" placeholder="Your name" autocomplete="name" required minlength="2">
-          <label for="signupEmail">Email address</label><input id="signupEmail" name="email" type="email" placeholder="you@example.com" autocomplete="email" required>
+          <label for="signupName">Full name</label><input id="signupName" name="name" type="text" placeholder="Your name" autocomplete="name" required minlength="2" maxlength="60">
+          <label for="signupEmail">Email address</label><input id="signupEmail" name="email" type="email" placeholder="you@example.com" autocomplete="email" maxlength="254" required>
           <label for="signupRole">I am a...</label><select id="signupRole" name="role" required><option value="">Choose your role</option><option value="school">School student</option><option value="college">College student</option><option value="university">University student</option><option value="other">Other learner</option></select>
-          <label for="signupPassword">Create password</label><div class="password-field"><input id="signupPassword" name="password" type="password" placeholder="At least 8 characters" autocomplete="new-password" required minlength="8"><button type="button" class="password-toggle" data-toggle-password="signupPassword" aria-label="Show password">Show</button></div>
-          <label for="signupConfirm">Confirm password</label><input id="signupConfirm" name="confirmPassword" type="password" placeholder="Re-enter your password" autocomplete="new-password" required minlength="8">
-          <label class="checkbox-row"><input id="signupTerms" type="checkbox" required><span>I agree to the <a href="terms.html" target="_blank" rel="noopener">Terms &amp; Conditions</a> and <a href="privacy-policy.html" target="_blank" rel="noopener">Privacy Policy</a>.</span></label>
+          <label for="signupPassword">Create password</label><div class="password-field"><input id="signupPassword" name="password" type="password" placeholder="At least 8 characters" autocomplete="new-password" required minlength="8" maxlength="72"><button type="button" class="password-toggle" data-toggle-password="signupPassword" aria-label="Show password">Show</button></div>
+          <label for="signupConfirm">Confirm password</label><input id="signupConfirm" name="confirmPassword" type="password" placeholder="Re-enter your password" autocomplete="new-password" required minlength="8" maxlength="72">
+          <label class="checkbox-row"><input id="signupTerms" type="checkbox" required><span>I agree to the <a href="terms.html" target="_blank" rel="noopener noreferrer">Terms &amp; Conditions</a> and <a href="privacy-policy.html" target="_blank" rel="noopener noreferrer">Privacy Policy</a>.</span></label>
           <div class="form-message" id="signupMessage" role="status" aria-live="polite"></div>
           <button class="button button-primary auth-submit" type="submit">Create account <span>→</span></button>
         </form>
@@ -71,7 +68,6 @@
       <div class="auth-back-link"><a href="index.html">← Back to homepage</a></div>
     </section>
   </main>
-  <div class="phase3-toast" id="phase3Toast" role="status" aria-live="polite"></div>
   <script src="js/responsive-nav.js" defer></script>
 </body>
 </html>

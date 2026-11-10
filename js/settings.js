@@ -4,7 +4,7 @@
   const menuToggle = document.getElementById("dashboardMenuToggle");
   const overlay = document.getElementById("dashboardOverlay");
   const toast = document.getElementById("dashboardToast");
-  const PREF_KEY = "studyhub-dashboard-preferences";
+  const PREF_KEY = "notespix-preferences";
   let toastTimer;
   let authClient = null;
   let signedInUser = null;
@@ -52,7 +52,7 @@
     const safeTheme = theme === "dark" ? "dark" : "light";
     document.documentElement.dataset.theme = safeTheme;
     document.documentElement.style.colorScheme = safeTheme;
-    try { localStorage.setItem("studyhub-theme", safeTheme); } catch (_) {}
+    try { localStorage.setItem("notespix-theme", safeTheme); } catch (_) {}
     document.querySelectorAll("[data-theme-toggle]").forEach(button => {
       const dark = safeTheme === "dark";
       button.setAttribute("aria-pressed", String(dark));
@@ -67,7 +67,7 @@
     document.querySelectorAll("[data-select-theme]").forEach(button => {
       button.setAttribute("aria-pressed", String(button.dataset.selectTheme === safeTheme));
     });
-    if (persist) queueAccountMetadata({ studyhub_theme: safeTheme });
+    if (persist) queueAccountMetadata({ notespix_theme: safeTheme });
   }
   document.querySelectorAll("[data-select-theme]").forEach(button => {
     button.addEventListener("click", () => {
@@ -76,13 +76,13 @@
       showToast(`${theme === "dark" ? "Dark" : "Light"} appearance saved.`);
     });
   });
-  document.addEventListener("studyhub:theme-changed", event => {
+  document.addEventListener("notespix:theme-changed", event => {
     const theme = event.detail?.theme || document.documentElement.dataset.theme || "light";
     document.querySelectorAll("[data-select-theme]").forEach(button => {
       button.setAttribute("aria-pressed", String(button.dataset.selectTheme === theme));
     });
     // The shared theme switcher emits this event after a header toggle.
-    if (signedInUser) queueAccountMetadata({ studyhub_theme: theme });
+    if (signedInUser) queueAccountMetadata({ notespix_theme: theme });
   });
 
   // Preferences are stored in Supabase user metadata, with a local cache for instant rendering.
@@ -116,7 +116,7 @@
       if (updateError) throw updateError;
     }).catch(error => {
       console.error("Could not sync NotesPix settings:", error);
-      showToast(error.message || "Settings could not be synced to your account.");
+      showToast(window.NotesPixData?.friendlyError(error, "Settings could not be synced to your account."));
     });
     return metadataQueue;
   }
@@ -127,7 +127,7 @@
       showWeeklyActivity: Boolean(weeklyToggle?.checked)
     };
     try { localStorage.setItem(PREF_KEY, JSON.stringify(preferences)); } catch (_) {}
-    await queueAccountMetadata({ studyhub_preferences: preferences });
+    await queueAccountMetadata({ notespix_preferences: preferences });
     showToast("Dashboard preferences saved to your account.");
   }
   tipsToggle?.addEventListener("change", savePreferences);
@@ -135,17 +135,18 @@
 
   // Signed-in account identity and security actions use the actual Supabase session.
   function getSupabase() {
-    if (!window.supabase?.createClient || !window.STUDYHUB_SUPABASE_URL || !window.STUDYHUB_SUPABASE_PUBLISHABLE_KEY) {
+    if (window.NotesPixData?.client) return window.NotesPixData.client();
+    if (!window.supabase?.createClient || !window.NOTESPIX_SUPABASE_URL || !window.NOTESPIX_SUPABASE_PUBLISHABLE_KEY) {
       throw new Error("NotesPix authentication is unavailable. Please refresh and try again.");
     }
-    if (!window.studyHubSupabaseClient) {
-      window.studyHubSupabaseClient = window.supabase.createClient(
-        window.STUDYHUB_SUPABASE_URL,
-        window.STUDYHUB_SUPABASE_PUBLISHABLE_KEY,
+    if (!window.notesPixSupabaseClient) {
+      window.notesPixSupabaseClient = window.supabase.createClient(
+        window.NOTESPIX_SUPABASE_URL,
+        window.NOTESPIX_SUPABASE_PUBLISHABLE_KEY,
         { auth: { persistSession: true, autoRefreshToken: true, detectSessionInUrl: true } }
       );
     }
-    return window.studyHubSupabaseClient;
+    return window.notesPixSupabaseClient;
   }
   const initials = name => String(name || "Student").trim().split(/\s+/).filter(Boolean).slice(0, 2)
     .map(part => part[0]).join("").toUpperCase() || "S";
@@ -168,9 +169,9 @@
       return;
     }
     const savedBrowserTheme = (() => {
-      try { return localStorage.getItem("studyhub-theme"); } catch (_) { return null; }
+      try { return localStorage.getItem("notespix-theme"); } catch (_) { return null; }
     })();
-    const remoteTheme = signedInUser.user_metadata?.studyhub_theme;
+    const remoteTheme = signedInUser.user_metadata?.notespix_theme;
     // Browser theme is the shared preference across all NotesPix pages; only
     // fall back to account metadata when this browser has no saved choice yet.
     if (savedBrowserTheme === "dark" || savedBrowserTheme === "light") {
@@ -178,7 +179,7 @@
     } else if (remoteTheme === "dark" || remoteTheme === "light") {
       applyTheme(remoteTheme, false);
     }
-    const remotePreferences = signedInUser.user_metadata?.studyhub_preferences;
+    const remotePreferences = signedInUser.user_metadata?.notespix_preferences;
     if (remotePreferences && typeof remotePreferences === "object") {
       preferences = {
         showStudyTips: typeof remotePreferences.showStudyTips === "boolean" ? remotePreferences.showStudyTips : true,
@@ -198,12 +199,6 @@
     }
     displayName = displayName || signedInUser.email?.split("@")[0] || "Student";
     paintIdentity(displayName, signedInUser.email || "");
-    try {
-      localStorage.setItem("studyhub-demo-user", JSON.stringify({
-        id: signedInUser.id, name: displayName, email: signedInUser.email || "",
-        role: signedInUser.user_metadata?.role || "other"
-      }));
-    } catch (_) {}
   }
 
   const passwordForm = document.getElementById("passwordChangeForm");
@@ -234,6 +229,10 @@
       setPasswordMessage("Use at least 8 characters for your new password.", "error");
       return;
     }
+    if (newPassword.length > 72) {
+      setPasswordMessage("Please keep your password under 72 characters.", "error");
+      return;
+    }
     if (newPassword !== confirmPassword) {
       setPasswordMessage("The passwords do not match. Please check them.", "error");
       return;
@@ -250,7 +249,7 @@
       setPasswordMessage("");
       showToast("Your password has been updated.");
     } catch (error) {
-      setPasswordMessage(error.message || "Could not update your password. Please try again.", "error");
+      setPasswordMessage(window.NotesPixData?.friendlyError(error, "Could not update your password. Please try again."), "error");
     } finally {
       savePasswordButton.disabled = false;
       savePasswordButton.textContent = "Update password";
@@ -265,10 +264,9 @@
       if (!authClient) authClient = getSupabase();
       const { error } = await authClient.auth.signOut();
       if (error) throw error;
-      try { localStorage.removeItem("studyhub-demo-user"); } catch (_) {}
       window.location.replace("index.html");
     } catch (error) {
-      showToast(error.message || "Could not sign out. Please try again.");
+      showToast(window.NotesPixData?.friendlyError(error, "Could not sign out. Please try again."));
       button.disabled = false;
       button.textContent = "Sign out";
     }
@@ -279,6 +277,6 @@
     const name = document.getElementById("settingsAccountName");
     const email = document.getElementById("settingsAccountEmail");
     if (name) name.textContent = "Account unavailable";
-    if (email) email.textContent = error.message || "Please refresh or sign in again.";
+    if (email) email.textContent = window.NotesPixData?.friendlyError(error, "Please refresh or sign in again.");
   });
 })();

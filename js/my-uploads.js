@@ -1,19 +1,19 @@
 (() => {
   const list = document.getElementById('uploadsList');
   if (!list) return;
-  const esc = value => window.StudyHubData.escapeHtml(value);
+  const esc = value => window.NotesPixData.escapeHtml(value);
   const empty = () => {
-    list.innerHTML = '<div class="phase6-empty"><h3>No uploads yet</h3><p>When you publish a resource, it will appear here.</p><a class="button button-primary" href="upload.html">Upload a resource</a></div>';
+    list.innerHTML = '<div class="workspace-empty"><h3>No uploads yet</h3><p>When you publish a resource, it will appear here.</p><a class="button button-primary" href="upload.html">Upload a resource</a></div>';
   };
   const render = item => `
-    <article class="phase6-resource" data-resource-id="${esc(item.id)}">
-      <div class="phase6-file-icon">${esc((item.format || 'FILE').toUpperCase())}</div>
-      <div class="phase6-resource-main">
+    <article class="workspace-resource" data-resource-id="${esc(item.id)}">
+      <div class="workspace-file-icon">${esc((item.format || 'FILE').toUpperCase())}</div>
+      <div class="workspace-resource-main">
         <h3>${esc(item.title)}</h3>
         <p>${esc(item.subject || 'General')} · Published ${new Date(item.created_at).toLocaleDateString()}</p>
       </div>
-      <span class="phase6-status status-approved">Published</span>
-      <div class="phase6-card-actions">
+      <span class="workspace-status status-approved">Published</span>
+      <div class="workspace-card-actions">
         <a href="resource-details.html?id=${encodeURIComponent(item.id)}">View details</a>
         <button type="button" class="upload-delete-button" data-delete-resource="${esc(item.id)}" aria-label="Delete ${esc(item.title)}">Delete</button>
       </div>
@@ -21,7 +21,7 @@
   const load = async () => {
     list.innerHTML = '<p role="status">Loading your resources…</p>';
     try {
-      const { supabase, user } = await window.StudyHubData.requireUser();
+      const { supabase, user } = await window.NotesPixData.requireUser();
       const { data, error } = await supabase.from('resources')
         .select('id,title,subject,format,file_path,created_at')
         .eq('owner_id', user.id).order('created_at', { ascending: false });
@@ -29,7 +29,8 @@
       if (!data?.length) { empty(); return; }
       list.innerHTML = data.map(render).join('');
     } catch (error) {
-      list.innerHTML = `<div class="phase6-empty"><h3>Could not load uploads</h3><p>${esc(error.message || 'Please log in and try again.')}</p><a href="login.html">Log in</a></div>`;
+      console.error('Could not load uploads:', error);
+      list.innerHTML = `<div class="workspace-empty"><h3>Could not load uploads</h3><p>${esc(window.NotesPixData?.friendlyError(error, 'Please sign in and try again.'))}</p><a href="login.html">Log in</a></div>`;
     }
   };
 
@@ -44,7 +45,7 @@
     button.disabled = true;
     button.textContent = 'Deleting…';
     try {
-      const { supabase, user } = await window.StudyHubData.requireUser();
+      const { supabase, user } = await window.NotesPixData.requireUser();
       const { data: resource, error: fetchError } = await supabase.from('resources')
         .select('id,file_path').eq('id', id).eq('owner_id', user.id).single();
       if (fetchError) throw fetchError;
@@ -70,7 +71,7 @@
       if (!list.querySelector('[data-resource-id]')) empty();
     } catch (error) {
       console.error('Could not delete NotesPix resource:', error);
-      window.alert(error.message || 'Could not delete this resource. Please try again.');
+      window.alert(window.NotesPixData?.friendlyError(error, 'Could not delete this resource. Please try again.'));
       button.disabled = false;
       button.textContent = 'Delete';
     }

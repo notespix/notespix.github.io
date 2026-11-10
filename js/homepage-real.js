@@ -21,18 +21,18 @@
     if(subjectLoading)subjectLoading.hidden=true;
     if(!subjectsEl)return;
     const names=[...map].sort((a,b)=>a[0].localeCompare(b[0]));
-    subjectsEl.innerHTML=names.length?names.slice(0,8).map(([name,count],i)=>`<a href="explore.html?q=${encodeURIComponent(name)}" class="subject-pill"><span class="subject-emoji">${["📚","✏️","⚛️","🧪","🧬","📖","📊","💻"][i%8]}</span><span>${esc(name)}</span><small>${count}</small><span class="subject-arrow">↗</span></a>`).join(""):'<p class="home-subject-empty">Subjects will appear here as students publish resources.</p>';
+    subjectsEl.innerHTML=names.length?names.slice(0,8).map(([name,count])=>`<a href="explore.html?q=${encodeURIComponent(name)}" class="subject-pill"><span class="subject-emoji">${esc(name.trim().charAt(0).toUpperCase() || "#")}</span><span>${esc(name)}</span><small>${count}</small><span class="subject-arrow">↗</span></a>`).join(""):'<p class="home-subject-empty">Subjects will appear here as students publish resources.</p>';
   }
   function renderLevels(){
     if(!levelsEl)return;
     const map=new Map();resources.forEach(r=>{if(!r.academic_level)return;const key=`${r.education_level||"other"}|${r.academic_level}`;map.set(key,(map.get(key)||0)+1);});
     const entries=[...map].sort((a,b)=>a[0].localeCompare(b[0]));
-    levelsEl.innerHTML=entries.length?entries.slice(0,8).map(([key,count])=>{const [type,label]=key.split("|");return `<a class="level-card" href="explore.html?education=${encodeURIComponent(type)}&level=${encodeURIComponent(label)}"><span class="level-card-icon">${type==="school"?"🎒":"🎓"}</span><span><strong>${esc(label)}</strong><small>${type==="school"?"School":"College / University"}</small></span><b>${count}</b></a>`;}).join(""):'<p class="home-level-empty">Classes and college years will appear here when students upload classified resources.</p>';
+    levelsEl.innerHTML=entries.length?entries.slice(0,8).map(([key,count])=>{const [type,label]=key.split("|");return `<a class="level-card" href="explore.html?education=${encodeURIComponent(type)}&level=${encodeURIComponent(label)}"><span class="level-card-icon">${type==="school"?"S":"C"}</span><span><strong>${esc(label)}</strong><small>${type==="school"?"School":"College / University"}</small></span><b>${count}</b></a>`;}).join(""):'<p class="home-level-empty">Classes and college years will appear here when students upload classified resources.</p>';
   }
   async function load(){
     try{
-      let sb=window.studyHubSupabaseClient;
-      if(!sb){if(!window.supabase?.createClient||!window.STUDYHUB_SUPABASE_URL||!window.STUDYHUB_SUPABASE_PUBLISHABLE_KEY)throw Error("Supabase is not configured.");sb=window.supabase.createClient(window.STUDYHUB_SUPABASE_URL,window.STUDYHUB_SUPABASE_PUBLISHABLE_KEY,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true}});window.studyHubSupabaseClient=sb;}
+      let sb=window.notesPixSupabaseClient;
+      if(!sb){if(!window.supabase?.createClient||!window.NOTESPIX_SUPABASE_URL||!window.NOTESPIX_SUPABASE_PUBLISHABLE_KEY)throw Error("NotesPix could not connect. Please refresh the page.");sb=window.supabase.createClient(window.NOTESPIX_SUPABASE_URL,window.NOTESPIX_SUPABASE_PUBLISHABLE_KEY,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true}});window.notesPixSupabaseClient=sb;}
       const {data,error}=await sb.from("resources").select("id,title,description,subject,format,created_at,education_level,academic_level,semester,unit_topic").order("created_at",{ascending:false}).limit(200);
       if(error)throw error;resources=data||[];renderResources();renderSubjects();renderLevels();
     }catch(e){console.error("Homepage classified resources failed:",e);if(loading)loading.textContent="Resources could not load. Please refresh.";if(subjectLoading)subjectLoading.textContent="Subjects unavailable.";if(levelsEl)levelsEl.innerHTML='<p class="home-level-empty">Classification is temporarily unavailable.</p>';if(empty){empty.hidden=false;empty.textContent="We couldn't load resources right now. Please refresh and try again.";}}
