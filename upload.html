@@ -1,93 +1,96 @@
-<!DOCTYPE html><html lang="en"><head>
-  <script src="js/analytics.js"></script>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="referrer" content="strict-origin-when-cross-origin">
-  <meta http-equiv="Content-Security-Policy" content="object-src 'none'; base-uri 'self'; form-action 'self'"><title>Upload a resource — NotesPix</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="css/style.css"><link rel="stylesheet" href="css/theme.css"><link rel="stylesheet" href="css/profile.css"><script src="js/theme.js" defer></script><script src="js/profile.js" defer></script>  <script src="js/vendor/supabase.js"></script>
-  <script src="js/supabase-config.js"></script>
-  <script src="js/mobile-auth-init.js"></script>
-  <script src="js/mobile-auth-gate.js" defer></script>
-  <script src="js/supabase-session-ui.js" defer></script>
-  <link rel="stylesheet" href="css/responsive.css">
-  <link rel="icon" type="image/svg+xml" href="favicon.svg">
-  <meta name="theme-color" content="#071638">
-  <meta name="description" content="Upload study notes, PDFs, presentations, and other learning resources to share with the NotesPix student community."></head><body class="page-shell"><header class="site-header"><div class="header-inner container"><a class="brand" href="index.html" aria-label="NotesPix home"><span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 8.5 12 4l9 4.5-9 4.5L3 8.5Z"/><path d="M6.5 10.5v5.2c3.3 2.5 7.7 2.5 11 0v-5.2M21 9v6"/></svg></span><span>Notes<span class="brand-accent">Pix</span></span></a><nav class="primary-nav page-nav" aria-label="Main navigation"><a class="nav-link" href="index.html">Home</a><a class="nav-link" href="explore.html">Explore resources</a><a class="nav-link active" href="upload.html" aria-current="page">Upload</a><a class="nav-link" href="how-it-works.html">How it works</a></nav><div class="header-actions"><button class="theme-toggle" type="button" data-theme-toggle aria-pressed="false"><span class="theme-toggle-icon">☾</span><span class="theme-toggle-label">Dark mode</span></button><a class="login-link" href="login.html">Log in</a><a class="button button-primary button-small" href="signup.html">Join NotesPix ↗</a><div class="profile-menu" data-profile-menu><button class="profile-trigger" type="button" data-profile-trigger aria-expanded="false" aria-haspopup="true"><span class="profile-avatar" data-profile-initials>S</span><span class="profile-trigger-name" data-profile-name>Student</span><span class="profile-chevron">▾</span></button><div class="profile-dropdown" role="menu"><a href="dashboard.html" role="menuitem">▦ &nbsp; Dashboard</a><a href="profile.html" role="menuitem">◎ &nbsp; My Profile</a><a href="settings.html" role="menuitem">⚙ &nbsp; Settings</a><button type="button" class="profile-logout" data-profile-logout role="menuitem">↪ &nbsp; Log out</button></div></div></div></div></header><main class="upload-experience">
-  <section class="upload-hero-wrap">
-    <div class="upload-hero container">
-      <div class="upload-hero-copy">
-        <div class="upload-kicker"><span class="upload-kicker-dot"></span> THE NOTESPIX COMMUNITY</div>
-        <h1>Good notes deserve<br><span>to be shared.</span></h1>
-        <p>Turn your hard work into someone else's breakthrough. Share notes, presentations and study guides with students who need them.</p>
-        <div class="upload-hero-points">
-          <span><b>01</b> Add your details</span>
-          <span><b>02</b> Choose your file</span>
-          <span><b>03</b> Publish instantly</span>
-        </div>
-      </div>
-      <div class="upload-hero-art" aria-label="NotesPix knowledge sharing illustration">
-        <div class="art-orbit orbit-one"></div><div class="art-orbit orbit-two"></div>
-        <div class="art-paper paper-back">✦</div>
-        <div class="art-paper paper-front"><span class="paper-icon">N</span><i></i><i></i><i></i></div>
-        <div class="art-float float-one">PDF <b>↗</b></div>
-        <div class="art-float float-two">✦ &nbsp; Share knowledge</div>
-        <div class="art-spark spark-one">✦</div><div class="art-spark spark-two">✧</div>
-      </div>
-    </div>
-  </section>
+<!DOCTYPE html>
 
-  <section class="upload-workspace container">
-    <div class="upload-main-column">
-      <div class="upload-section-heading">
-        <div><span class="upload-step-label">LET'S GET STARTED</span><h2>Upload your resource</h2><p>Add the class or year, subject and topic so students can find your resource in the right place.</p></div>
-        <span class="upload-step-count">STEP 1 OF 1</span>
-      </div>
-      <section class="resource-card upload-form-card">
-        <div id="uploadAuthNotice" class="upload-auth-gate" hidden>
-          <div class="upload-auth-gate-icon">✦</div>
-          <span class="upload-step-label">JOIN THE NOTESPIX COMMUNITY</span>
-          <h3>Create an account to share your resources.</h3>
-          <p>Sign up for a free NotesPix account to upload notes and help other students learn.</p>
-          <div class="upload-auth-gate-actions">
-            <a class="button button-primary" href="signup.html">Sign up to upload <span aria-hidden="true">→</span></a>
-            <a class="upload-auth-login" href="login.html">Already have an account? Log in</a>
-          </div>
-        </div>
-        <form id="resourceUploadForm" class="upload-form">
-          <div class="upload-field"><label for="resourceTitle">Resource title <span>Required</span></label><input id="resourceTitle" name="title" type="text" maxlength="100" placeholder="e.g. Computer Networks — Unit 2 Notes" required><small>Give your resource a clear, helpful name.</small></div>
-          <div class="upload-field"><label for="resourceSubject">Subject <span>Required</span></label><input id="resourceSubject" name="subject" type="text" maxlength="60" placeholder="e.g. Computer Science" required><small>Which subject does this resource belong to?</small></div>
-          <div class="upload-field upload-description-field">
-            <label for="resourceDescriptionInput">About this resource <span>Optional</span></label>
-            <textarea id="resourceDescriptionInput" name="description" maxlength="500" rows="4" placeholder="Tell students what this resource covers, which topics are included, and how it can help them..."></textarea>
-            <small>This description will appear on your resource details page. Maximum 500 characters.</small>
-          </div>
-          <div class="upload-form-grid classification-grid">
-            <div class="upload-field"><label for="educationLevel">Education level <span>Required</span></label><select id="educationLevel" name="education_level" required><option value="">Choose level</option><option value="school">School</option><option value="college">College / University</option></select></div>
-            <div class="upload-field"><label for="academicLevel">Class / Year <span>Required</span></label><select id="academicLevel" name="academic_level" required disabled><option value="">Choose education level first</option></select></div>
-          </div>
-          <div class="upload-form-grid" id="semesterRow" hidden>
-            <div class="upload-field"><label for="semester">Semester <span>Optional</span></label><select id="semester" name="semester"><option value="">Select semester</option><option>Semester 1</option><option>Semester 2</option><option>Semester 3</option><option>Semester 4</option><option>Semester 5</option><option>Semester 6</option><option>Semester 7</option><option>Semester 8</option></select></div>
-            <div class="upload-field"><label for="unitTopic">Unit / Chapter / Topic <span>Optional</span></label><input id="unitTopic" name="unit_topic" type="text" maxlength="100" placeholder="e.g. Unit 1 — Network Basics"></div>
-          </div>
-          <div class="upload-field" id="schoolTopicField" hidden><label for="schoolUnitTopic">Chapter / Topic <span>Optional</span></label><input id="schoolUnitTopic" type="text" maxlength="100" placeholder="e.g. Chapter 3 — Trigonometry"></div>
-          <div class="upload-form-grid">
-            <div class="upload-field"><label for="resourceFormat">File format <span>Required</span></label><select id="resourceFormat" name="format" required><option value="">Choose format</option><option>PDF</option><option>DOCX</option><option>PPTX</option><option>Other</option></select></div>
-            <div class="upload-field"><label>File size <span>Up to 10 MB</span></label><div class="upload-size-hint"><strong>10 MB</strong><small>Maximum file size</small></div></div>
-          </div>
-          <div class="upload-field upload-file-field"><label for="resourceFile">Your study file <span>Required</span></label>
-            <label class="upload-dropzone" for="resourceFile"><span class="dropzone-icon">↑</span><strong>Drop your file here, or <em>browse</em></strong><small>PDF, DOC, DOCX, PPT or PPTX · Maximum 10 MB</small><span class="dropzone-footnote">Your file will be stored securely in NotesPix Storage.</span></label>
-            <input id="resourceFile" name="file" type="file" accept=".pdf,.doc,.docx,.ppt,.pptx" class="upload-native-file">
-            <p id="selectedFileLabel" class="upload-file-note">No file selected yet.</p>
-          </div>
-          <div id="uploadFormMessage" class="upload-form-message" role="status" aria-live="polite"></div>
-          <div class="upload-form-actions"><button class="button button-primary upload-submit-button" type="submit"><span>Upload &amp; publish resource</span><b aria-hidden="true">→</b></button><a class="button button-secondary" href="my-uploads.html">Cancel</a></div>
-          <p class="upload-publish-note"><span>✓</span> Your resource is published automatically after a successful upload.</p>
-        </form>
-      </section>
-    </div>
-    <aside class="upload-side-column">
-      <div class="upload-impact-card"><div class="impact-icon">✦</div><span class="upload-step-label">MAKE AN IMPACT</span><h3>Your notes could be someone's <span>aha moment.</span></h3><p>Every resource you share helps another student learn a little easier. That's the NotesPix spirit.</p><div class="impact-signature"><span>N</span><div><strong>Learn together.</strong><small>Grow together.</small></div></div></div>
-      <div class="upload-tips-card"><h3>Quick upload checklist</h3><ul><li><span>✓</span> Use a clear resource title</li><li><span>✓</span> Select the correct class and subject</li><li><span>✓</span> Make sure the file is under 10 MB</li><li><span>✓</span> Upload only material you can share</li></ul><a href="how-it-works.html">How NotesPix works <b>→</b></a></div>
-    </aside>
-  </section>
+<html lang="en"><head>
+<script src="js/analytics.js"></script>
+<meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="strict-origin-when-cross-origin" name="referrer"/>
+<meta content="object-src 'none'; base-uri 'self'; form-action 'self'" http-equiv="Content-Security-Policy"/><title>Upload a resource — NotesPix</title><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&amp;family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/><link href="css/style.css" rel="stylesheet"/><link href="css/theme.css" rel="stylesheet"/><link href="css/profile.css" rel="stylesheet"/><script defer="" src="js/theme.js"></script><script defer="" src="js/profile.js"></script> <script src="js/vendor/supabase.js"></script>
+<script src="js/supabase-config.js"></script>
+<script src="js/mobile-auth-init.js"></script>
+<script defer="" src="js/mobile-auth-gate.js"></script>
+<script defer="" src="js/supabase-session-ui.js"></script>
+<link href="css/responsive.css" rel="stylesheet"/>
+<link href="favicon.svg" rel="icon" type="image/svg+xml"/>
+<meta content="#071638" name="theme-color"/>
+<meta content="Upload study notes, PDFs, presentations, and other learning resources to share with the NotesPix student community." name="description"/> <link href="css/floating-ios-sidebar.css" rel="stylesheet"/>
+<script defer="" src="js/ios-sidebar-enhance.js"></script>
+</head><body class="page-shell"><header class="site-header"><div class="header-inner container"><a aria-label="NotesPix home" class="brand" href="index.html"><span aria-hidden="true" class="brand-mark"><svg viewbox="0 0 24 24"><path d="M3 8.5 12 4l9 4.5-9 4.5L3 8.5Z"></path><path d="M6.5 10.5v5.2c3.3 2.5 7.7 2.5 11 0v-5.2M21 9v6"></path></svg></span><span>Notes<span class="brand-accent">Pix</span></span></a><nav aria-label="Main navigation" class="primary-nav page-nav"><a class="nav-link" href="index.html" title="Home">Home</a><a class="nav-link" href="explore.html" title="Explore resources">Explore resources</a><a aria-current="page" class="nav-link active" href="upload.html" title="Upload">Upload</a><a class="nav-link" href="how-it-works.html" title="How it works">How it works</a></nav><div class="header-actions"><button aria-pressed="false" class="theme-toggle" data-theme-toggle="" type="button"><span class="theme-toggle-icon">☾</span><span class="theme-toggle-label">Dark mode</span></button><a class="login-link" href="login.html">Log in</a><a class="button button-primary button-small" href="signup.html">Join NotesPix ↗</a><div class="profile-menu" data-profile-menu=""><button aria-expanded="false" aria-haspopup="true" class="profile-trigger" data-profile-trigger="" type="button"><span class="profile-avatar"><span data-profile-initials="">P</span><svg aria-hidden="true" class="guest-profile-icon" data-profile-guest-icon="" viewbox="0 0 24 24"><circle cx="12" cy="8" r="4"></circle><path d="M4 21a8 8 0 0 1 16 0"></path></svg></span><span class="profile-trigger-name" data-profile-name="">Profile</span><span class="profile-chevron">▾</span></button><div class="profile-dropdown" role="menu"><div class="profile-dropdown-head" data-auth-signed-in=""><span class="profile-avatar"><span data-profile-initials="">P</span><svg aria-hidden="true" class="guest-profile-icon" data-profile-guest-icon="" viewbox="0 0 24 24"><circle cx="12" cy="8" r="4"></circle><path d="M4 21a8 8 0 0 1 16 0"></path></svg></span><div><strong data-profile-fullname="">Profile</strong><small>Student account</small></div></div><div class="profile-guest-actions" data-auth-signed-out=""><a class="profile-create-account" href="signup.html" role="menuitem">Create account</a><a class="profile-login" href="login.html" role="menuitem">Log in</a></div><div class="profile-account-actions" data-auth-signed-in=""><a href="dashboard.html" role="menuitem">▦  Dashboard</a><a href="profile.html" role="menuitem">◎  My Profile</a><a href="my-uploads.html" role="menuitem">↥  My Uploads</a><a href="saved-notes.html" role="menuitem">♡  Saved Notes</a><a href="my-activity.html" role="menuitem">◷  My Activity</a><a href="settings.html" role="menuitem">⚙  Settings</a><button class="profile-logout" data-profile-logout="" role="menuitem" type="button">↪  Log out</button></div></div></div></div></div></header><main class="upload-experience">
+<section class="upload-hero-wrap">
+<div class="upload-hero container">
+<div class="upload-hero-copy">
+<div class="upload-kicker"><span class="upload-kicker-dot"></span> THE NOTESPIX COMMUNITY</div>
+<h1>Good notes deserve<br/><span>to be shared.</span></h1>
+<p>Turn your hard work into someone else's breakthrough. Share notes, presentations and study guides with students who need them.</p>
+<div class="upload-hero-points">
+<span><b>01</b> Add your details</span>
+<span><b>02</b> Choose your file</span>
+<span><b>03</b> Publish instantly</span>
+</div>
+</div>
+<div aria-label="NotesPix knowledge sharing illustration" class="upload-hero-art">
+<div class="art-orbit orbit-one"></div><div class="art-orbit orbit-two"></div>
+<div class="art-paper paper-back">✦</div>
+<div class="art-paper paper-front"><span class="paper-icon">N</span><i></i><i></i><i></i></div>
+<div class="art-float float-one">PDF <b>↗</b></div>
+<div class="art-float float-two">✦   Share knowledge</div>
+<div class="art-spark spark-one">✦</div><div class="art-spark spark-two">✧</div>
+</div>
+</div>
+</section>
+<section class="upload-workspace container">
+<div class="upload-main-column">
+<div class="upload-section-heading">
+<div><span class="upload-step-label">LET'S GET STARTED</span><h2>Upload your resource</h2><p>Add the class or year, subject and topic so students can find your resource in the right place.</p></div>
+<span class="upload-step-count">STEP 1 OF 1</span>
+</div>
+<section class="resource-card upload-form-card">
+<div class="upload-auth-gate" hidden="" id="uploadAuthNotice">
+<div class="upload-auth-gate-icon">✦</div>
+<span class="upload-step-label">JOIN THE NOTESPIX COMMUNITY</span>
+<h3>Create an account to share your resources.</h3>
+<p>Sign up for a free NotesPix account to upload notes and help other students learn.</p>
+<div class="upload-auth-gate-actions">
+<a class="button button-primary" href="signup.html">Sign up to upload <span aria-hidden="true">→</span></a>
+<a class="upload-auth-login" href="login.html">Already have an account? Log in</a>
+</div>
+</div>
+<form class="upload-form" id="resourceUploadForm">
+<div class="upload-field"><label for="resourceTitle">Resource title <span>Required</span></label><input id="resourceTitle" maxlength="100" name="title" placeholder="e.g. Computer Networks — Unit 2 Notes" required="" type="text"/><small>Give your resource a clear, helpful name.</small></div>
+<div class="upload-field"><label for="resourceSubject">Subject <span>Required</span></label><input id="resourceSubject" maxlength="60" name="subject" placeholder="e.g. Computer Science" required="" type="text"/><small>Which subject does this resource belong to?</small></div>
+<div class="upload-field upload-description-field">
+<label for="resourceDescriptionInput">About this resource <span>Optional</span></label>
+<textarea id="resourceDescriptionInput" maxlength="500" name="description" placeholder="Tell students what this resource covers, which topics are included, and how it can help them..." rows="4"></textarea>
+<small>This description will appear on your resource details page. Maximum 500 characters.</small>
+</div>
+<div class="upload-form-grid classification-grid">
+<div class="upload-field"><label for="educationLevel">Education level <span>Required</span></label><select id="educationLevel" name="education_level" required=""><option value="">Choose level</option><option value="school">School</option><option value="college">College / University</option></select></div>
+<div class="upload-field"><label for="academicLevel">Class / Year <span>Required</span></label><select disabled="" id="academicLevel" name="academic_level" required=""><option value="">Choose education level first</option></select></div>
+</div>
+<div class="upload-form-grid" hidden="" id="semesterRow">
+<div class="upload-field"><label for="semester">Semester <span>Optional</span></label><select id="semester" name="semester"><option value="">Select semester</option><option>Semester 1</option><option>Semester 2</option><option>Semester 3</option><option>Semester 4</option><option>Semester 5</option><option>Semester 6</option><option>Semester 7</option><option>Semester 8</option></select></div>
+<div class="upload-field"><label for="unitTopic">Unit / Chapter / Topic <span>Optional</span></label><input id="unitTopic" maxlength="100" name="unit_topic" placeholder="e.g. Unit 1 — Network Basics" type="text"/></div>
+</div>
+<div class="upload-field" hidden="" id="schoolTopicField"><label for="schoolUnitTopic">Chapter / Topic <span>Optional</span></label><input id="schoolUnitTopic" maxlength="100" placeholder="e.g. Chapter 3 — Trigonometry" type="text"/></div>
+<div class="upload-form-grid">
+<div class="upload-field"><label for="resourceFormat">File format <span>Required</span></label><select id="resourceFormat" name="format" required=""><option value="">Choose format</option><option>PDF</option><option>DOCX</option><option>PPTX</option><option>Other</option></select></div>
+<div class="upload-field"><label>File size <span>Up to 10 MB</span></label><div class="upload-size-hint"><strong>10 MB</strong><small>Maximum file size</small></div></div>
+</div>
+<div class="upload-field upload-file-field"><label for="resourceFile">Your study file <span>Required</span></label>
+<label class="upload-dropzone" for="resourceFile"><span class="dropzone-icon">↑</span><strong>Drop your file here, or <em>browse</em></strong><small>PDF, DOC, DOCX, PPT or PPTX · Maximum 10 MB</small><span class="dropzone-footnote">Your file will be stored securely in NotesPix Storage.</span></label>
+<input accept=".pdf,.doc,.docx,.ppt,.pptx" class="upload-native-file" id="resourceFile" name="file" type="file"/>
+<p class="upload-file-note" id="selectedFileLabel">No file selected yet.</p>
+</div>
+<div aria-live="polite" class="upload-form-message" id="uploadFormMessage" role="status"></div>
+<div class="upload-form-actions"><button class="button button-primary upload-submit-button" type="submit"><span>Upload &amp; publish resource</span><b aria-hidden="true">→</b></button><a class="button button-secondary" href="my-uploads.html">Cancel</a></div>
+<p class="upload-publish-note"><span>✓</span> Your resource is published automatically after a successful upload.</p>
+</form>
+</section>
+</div>
+<aside class="upload-side-column">
+<div class="upload-impact-card"><div class="impact-icon">✦</div><span class="upload-step-label">MAKE AN IMPACT</span><h3>Your notes could be someone's <span>aha moment.</span></h3><p>Every resource you share helps another student learn a little easier. That's the NotesPix spirit.</p><div class="impact-signature"><span>N</span><div><strong>Learn together.</strong><small>Grow together.</small></div></div></div>
+<div class="upload-tips-card"><h3>Quick upload checklist</h3><ul><li><span>✓</span> Use a clear resource title</li><li><span>✓</span> Select the correct class and subject</li><li><span>✓</span> Make sure the file is under 10 MB</li><li><span>✓</span> Upload only material you can share</li></ul><a href="how-it-works.html">How NotesPix works <b>→</b></a></div>
+</aside>
+</section>
 </main>
 <style>
 .upload-auth-gate{padding:34px 28px;text-align:center;border:1px solid var(--up-line);border-radius:18px;background:linear-gradient(145deg,rgba(37,99,235,.11),var(--up-card) 75%);margin-bottom:18px}
@@ -112,5 +115,5 @@ html[data-theme="dark"] .upload-auth-gate-icon{background:#26385d;color:#a9c1ff}
 html[data-theme="dark"] .upload-experience{--up-card:#171f30;--up-text:#e7ecf6;--up-muted:#a0abc0;--up-line:#2b354a;background:#101522}html[data-theme="dark"] .upload-form-card,html[data-theme="dark"] .upload-tips-card{background:#171f30;border-color:#2b354a}html[data-theme="dark"] .upload-form input:not([type=file]),html[data-theme="dark"] .upload-form select,html[data-theme="dark"] .upload-form textarea{background:#131b2b;border-color:#354159;color:#e7ecf6}html[data-theme="dark"] .upload-dropzone{background:linear-gradient(135deg,#202d46,#1a263b);border-color:#526b9f}html[data-theme="dark"] .upload-dropzone strong{color:#e7ecf6}html[data-theme="dark"] .upload-dropzone small,html[data-theme="dark"] .dropzone-footnote{color:#a0abc0}html[data-theme="dark"] .upload-field>label:first-child span{background:#26385d;color:#a9c1ff}html[data-theme="dark"] .upload-size-hint{border-color:#354159;color:#e7ecf6}html[data-theme="dark"] .upload-size-hint small{color:#a0abc0}html[data-theme="dark"] .upload-form-message[data-state=success]{background:#123c30;color:#8de0b9}
 @media(max-width:900px){.upload-workspace{grid-template-columns:minmax(0,1fr) 260px;gap:18px}.upload-hero{grid-template-columns:1fr .7fr}.upload-hero-art{transform:scale(.85)}}@media(max-width:720px){.upload-hero{grid-template-columns:1fr;padding-top:38px;padding-bottom:30px}.upload-hero-art{display:none}.upload-hero h1{font-size:clamp(38px,10vw,52px)}.upload-hero-points{gap:12px}.upload-workspace{grid-template-columns:1fr;padding-top:28px}.upload-side-column{grid-template-columns:1fr 1fr}.upload-form-card{padding:20px}}@media(max-width:520px){.upload-side-column{grid-template-columns:1fr}.upload-form-grid{grid-template-columns:1fr}.upload-section-heading{align-items:flex-start}.upload-section-heading h2{font-size:21px}.upload-step-count{font-size:8px}.upload-form-actions .button{width:100%}}
 </style>
-<script src="js/supabase-data.js"></script><script src="js/upload-real.js" defer></script>  <script src="js/responsive-nav.js" defer></script>
+<script src="js/supabase-data.js"></script><script defer="" src="js/upload-real.js"></script> <script defer="" src="js/responsive-nav.js"></script>
 </body></html>

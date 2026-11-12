@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+
+<head>
+  <script async src="https://www.googletagmanager.com/gtm.js?id=GTM-MSJ7TPD4"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+  </script>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Moderator Review — NotesPix</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/theme.css">
+    <link rel="stylesheet" href="css/phase6.css">
+    <script src="js/theme.js" defer></script>
+    <script src="js/phase6.js" defer></script>
+    <script src="js/moderation-demo.js" defer></script>
+  <link rel="stylesheet" href="css/responsive.css">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <meta name="theme-color" content="#071638">
+  <meta name="description" content="NotesPix moderation workspace for reviewing reported community resources."></head>
+
+<body class="phase6-page">
+    <div class="dashboard-layout">
+        <aside class="dashboard-sidebar"><a class="dashboard-brand" href="index.html">Notes<span>Pix</span></a>
+            <nav><a href="dashboard.html">Dashboard</a><a href="explore.html">Explore Resources</a><a
+                    href="my-uploads.html">My Uploads</a><a class="active" href="moderation.html">Moderator Review</a>
+            </nav>
+            <p class="muted-note">Frontend demo tool</p>
+        </aside>
+        <div class="dashboard-main-wrap">
+            <header class="dashboard-topbar"><a class="breadcrumb" href="index.html">Home <span>/</span>
+                    <strong>Moderator Review</strong></a><button class="theme-toggle" type="button" data-theme-toggle
+                    aria-pressed="false"><span class="theme-toggle-icon">☾</span><span class="theme-toggle-label">Dark
+                        mode</span></button></header>
+            <main class="dashboard-main" id="mainContent">
+                <section class="welcome-row">
+                    <div>
+                        <div class="dashboard-eyebrow"><span></span> CONTENT SAFETY</div>
+                        <h1>Moderator Review</h1>
+                        <p>Review student submissions and reports. Only approved resources appear in Explore.</p>
+                    </div>
+                </section>
+                <section class="phase6-toolbar">
+                    <div>
+                        <h2>Submitted resources</h2>
+                        <p>Approve or reject submissions here, not from the student’s My Uploads page.</p>
+                    </div><a class="button button-outline" href="explore.html">View Explore</a>
+                </section>
+                <section id="moderationUploads" class="phase6-list"></section>
+                <section class="phase6-toolbar" style="margin-top:32px">
+                    <div>
+                        <h2>Resource reports</h2>
+                        <p>Reports submitted from Resource Details in this browser demo.</p>
+                    </div>
+                </section>
+                <section id="moderationReports" class="phase6-list"></section>
+            </main>
+        </div>
+    </div>
+    <div class="phase6-toast" id="phase6Toast" role="status" aria-live="polite"></div>
+  <script src="js/responsive-nav.js" defer></script>
+</body>
+
+</html>

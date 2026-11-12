@@ -1,4 +1,5 @@
-/* Keeps the header identity, sign-out control, and protected-page redirects in sync with the real Supabase session. */
+/* Keeps the NotesPix profile menu in sync with the real Supabase session.
+   Guests always get a Profile entry with Create account / Log in actions. */
 (() => {
   const getClient = () => {
     if (window.NotesPixData?.client) return window.NotesPixData.client();
@@ -25,38 +26,58 @@
 
   const paint = profile => {
     const signedIn = Boolean(profile);
-    document.querySelectorAll('.header-actions .login-link').forEach(link => {
-      link.style.display = signedIn ? 'none' : '';
+
+    // The profile control is the single account entry point for guests and members.
+    document.querySelectorAll('.header-actions .login-link, .header-actions a[href="signup.html"]').forEach(link => {
+      link.style.display = 'none';
     });
-    document.querySelectorAll('.header-actions a[href="signup.html"]').forEach(link => {
-      link.style.display = signedIn ? 'none' : '';
-    });
+
     document.querySelectorAll('[data-profile-menu]').forEach(menu => {
-      menu.style.display = signedIn ? 'block' : 'none';
-      if (!signedIn) {
-        menu.classList.remove('open');
-        menu.querySelector('[data-profile-trigger]')?.setAttribute('aria-expanded', 'false');
+      menu.style.display = 'block';
+      menu.classList.remove('open');
+      menu.querySelector('[data-profile-trigger]')?.setAttribute('aria-expanded', 'false');
+    });
+
+    document.querySelectorAll('[data-auth-signed-out]').forEach(el => {
+      el.style.display = signedIn ? 'none' : '';
+    });
+    document.querySelectorAll('[data-auth-signed-in]').forEach(el => {
+      el.style.display = signedIn ? '' : 'none';
+    });
+
+    const name = signedIn ? (profile.name || 'Student') : 'Profile';
+    const initials = signedIn
+      ? (name.trim().split(/\s+/).slice(0, 2).map(part => part[0]).join('').toUpperCase() || 'S')
+      : 'P';
+
+    document.querySelectorAll('[data-profile-name]').forEach(element => {
+      element.textContent = name;
+    });
+    document.querySelectorAll('[data-profile-fullname]').forEach(element => {
+      element.textContent = signedIn ? name : 'Welcome to NotesPix';
+    });
+    document.querySelectorAll('.profile-avatar [data-profile-initials]').forEach(element => {
+      element.textContent = initials;
+      element.style.display = signedIn ? 'grid' : 'none';
+    });
+    document.querySelectorAll('.profile-avatar [data-profile-guest-icon]').forEach(element => {
+      element.style.display = signedIn ? 'none' : 'block';
+    });
+
+    document.querySelectorAll('.header-actions [data-auth-aware-cta]').forEach(element => {
+      element.style.display = signedIn ? 'none' : '';
+    });
+    document.querySelectorAll('main [data-auth-aware-cta]').forEach(element => {
+      if (signedIn) {
+        element.href = 'dashboard.html';
+        element.textContent = 'Go to your dashboard →';
+      } else if (element.dataset.originalHref) {
+        element.href = element.dataset.originalHref;
       }
     });
 
-    if (!signedIn) return;
-    const name = profile.name || 'Student';
-    const initials = name.trim().split(/\s+/).slice(0, 2).map(part => part[0]).join('').toUpperCase() || 'S';
-    document.querySelectorAll('[data-profile-name], [data-profile-fullname]').forEach(element => {
-      element.textContent = name;
-    });
-    document.querySelectorAll('[data-profile-initials]').forEach(element => {
-      element.textContent = initials;
-    });
-    document.querySelectorAll('.header-actions [data-auth-aware-cta]').forEach(element => {
-      element.style.display = 'none';
-    });
-    document.querySelectorAll('main [data-auth-aware-cta]').forEach(element => {
-      element.href = 'dashboard.html';
-      element.textContent = 'Go to your dashboard →';
-    });
     const welcome = document.querySelector('.welcome-row h1');
-    if (welcome) {
+    if (signedIn && welcome) {
       welcome.textContent = `Hey ${name.trim().split(/\s+/)[0]} `;
       const accent = document.createElement('span');
       accent.className = 'wave';
@@ -77,6 +98,9 @@
   };
 
   document.addEventListener('DOMContentLoaded', () => {
+    // Default safely to guest UI even if Supabase is not configured on this page.
+    paint(null);
+
     const auth = getClient();
     if (!auth) return;
 

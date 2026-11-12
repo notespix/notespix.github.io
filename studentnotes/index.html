@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<script src="js/analytics.js"></script>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="strict-origin-when-cross-origin" name="referrer"/>
+<meta content="object-src 'none'; base-uri 'self'; form-action 'self'" http-equiv="Content-Security-Policy"/>
+<meta content="NotesPix helps students discover notes, study resources and tools in one place." name="description"/>
+<title>NotesPix — Learn smarter, together</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&amp;family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<script src="js/vendor/supabase.js"></script>
+<script src="js/supabase-config.js"></script>
+<script src="js/supabase-data.js"></script>
+<script src="js/mobile-auth-init.js"></script>
+<script defer="" src="js/mobile-auth-gate.js"></script>
+<script defer="" src="js/supabase-session-ui.js"></script>
+<link href="css/style.css" rel="stylesheet"/>
+<script defer="" src="js/app.js"></script>
+<script defer="" src="js/homepage-real.js"></script>
+<link href="css/theme.css" rel="stylesheet"/>
+<script defer="" src="js/theme.js"></script>
+<link href="css/profile.css" rel="stylesheet"/>
+<script defer="" src="js/profile.js"></script>
+<link href="css/responsive.css" rel="stylesheet"/>
+<link href="favicon.svg" rel="icon" type="image/svg+xml"/>
+<meta content="#071638" name="theme-color"/>
+<link href="css/floating-ios-sidebar.css" rel="stylesheet"/>
+<script defer="" src="js/ios-sidebar-enhance.js"></script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header">
+<div class="header-inner container">
+<a aria-label="NotesPix home" class="brand" href="index.html">
+<span aria-hidden="true" class="brand-mark"><svg viewbox="0 0 24 24"><path d="M3 8.5 12 4l9 4.5-9 4.5L3 8.5Z"></path><path d="M6.5 10.5v5.2c3.3 2.5 7.7 2.5 11 0v-5.2M21 9v6"></path></svg></span>
+<span>Notes<span class="brand-accent">Pix</span></span>
+</a>
+<button aria-controls="primaryNav" aria-expanded="false" aria-label="Open navigation" class="mobile-menu-toggle icon-button" id="mobileMenuToggle">
+<svg aria-hidden="true" viewbox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"></path></svg>
+</button>
+<nav aria-label="Main navigation" class="primary-nav" id="primaryNav">
+<a aria-current="page" class="nav-link active" href="index.html" title="Home">Home</a>
+<a class="nav-link" href="explore.html" title="Explore resources">Explore resources</a>
+<a class="nav-link" href="upload.html" title="Upload">Upload</a>
+<a class="nav-link" href="how-it-works.html" title="How it works">How it works</a>
+</nav>
+<div class="header-actions">
+<button aria-pressed="false" class="theme-toggle" data-theme-toggle="" type="button"><span class="theme-toggle-icon">☾</span><span class="theme-toggle-label">Dark mode</span></button>
+<a class="login-link" href="login.html">Log in</a>
+<a class="button button-primary button-small" data-auth-aware-cta="" href="signup.html">Join NotesPix <span aria-hidden="true">↗</span></a>
+<div class="profile-menu" data-profile-menu="">
+<button aria-expanded="false" aria-haspopup="true" class="profile-trigger" data-profile-trigger="" type="button"><span class="profile-avatar"><span data-profile-initials="">P</span><svg aria-hidden="true" class="guest-profile-icon" data-profile-guest-icon="" viewbox="0 0 24 24"><circle cx="12" cy="8" r="4"></circle><path d="M4 21a8 8 0 0 1 16 0"></path></svg></span><span class="profile-trigger-name" data-profile-name="">Profile</span><span class="profile-chevron">▾</span></button>
+<div class="profile-dropdown" role="menu"><div class="profile-dropdown-head" data-auth-signed-in=""><span class="profile-avatar"><span data-profile-initials="">P</span><svg aria-hidden="true" class="guest-profile-icon" data-profile-guest-icon="" viewbox="0 0 24 24"><circle cx="12" cy="8" r="4"></circle><path d="M4 21a8 8 0 0 1 16 0"></path></svg></span><div><strong data-profile-fullname="">Profile</strong><small>Student account</small></div></div><div class="profile-guest-actions" data-auth-signed-out=""><a class="profile-create-account" href="signup.html" role="menuitem">Create account</a><a class="profile-login" href="login.html" role="menuitem">Log in</a></div><div class="profile-account-actions" data-auth-signed-in=""><a href="dashboard.html" role="menuitem">▦  Dashboard</a><a href="profile.html" role="menuitem">◎  My Profile</a><a href="my-uploads.html" role="menuitem">↥  My Uploads</a><a href="saved-notes.html" role="menuitem">♡  Saved Notes</a><a href="my-activity.html" role="menuitem">◷  My Activity</a><a href="settings.html" role="menuitem">⚙  Settings</a><button class="profile-logout" data-profile-logout="" role="menuitem" type="button">↪  Log out</button></div></div>
+</div></div>
+</div>
+</header>
+<main id="main">
+<section class="hero-section">
+<div aria-hidden="true" class="hero-glow hero-glow-one"></div>
+<div aria-hidden="true" class="hero-glow hero-glow-two"></div>
+<div class="container hero-grid">
+<div class="hero-copy">
+<div class="eyebrow"><span class="eyebrow-dot"></span> YOUR LEARNING COMMUNITY</div>
+<h1>Make your next<br/>big <span>breakthrough.</span></h1>
+<p class="hero-description">Discover notes, share what you know, and find the resources that make studying feel a little easier.</p>
+<div class="hero-actions">
+<a class="button button-primary button-large" href="explore.html">Explore resources <span aria-hidden="true">→</span></a>
+<a class="button button-secondary button-large" href="upload.html">↥ Upload a resource</a>
+</div>
+<div class="hero-proof">
+<div aria-hidden="true" class="avatar-stack"><span>R</span><span>A</span><span>M</span><span>+</span></div>
+<div><strong>A community built by students</strong><small>Learn together. Grow together.</small></div>
+</div>
+</div>
+<div aria-label="Illustration of a student studying with learning resources" class="hero-visual">
+<div class="visual-orbit orbit-one"></div>
+<div class="visual-orbit orbit-two"></div>
+<div class="student-illustration">
+<div class="student-hair"></div>
+<div class="student-face"><span class="eye eye-left"></span><span class="eye eye-right"></span><span class="smile"></span></div>
+<div class="student-neck"></div>
+<div class="student-body"><span class="shirt-line"></span></div>
+<div class="student-arm arm-left"></div>
+<div class="student-arm arm-right"></div>
+<div class="book book-left"><span></span><span></span><span></span></div>
+<div class="book book-right"><span></span><span></span><span></span></div>
+</div>
+<div class="floating-card floating-notes"><span class="floating-icon icon-blue">▤</span><span><strong>Study notes</strong><small>Ready when you are</small></span><span class="floating-check">✓</span></div>
+<div class="floating-card floating-progress"><span class="progress-symbol">↗</span><span><strong>One step at a time</strong><small>Keep making progress</small></span></div>
+<div class="floating-card floating-community"><span class="community-symbol">✦</span><span><strong>Learn together</strong><small>Share knowledge</small></span></div>
+</div>
+</div>
+</section>
+<section aria-label="Find study resources" class="quick-search-section">
+<div class="container">
+<form class="search-panel" id="resourceSearch">
+<div class="search-heading">
+<span aria-hidden="true" class="search-heading-icon">⌕</span>
+<div><strong>What are you studying today?</strong><small>Find resources to help you move forward.</small></div>
+</div>
+<label class="search-input-wrap">
+<span class="sr-only">Search resources</span>
+<svg aria-hidden="true" viewbox="0 0 24 24"><circle cx="10.8" cy="10.8" r="6.8"></circle><path d="m16 16 4.5 4.5"></path></svg>
+<input autocomplete="off" id="searchInput" placeholder="Search by title, subject, class, year or unit..." type="search"/>
+</label>
+<label class="sr-only" for="homeEducationFilter">Education level</label>
+<select class="search-select" id="homeEducationFilter">
+<option value="all">All classes / years</option>
+<option value="school">School classes</option>
+<option value="college">College / university</option>
+</select>
+<label class="sr-only" for="categoryFilter">Resource category</label>
+<select class="search-select" id="categoryFilter">
+<option value="all">All file formats</option>
+<option value="PDF">PDF</option>
+<option value="DOC">Word documents</option>
+<option value="PPT">PowerPoint</option>
+</select>
+<button class="button button-primary search-button" type="submit">Search <span aria-hidden="true">→</span></button>
+</form>
+</div>
+</section>
+<section class="section section-levels" id="browse-levels">
+<div class="container">
+<div class="section-heading compact-heading">
+<div><span class="section-kicker">BROWSE BY CLASS / YEAR</span><h2>Find your learning level.</h2><p>Choose your school class or college year to see relevant study material.</p></div>
+<a class="text-link" href="explore.html">Browse all <span aria-hidden="true">→</span></a>
+</div>
+<div aria-live="polite" class="level-list" id="homeLevelList"><p class="home-level-loading">Loading classes and years…</p></div>
+</div>
+</section>
+<section class="section section-resources" id="resources">
+<div class="container">
+<div class="section-heading">
+<div><span class="section-kicker">YOUR STUDY SPACE</span><h2>Recently shared resources.</h2><p>A small selection of the latest student uploads. Explore the full library anytime.</p></div>
+<a class="text-link" href="explore.html">Explore all resources <span aria-hidden="true">→</span></a>
+</div>
+<div aria-live="polite" class="resource-grid" id="resourceGrid">
+<div class="home-resource-loading" id="homeResourcesLoading">Loading published resources…</div>
+</div>
+<p class="empty-state" hidden="" id="emptyState">No published resources match your search. Try another keyword or format.</p>
+</div>
+</section>
+<section class="section section-subjects" id="subjects">
+<div class="container">
+<div class="section-heading compact-heading">
+<div><span class="section-kicker">BROWSE BY SUBJECT</span><h2>Find resources by subject.</h2><p>Subjects appear here as students share new resources.</p></div>
+<a class="text-link" href="explore.html">All subjects <span aria-hidden="true">→</span></a>
+</div>
+<div aria-live="polite" class="subject-list" id="homeSubjectList">
+<p class="home-subject-loading" id="homeSubjectsLoading">Loading available subjects…</p>
+</div>
+</div>
+</section>
+<section class="community-section" id="how-it-works">
+<div class="container community-panel">
+<div class="community-copy">
+<span class="section-kicker section-kicker-light">BETTER, TOGETHER</span>
+<h2>Your notes could<br/>help someone <span>shine.</span></h2>
+<p>NotesPix is built around students helping students. Share what you've learned and make the next person's journey a little easier.</p>
+<a class="button button-white" href="upload.html">Become a contributor <span aria-hidden="true">→</span></a>
+</div>
+<div aria-hidden="true" class="community-art">
+<div class="community-circle circle-back"></div><div class="community-circle circle-front"></div>
+<div class="community-person person-one"><span>R</span></div><div class="community-person person-two"><span>A</span></div><div class="community-person person-three"><span>S</span></div><div class="community-person person-four"><span>M</span></div>
+<div class="community-note note-one">✦ Share knowledge</div><div class="community-note note-two">↗ Grow together</div>
+</div>
+</div>
+</section>
+<section class="final-cta">
+<div class="container final-cta-inner"><div><span class="section-kicker">YOUR NEXT CHAPTER STARTS HERE</span><h2>Ready to study smarter?</h2><p>Find a resource. Share an idea. Keep moving forward.</p></div><a class="button button-primary button-large" data-auth-aware-cta="" href="signup.html">Join the community <span aria-hidden="true">→</span></a></div>
+</section>
+</main>
+<footer class="site-footer">
+<div class="container footer-main">
+<div class="footer-brand"><a class="brand brand-light" href="index.html"><span aria-hidden="true" class="brand-mark"><svg viewbox="0 0 24 24"><path d="M3 8.5 12 4l9 4.5-9 4.5L3 8.5Z"></path><path d="M6.5 10.5v5.2c3.3 2.5 7.7 2.5 11 0v-5.2M21 9v6"></path></svg></span><span>Notes<span class="brand-accent">Pix</span></span></a><p>A little more support for every student's journey.</p></div>
+<div class="footer-column"><strong>Explore</strong><a href="explore.html">Resources</a><a href="how-it-works.html">How it works</a></div>
+<div class="footer-column"><strong>NotesPix</strong><a href="about.html">About us</a><a href="help.html">Help &amp; support</a><a href="login.html">Student login</a></div>
+</div>
+<div class="container footer-bottom"><span>© <span id="currentYear">2026</span> NotesPix. Built for students.</span><span>Learn smarter, together.</span></div>
+</footer>
+<div aria-live="polite" class="toast" id="toast" role="status"></div>
+<script defer="" src="js/responsive-nav.js"></script>
+</body>
+</html>

@@ -1,126 +1,128 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-  <script src="js/analytics.js"></script>
-
-  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="referrer" content="strict-origin-when-cross-origin">
-  <meta http-equiv="Content-Security-Policy" content="object-src 'none'; base-uri 'self'; form-action 'self'">
-  <meta name="description" content="Explore student-shared study notes and learning resources on NotesPix.">
-  <title>Explore Resources — NotesPix</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css"><link rel="stylesheet" href="css/pages.css"><link rel="stylesheet" href="css/explore.css">
-  <script src="js/supabase-data.js"></script>
-  <script src="js/explore.js" defer></script>
-  <link rel="stylesheet" href="css/theme.css">
-  <script src="js/theme.js" defer></script>
-  <link rel="stylesheet" href="css/profile.css">
-  <script src="js/profile.js" defer></script>
-  <script src="js/vendor/supabase.js"></script>
-  <script src="js/supabase-config.js"></script>
-  <script src="js/mobile-auth-init.js"></script>
-  <script src="js/mobile-auth-gate.js" defer></script>
-  <script src="js/supabase-session-ui.js" defer></script>
-  <link rel="stylesheet" href="css/responsive.css">
-  <link rel="icon" type="image/svg+xml" href="favicon.svg">
-  <meta name="theme-color" content="#071638">
+<script src="js/analytics.js"></script>
+<meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="strict-origin-when-cross-origin" name="referrer"/>
+<meta content="object-src 'none'; base-uri 'self'; form-action 'self'" http-equiv="Content-Security-Policy"/>
+<meta content="Explore student-shared study notes and learning resources on NotesPix." name="description"/>
+<title>Explore Resources — NotesPix</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&amp;family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="css/style.css" rel="stylesheet"/><link href="css/pages.css" rel="stylesheet"/><link href="css/explore.css" rel="stylesheet"/>
+<script src="js/supabase-data.js"></script>
+<script defer="" src="js/explore.js"></script>
+<link href="css/theme.css" rel="stylesheet"/>
+<script defer="" src="js/theme.js"></script>
+<link href="css/profile.css" rel="stylesheet"/>
+<script defer="" src="js/profile.js"></script>
+<script src="js/vendor/supabase.js"></script>
+<script src="js/supabase-config.js"></script>
+<script src="js/mobile-auth-init.js"></script>
+<script defer="" src="js/mobile-auth-gate.js"></script>
+<script defer="" src="js/supabase-session-ui.js"></script>
+<link href="css/responsive.css" rel="stylesheet"/>
+<link href="favicon.svg" rel="icon" type="image/svg+xml"/>
+<meta content="#071638" name="theme-color"/>
+<link href="css/floating-ios-sidebar.css" rel="stylesheet"/>
+<script defer="" src="js/ios-sidebar-enhance.js"></script>
 </head>
 <body class="page-shell explore-page">
-  <header class="site-header">
-    <div class="header-inner container">
-      <a class="brand" href="index.html" aria-label="NotesPix home"><span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 8.5 12 4l9 4.5-9 4.5L3 8.5Z"/><path d="M6.5 10.5v5.2c3.3 2.5 7.7 2.5 11 0v-5.2M21 9v6"/></svg></span><span>Notes<span class="brand-accent">Pix</span></span></a>
-      <button class="mobile-menu-toggle icon-button" id="mobileMenuToggle" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="primaryNav"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
-      <nav class="primary-nav page-nav" id="primaryNav" aria-label="Main navigation"><a class="nav-link" href="index.html">Home</a><a class="nav-link active" href="explore.html" aria-current="page">Explore resources</a><a class="nav-link" href="upload.html">Upload</a><a class="nav-link" href="how-it-works.html">How it works</a></nav>
-      <div class="header-actions">
-        <button class="theme-toggle" type="button" data-theme-toggle aria-pressed="false"><span class="theme-toggle-icon">☾</span><span class="theme-toggle-label">Dark mode</span></button><a class="login-link" href="login.html">Log in</a><a class="button button-primary button-small" href="signup.html" data-auth-aware-cta>Join NotesPix <span>↗</span></a><div class="profile-menu" data-profile-menu>
-          <button class="profile-trigger" type="button" data-profile-trigger aria-expanded="false" aria-haspopup="true"><span class="profile-avatar" data-profile-initials> S </span><span class="profile-trigger-name" data-profile-name>Student</span><span class="profile-chevron">▾</span></button>
-          <div class="profile-dropdown" role="menu"><div class="profile-dropdown-head"><span class="profile-avatar" data-profile-initials>S</span><div><strong data-profile-fullname>Student</strong><small>Student account</small></div></div><a href="dashboard.html" role="menuitem">▦ &nbsp; Dashboard</a><a href="profile.html" role="menuitem">◎ &nbsp; My Profile</a><a href="my-uploads.html" role="menuitem">↥ &nbsp; My Uploads</a><a href="saved-notes.html" role="menuitem">♡ &nbsp; Saved Notes</a><a href="my-activity.html" role="menuitem">◷ &nbsp; My Activity</a><a href="settings.html" role="menuitem">⚙ &nbsp; Settings</a><button type="button" class="profile-logout" data-profile-logout role="menuitem">↪ &nbsp; Log out</button></div>
-        </div></div>
-    </div>
-  </header>
-  <main class="explore-main container">
-    <section class="explore-hero">
-      <div class="explore-hero-copy"><div class="explore-eyebrow"><span></span> THE STUDENT RESOURCE LIBRARY</div><h1>Find the notes.<br><span>Make the progress.</span></h1><p>Explore study notes, revision guides and helpful resources shared by students like you.</p></div>
-      <div class="explore-hero-art" aria-hidden="true"><div class="explore-art-orbit orbit-a"></div><div class="explore-art-orbit orbit-b"></div><div class="floating-paper paper-one"><span>PDF</span><i></i><i></i><i></i></div><div class="floating-paper paper-two"><span>✦</span><i></i><i></i></div><div class="explore-art-center"><span>▤</span><strong>Learn<br>together.</strong></div><div class="explore-art-spark spark-a">✦</div><div class="explore-art-spark spark-b">✧</div></div>
-    </section>
-    <section class="explore-search-panel" aria-label="Search and filter resources">
-      <form id="resourceSearchForm" class="explore-search-form">
-        <label class="search-field"><span aria-hidden="true">⌕</span><input id="resourceSearch" type="search" placeholder="Search notes, subjects, keywords..." aria-label="Search resources"><kbd>↵</kbd></label>
-        <button class="button button-primary search-submit" type="submit">Search resources <span>→</span></button>
-      </form>
-      <div class="explore-filter-row" id="popularSubjectFilters" hidden><span class="filter-caption">POPULAR:</span><div id="popularSubjectList" class="popular-subject-list"></div></div>
-    </section>
-    <div class="explore-layout">
-      <aside class="explore-filters" aria-label="Resource filters">
-        <div class="filter-heading"><h2>Filters</h2><button id="clearFilters" type="button">Clear all</button></div>
-        <div class="filter-group subject-filter-group">
-          <div class="subject-filter-heading"><h3>Subject</h3><span id="subjectTotal" class="subject-total">Loading…</span></div>
-          <label class="subject-filter-search"><span aria-hidden="true">⌕</span><input id="subjectFilterSearch" type="search" placeholder="Find a subject…" aria-label="Find a subject"></label>
-          <div id="subjectFilterList" class="subject-filter-list" aria-live="polite">
-            <p class="subject-filter-loading">Loading subjects from NotesPix…</p>
-          </div>
-          <button id="toggleAllSubjects" class="toggle-subjects-button" type="button" hidden>View all subjects <span aria-hidden="true">↓</span></button>
-          <p id="noSubjectMatches" class="subject-no-matches" hidden>No matching subjects found.</p>
-        </div>
-        <div class="filter-group"><h3>Resource type</h3>
-          <label class="filter-check"><input type="checkbox" name="type" value="Notes"><span>Study notes</span><small><span data-filter-count="type|Notes">—</span></small></label>
-          <label class="filter-check"><input type="checkbox" name="type" value="Question Bank"><span>Question banks</span><small><span data-filter-count="type|Question Bank">—</span></small></label>
-          <label class="filter-check"><input type="checkbox" name="type" value="Revision Guide"><span>Revision guides</span><small><span data-filter-count="type|Revision Guide">—</span></small></label>
-          <label class="filter-check"><input type="checkbox" name="type" value="Cheat Sheet"><span>Cheat sheets</span><small><span data-filter-count="type|Cheat Sheet">—</span></small></label>
-        </div>
-        <div class="filter-group"><h3>File format</h3>
-          <label class="filter-check"><input type="checkbox" name="format" value="PDF"><span>PDF</span><small><span data-filter-count="format|PDF">0</span></small></label>
-          <label class="filter-check"><input type="checkbox" name="format" value="DOC"><span>DOC / DOCX</span><small><span data-filter-count="format|DOC">0</span></small></label>
-          <label class="filter-check"><input type="checkbox" name="format" value="PPT"><span>PowerPoint</span><small><span data-filter-count="format|PPT">0</span></small></label>
-        </div>
-        <div class="filter-note"><span>✦</span><div><strong>Made for students</strong><p>Share useful resources and help someone learn something new.</p><a href="signup.html" data-auth-aware-cta>Join the community →</a></div></div>
-      </aside>
-      <section class="explore-results">
-        <div class="results-toolbar"><div><h2>Explore resources</h2><p id="resultsCount">Loading published resources…</p></div><label class="sort-select"><span>Sort by</span><select id="sortResources" aria-label="Sort resources"><option value="popular">Most popular</option><option value="newest">Newest first</option><option value="title">Title A–Z</option></select></label></div>
-        <div class="active-filters" id="activeFilters" aria-live="polite"></div>
-        <div class="resource-grid" id="resourceGrid">
-          <article class="explore-resource-card" data-title="Computer Networks Unit 2 Notes" data-subject="Computer Science" data-type="Notes" data-format="PDF" data-keywords="osi tcp ip networking protocols layers" data-popularity="98" data-date="2026-10-15">
-            <a class="explore-card-visual visual-network" href="resource-details.html" aria-label="View Computer Networks notes"><span class="visual-file">PDF</span><span class="visual-chip">12 PAGES</span><div class="visual-network-lines"><i></i><i></i><i></i><i></i><b>OSI</b></div></a>
-            <div class="explore-card-body"><div class="explore-card-tags"><span class="mini-tag blue-tag">COMPUTER SCIENCE</span><span class="file-type">PDF</span></div><h3><a href="resource-details.html">Computer Networks — Unit 2 Notes</a></h3><p>OSI model, TCP/IP layers and network protocols.</p><div class="explore-card-meta"><span class="mini-avatar">AK</span><span>Arjun K.</span><span class="meta-spacer"></span><span>↓ 248</span></div><div class="explore-card-bottom"><span>Updated 2 days ago</span><a href="resource-details.html">View resource <span>→</span></a></div></div>
-          </article>
-          <article class="explore-resource-card" data-title="Engineering Mathematics Quick Revision" data-subject="Mathematics" data-type="Revision Guide" data-format="PDF" data-keywords="calculus algebra formulas solved examples" data-popularity="87" data-date="2026-10-13">
-            <a class="explore-card-visual visual-math" href="resource-details.html" aria-label="View Engineering Mathematics revision"><span class="visual-file">PDF</span><span class="visual-chip">8 PAGES</span><div class="math-visual-symbol">∑<small>f(x)</small></div><div class="math-visual-orbit"></div></a>
-            <div class="explore-card-body"><div class="explore-card-tags"><span class="mini-tag purple-tag">MATHEMATICS</span><span class="file-type">PDF</span></div><h3><a href="resource-details.html">Engineering Mathematics — Quick Revision</a></h3><p>Key formulas and solved examples for revision.</p><div class="explore-card-meta"><span class="mini-avatar avatar-orange">MP</span><span>Meera P.</span><span class="meta-spacer"></span><span>↓ 186</span></div><div class="explore-card-bottom"><span>Updated 4 days ago</span><a href="resource-details.html">View resource <span>→</span></a></div></div>
-          </article>
-          <article class="explore-resource-card" data-title="Physics Formula Handbook" data-subject="Physics" data-type="Cheat Sheet" data-format="PDF" data-keywords="mechanics optics electricity formula handbook" data-popularity="72" data-date="2026-10-12">
-            <a class="explore-card-visual visual-physics" href="resource-details.html" aria-label="View Physics Formula Handbook"><span class="visual-file">PDF</span><span class="visual-chip">6 PAGES</span><div class="physics-atom"><i></i><i></i><b>+</b></div></a>
-            <div class="explore-card-body"><div class="explore-card-tags"><span class="mini-tag green-tag">PHYSICS</span><span class="file-type">PDF</span></div><h3><a href="resource-details.html">Physics Formula Handbook</a></h3><p>A compact reference for key physics formulas.</p><div class="explore-card-meta"><span class="mini-avatar avatar-green">RS</span><span>Riya S.</span><span class="meta-spacer"></span><span>↓ 142</span></div><div class="explore-card-bottom"><span>Updated 5 days ago</span><a href="resource-details.html">View resource <span>→</span></a></div></div>
-          </article>
-          <article class="explore-resource-card" data-title="DBMS Important Questions" data-subject="Database" data-type="Question Bank" data-format="PDF" data-keywords="database sql normalization previous year exam questions" data-popularity="94" data-date="2026-10-16">
-            <a class="explore-card-visual visual-db" href="resource-details.html" aria-label="View DBMS questions"><span class="visual-file">PDF</span><span class="visual-chip">40 QUESTIONS</span><div class="db-visual-stack"><i></i><i></i><i></i><b>DB</b></div></a>
-            <div class="explore-card-body"><div class="explore-card-tags"><span class="mini-tag blue-tag">DATABASE</span><span class="file-type">PDF</span></div><h3><a href="resource-details.html">DBMS Important Questions</a></h3><p>Practice questions covering SQL and normalization.</p><div class="explore-card-meta"><span class="mini-avatar avatar-purple">NK</span><span>Nikhil K.</span><span class="meta-spacer"></span><span>↓ 221</span></div><div class="explore-card-bottom"><span>Updated yesterday</span><a href="resource-details.html">View resource <span>→</span></a></div></div>
-          </article>
-          <article class="explore-resource-card" data-title="Python Programming Essentials" data-subject="Programming" data-type="Notes" data-format="DOC" data-keywords="python coding loops functions lists beginner" data-popularity="82" data-date="2026-10-14">
-            <a class="explore-card-visual visual-code" href="resource-details.html" aria-label="View Python Programming notes"><span class="visual-file doc-file">DOC</span><span class="visual-chip">BEGINNER</span><div class="code-visual-lines"><i></i><i></i><i></i><i></i><i></i><b>{ }</b></div></a>
-            <div class="explore-card-body"><div class="explore-card-tags"><span class="mini-tag purple-tag">PROGRAMMING</span><span class="file-type">DOC</span></div><h3><a href="resource-details.html">Python Programming Essentials</a></h3><p>Core syntax, loops, functions and common patterns.</p><div class="explore-card-meta"><span class="mini-avatar avatar-orange">AV</span><span>Aman V.</span><span class="meta-spacer"></span><span>↓ 174</span></div><div class="explore-card-bottom"><span>Updated 3 days ago</span><a href="resource-details.html">View resource <span>→</span></a></div></div>
-          </article>
-          <article class="explore-resource-card" data-title="Operating Systems Summary" data-subject="Computer Science" data-type="Notes" data-format="PDF" data-keywords="process scheduling memory management deadlock" data-popularity="90" data-date="2026-10-11">
-            <a class="explore-card-visual visual-os" href="resource-details.html" aria-label="View Operating Systems summary"><span class="visual-file">PDF</span><span class="visual-chip">10 PAGES</span><div class="os-visual-grid"><i>CPU</i><i>RAM</i><i>IO</i><b>OS</b></div></a>
-            <div class="explore-card-body"><div class="explore-card-tags"><span class="mini-tag blue-tag">COMPUTER SCIENCE</span><span class="file-type">PDF</span></div><h3><a href="resource-details.html">Operating Systems Summary</a></h3><p>Processes, memory management and scheduling.</p><div class="explore-card-meta"><span class="mini-avatar avatar-green">TD</span><span>Tanya D.</span><span class="meta-spacer"></span><span>↓ 203</span></div><div class="explore-card-bottom"><span>Updated 6 days ago</span><a href="resource-details.html">View resource <span>→</span></a></div></div>
-          </article>
-          <article class="explore-resource-card" data-title="Exam Prep: Data Structures" data-subject="Exam Prep" data-type="Question Bank" data-format="PDF" data-keywords="arrays linked lists trees graphs algorithms revision" data-popularity="89" data-date="2026-10-10">
-            <a class="explore-card-visual visual-exam" href="resource-details.html" aria-label="View Data Structures exam prep"><span class="visual-file">PDF</span><span class="visual-chip">EXAM READY</span><div class="exam-visual-badge">A<span>+</span></div></a>
-            <div class="explore-card-body"><div class="explore-card-tags"><span class="mini-tag orange-tag">EXAM PREP</span><span class="file-type">PDF</span></div><h3><a href="resource-details.html">Exam Prep: Data Structures</a></h3><p>Practice arrays, linked lists, trees and graphs.</p><div class="explore-card-meta"><span class="mini-avatar">SK</span><span>Sahil K.</span><span class="meta-spacer"></span><span>↓ 198</span></div><div class="explore-card-bottom"><span>Updated a week ago</span><a href="resource-details.html">View resource <span>→</span></a></div></div>
-          </article>
-          <article class="explore-resource-card" data-title="Web Development Quick Guide" data-subject="Programming" data-type="Revision Guide" data-format="PPT" data-keywords="html css javascript responsive design frontend" data-popularity="69" data-date="2026-10-09">
-            <a class="explore-card-visual visual-web" href="resource-details.html" aria-label="View Web Development guide"><span class="visual-file ppt-file">PPT</span><span class="visual-chip">QUICK GUIDE</span><div class="web-visual-window"><div><i></i><i></i><i></i></div><b>&lt;/&gt;</b><span></span><span></span></div></a>
-            <div class="explore-card-body"><div class="explore-card-tags"><span class="mini-tag purple-tag">PROGRAMMING</span><span class="file-type">PPT</span></div><h3><a href="resource-details.html">Web Development Quick Guide</a></h3><p>HTML, CSS and JavaScript fundamentals.</p><div class="explore-card-meta"><span class="mini-avatar avatar-purple">PS</span><span>Priya S.</span><span class="meta-spacer"></span><span>↓ 116</span></div><div class="explore-card-bottom"><span>Updated a week ago</span><a href="resource-details.html">View resource <span>→</span></a></div></div>
-          </article>
-        </div>
-        <div class="no-results" id="noResults" hidden><span>⌕</span><h3>No resources found</h3><p>Try another keyword or clear filters. New resources appear here when students publish them.</p><button class="button button-primary" id="resetFromEmpty" type="button">Clear filters</button></div>
-        <div class="explore-load-more"><span>You're viewing resources published by NotesPix students.</span><button id="loadMoreButton" type="button">That's all for now <span>✓</span></button></div>
-      </section>
-    </div>
-    <section class="explore-bottom-cta"><div><span class="cta-spark">✦</span><h2>Have notes that could help someone?</h2><p>Share what you've learned and make studying a little easier for another student.</p></div><a class="button button-primary" href="signup.html" data-auth-aware-cta>Join the community <span>→</span></a></section>
-  </main>
-  <footer class="page-footer"><div class="container"><span>© 2026 NotesPix. Built for students, together.</span><span><a href="index.html">Home</a><a href="login.html">Log in</a><a href="signup.html" data-auth-aware-cta>Join NotesPix</a></span></div></footer>
-  <div class="page-toast" id="pageToast" role="status" aria-live="polite"></div>
-  <script src="js/responsive-nav.js" defer></script>
+<header class="site-header">
+<div class="header-inner container">
+<a aria-label="NotesPix home" class="brand" href="index.html"><span aria-hidden="true" class="brand-mark"><svg viewbox="0 0 24 24"><path d="M3 8.5 12 4l9 4.5-9 4.5L3 8.5Z"></path><path d="M6.5 10.5v5.2c3.3 2.5 7.7 2.5 11 0v-5.2M21 9v6"></path></svg></span><span>Notes<span class="brand-accent">Pix</span></span></a>
+<button aria-controls="primaryNav" aria-expanded="false" aria-label="Open navigation" class="mobile-menu-toggle icon-button" id="mobileMenuToggle" type="button"><svg aria-hidden="true" viewbox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"></path></svg></button>
+<nav aria-label="Main navigation" class="primary-nav page-nav" id="primaryNav"><a class="nav-link" href="index.html" title="Home">Home</a><a aria-current="page" class="nav-link active" href="explore.html" title="Explore resources">Explore resources</a><a class="nav-link" href="upload.html" title="Upload">Upload</a><a class="nav-link" href="how-it-works.html" title="How it works">How it works</a></nav>
+<div class="header-actions">
+<button aria-pressed="false" class="theme-toggle" data-theme-toggle="" type="button"><span class="theme-toggle-icon">☾</span><span class="theme-toggle-label">Dark mode</span></button><a class="login-link" href="login.html">Log in</a><a class="button button-primary button-small" data-auth-aware-cta="" href="signup.html">Join NotesPix <span>↗</span></a><div class="profile-menu" data-profile-menu="">
+<button aria-expanded="false" aria-haspopup="true" class="profile-trigger" data-profile-trigger="" type="button"><span class="profile-avatar"><span data-profile-initials="">P</span><svg aria-hidden="true" class="guest-profile-icon" data-profile-guest-icon="" viewbox="0 0 24 24"><circle cx="12" cy="8" r="4"></circle><path d="M4 21a8 8 0 0 1 16 0"></path></svg></span><span class="profile-trigger-name" data-profile-name="">Profile</span><span class="profile-chevron">▾</span></button>
+<div class="profile-dropdown" role="menu"><div class="profile-dropdown-head" data-auth-signed-in=""><span class="profile-avatar"><span data-profile-initials="">P</span><svg aria-hidden="true" class="guest-profile-icon" data-profile-guest-icon="" viewbox="0 0 24 24"><circle cx="12" cy="8" r="4"></circle><path d="M4 21a8 8 0 0 1 16 0"></path></svg></span><div><strong data-profile-fullname="">Profile</strong><small>Student account</small></div></div><div class="profile-guest-actions" data-auth-signed-out=""><a class="profile-create-account" href="signup.html" role="menuitem">Create account</a><a class="profile-login" href="login.html" role="menuitem">Log in</a></div><div class="profile-account-actions" data-auth-signed-in=""><a href="dashboard.html" role="menuitem">▦  Dashboard</a><a href="profile.html" role="menuitem">◎  My Profile</a><a href="my-uploads.html" role="menuitem">↥  My Uploads</a><a href="saved-notes.html" role="menuitem">♡  Saved Notes</a><a href="my-activity.html" role="menuitem">◷  My Activity</a><a href="settings.html" role="menuitem">⚙  Settings</a><button class="profile-logout" data-profile-logout="" role="menuitem" type="button">↪  Log out</button></div></div>
+</div></div>
+</div>
+</header>
+<main class="explore-main container">
+<section class="explore-hero">
+<div class="explore-hero-copy"><div class="explore-eyebrow"><span></span> THE STUDENT RESOURCE LIBRARY</div><h1>Find the notes.<br/><span>Make the progress.</span></h1><p>Explore study notes, revision guides and helpful resources shared by students like you.</p></div>
+<div aria-hidden="true" class="explore-hero-art"><div class="explore-art-orbit orbit-a"></div><div class="explore-art-orbit orbit-b"></div><div class="floating-paper paper-one"><span>PDF</span><i></i><i></i><i></i></div><div class="floating-paper paper-two"><span>✦</span><i></i><i></i></div><div class="explore-art-center"><span>▤</span><strong>Learn<br/>together.</strong></div><div class="explore-art-spark spark-a">✦</div><div class="explore-art-spark spark-b">✧</div></div>
+</section>
+<section aria-label="Search and filter resources" class="explore-search-panel">
+<form class="explore-search-form" id="resourceSearchForm">
+<label class="search-field"><span aria-hidden="true">⌕</span><input aria-label="Search resources" id="resourceSearch" placeholder="Search notes, subjects, keywords..." type="search"/><kbd>↵</kbd></label>
+<button class="button button-primary search-submit" type="submit">Search resources <span>→</span></button>
+</form>
+<div class="explore-filter-row" hidden="" id="popularSubjectFilters"><span class="filter-caption">POPULAR:</span><div class="popular-subject-list" id="popularSubjectList"></div></div>
+</section>
+<div class="explore-layout">
+<aside aria-label="Resource filters" class="explore-filters">
+<div class="filter-heading"><h2>Filters</h2><button id="clearFilters" type="button">Clear all</button></div>
+<div class="filter-group subject-filter-group">
+<div class="subject-filter-heading"><h3>Subject</h3><span class="subject-total" id="subjectTotal">Loading…</span></div>
+<label class="subject-filter-search"><span aria-hidden="true">⌕</span><input aria-label="Find a subject" id="subjectFilterSearch" placeholder="Find a subject…" type="search"/></label>
+<div aria-live="polite" class="subject-filter-list" id="subjectFilterList">
+<p class="subject-filter-loading">Loading subjects from NotesPix…</p>
+</div>
+<button class="toggle-subjects-button" hidden="" id="toggleAllSubjects" type="button">View all subjects <span aria-hidden="true">↓</span></button>
+<p class="subject-no-matches" hidden="" id="noSubjectMatches">No matching subjects found.</p>
+</div>
+<div class="filter-group"><h3>Resource type</h3>
+<label class="filter-check"><input name="type" type="checkbox" value="Notes"/><span>Study notes</span><small><span data-filter-count="type|Notes">—</span></small></label>
+<label class="filter-check"><input name="type" type="checkbox" value="Question Bank"/><span>Question banks</span><small><span data-filter-count="type|Question Bank">—</span></small></label>
+<label class="filter-check"><input name="type" type="checkbox" value="Revision Guide"/><span>Revision guides</span><small><span data-filter-count="type|Revision Guide">—</span></small></label>
+<label class="filter-check"><input name="type" type="checkbox" value="Cheat Sheet"/><span>Cheat sheets</span><small><span data-filter-count="type|Cheat Sheet">—</span></small></label>
+</div>
+<div class="filter-group"><h3>File format</h3>
+<label class="filter-check"><input name="format" type="checkbox" value="PDF"/><span>PDF</span><small><span data-filter-count="format|PDF">0</span></small></label>
+<label class="filter-check"><input name="format" type="checkbox" value="DOC"/><span>DOC / DOCX</span><small><span data-filter-count="format|DOC">0</span></small></label>
+<label class="filter-check"><input name="format" type="checkbox" value="PPT"/><span>PowerPoint</span><small><span data-filter-count="format|PPT">0</span></small></label>
+</div>
+<div class="filter-note"><span>✦</span><div><strong>Made for students</strong><p>Share useful resources and help someone learn something new.</p><a data-auth-aware-cta="" href="signup.html">Join the community →</a></div></div>
+</aside>
+<section class="explore-results">
+<div class="results-toolbar"><div><h2>Explore resources</h2><p id="resultsCount">Loading published resources…</p></div><label class="sort-select"><span>Sort by</span><select aria-label="Sort resources" id="sortResources"><option value="popular">Most popular</option><option value="newest">Newest first</option><option value="title">Title A–Z</option></select></label></div>
+<div aria-live="polite" class="active-filters" id="activeFilters"></div>
+<div class="resource-grid" id="resourceGrid">
+<article class="explore-resource-card" data-date="2026-10-15" data-format="PDF" data-keywords="osi tcp ip networking protocols layers" data-popularity="98" data-subject="Computer Science" data-title="Computer Networks Unit 2 Notes" data-type="Notes">
+<a aria-label="View Computer Networks notes" class="explore-card-visual visual-network" href="resource-details.html"><span class="visual-file">PDF</span><span class="visual-chip">12 PAGES</span><div class="visual-network-lines"><i></i><i></i><i></i><i></i><b>OSI</b></div></a>
+<div class="explore-card-body"><div class="explore-card-tags"><span class="mini-tag blue-tag">COMPUTER SCIENCE</span><span class="file-type">PDF</span></div><h3><a href="resource-details.html">Computer Networks — Unit 2 Notes</a></h3><p>OSI model, TCP/IP layers and network protocols.</p><div class="explore-card-meta"><span class="mini-avatar">AK</span><span>Arjun K.</span><span class="meta-spacer"></span><span>↓ 248</span></div><div class="explore-card-bottom"><span>Updated 2 days ago</span><a href="resource-details.html">View resource <span>→</span></a></div></div>
+</article>
+<article class="explore-resource-card" data-date="2026-10-13" data-format="PDF" data-keywords="calculus algebra formulas solved examples" data-popularity="87" data-subject="Mathematics" data-title="Engineering Mathematics Quick Revision" data-type="Revision Guide">
+<a aria-label="View Engineering Mathematics revision" class="explore-card-visual visual-math" href="resource-details.html"><span class="visual-file">PDF</span><span class="visual-chip">8 PAGES</span><div class="math-visual-symbol">∑<small>f(x)</small></div><div class="math-visual-orbit"></div></a>
+<div class="explore-card-body"><div class="explore-card-tags"><span class="mini-tag purple-tag">MATHEMATICS</span><span class="file-type">PDF</span></div><h3><a href="resource-details.html">Engineering Mathematics — Quick Revision</a></h3><p>Key formulas and solved examples for revision.</p><div class="explore-card-meta"><span class="mini-avatar avatar-orange">MP</span><span>Meera P.</span><span class="meta-spacer"></span><span>↓ 186</span></div><div class="explore-card-bottom"><span>Updated 4 days ago</span><a href="resource-details.html">View resource <span>→</span></a></div></div>
+</article>
+<article class="explore-resource-card" data-date="2026-10-12" data-format="PDF" data-keywords="mechanics optics electricity formula handbook" data-popularity="72" data-subject="Physics" data-title="Physics Formula Handbook" data-type="Cheat Sheet">
+<a aria-label="View Physics Formula Handbook" class="explore-card-visual visual-physics" href="resource-details.html"><span class="visual-file">PDF</span><span class="visual-chip">6 PAGES</span><div class="physics-atom"><i></i><i></i><b>+</b></div></a>
+<div class="explore-card-body"><div class="explore-card-tags"><span class="mini-tag green-tag">PHYSICS</span><span class="file-type">PDF</span></div><h3><a href="resource-details.html">Physics Formula Handbook</a></h3><p>A compact reference for key physics formulas.</p><div class="explore-card-meta"><span class="mini-avatar avatar-green">RS</span><span>Riya S.</span><span class="meta-spacer"></span><span>↓ 142</span></div><div class="explore-card-bottom"><span>Updated 5 days ago</span><a href="resource-details.html">View resource <span>→</span></a></div></div>
+</article>
+<article class="explore-resource-card" data-date="2026-10-16" data-format="PDF" data-keywords="database sql normalization previous year exam questions" data-popularity="94" data-subject="Database" data-title="DBMS Important Questions" data-type="Question Bank">
+<a aria-label="View DBMS questions" class="explore-card-visual visual-db" href="resource-details.html"><span class="visual-file">PDF</span><span class="visual-chip">40 QUESTIONS</span><div class="db-visual-stack"><i></i><i></i><i></i><b>DB</b></div></a>
+<div class="explore-card-body"><div class="explore-card-tags"><span class="mini-tag blue-tag">DATABASE</span><span class="file-type">PDF</span></div><h3><a href="resource-details.html">DBMS Important Questions</a></h3><p>Practice questions covering SQL and normalization.</p><div class="explore-card-meta"><span class="mini-avatar avatar-purple">NK</span><span>Nikhil K.</span><span class="meta-spacer"></span><span>↓ 221</span></div><div class="explore-card-bottom"><span>Updated yesterday</span><a href="resource-details.html">View resource <span>→</span></a></div></div>
+</article>
+<article class="explore-resource-card" data-date="2026-10-14" data-format="DOC" data-keywords="python coding loops functions lists beginner" data-popularity="82" data-subject="Programming" data-title="Python Programming Essentials" data-type="Notes">
+<a aria-label="View Python Programming notes" class="explore-card-visual visual-code" href="resource-details.html"><span class="visual-file doc-file">DOC</span><span class="visual-chip">BEGINNER</span><div class="code-visual-lines"><i></i><i></i><i></i><i></i><i></i><b>{ }</b></div></a>
+<div class="explore-card-body"><div class="explore-card-tags"><span class="mini-tag purple-tag">PROGRAMMING</span><span class="file-type">DOC</span></div><h3><a href="resource-details.html">Python Programming Essentials</a></h3><p>Core syntax, loops, functions and common patterns.</p><div class="explore-card-meta"><span class="mini-avatar avatar-orange">AV</span><span>Aman V.</span><span class="meta-spacer"></span><span>↓ 174</span></div><div class="explore-card-bottom"><span>Updated 3 days ago</span><a href="resource-details.html">View resource <span>→</span></a></div></div>
+</article>
+<article class="explore-resource-card" data-date="2026-10-11" data-format="PDF" data-keywords="process scheduling memory management deadlock" data-popularity="90" data-subject="Computer Science" data-title="Operating Systems Summary" data-type="Notes">
+<a aria-label="View Operating Systems summary" class="explore-card-visual visual-os" href="resource-details.html"><span class="visual-file">PDF</span><span class="visual-chip">10 PAGES</span><div class="os-visual-grid"><i>CPU</i><i>RAM</i><i>IO</i><b>OS</b></div></a>
+<div class="explore-card-body"><div class="explore-card-tags"><span class="mini-tag blue-tag">COMPUTER SCIENCE</span><span class="file-type">PDF</span></div><h3><a href="resource-details.html">Operating Systems Summary</a></h3><p>Processes, memory management and scheduling.</p><div class="explore-card-meta"><span class="mini-avatar avatar-green">TD</span><span>Tanya D.</span><span class="meta-spacer"></span><span>↓ 203</span></div><div class="explore-card-bottom"><span>Updated 6 days ago</span><a href="resource-details.html">View resource <span>→</span></a></div></div>
+</article>
+<article class="explore-resource-card" data-date="2026-10-10" data-format="PDF" data-keywords="arrays linked lists trees graphs algorithms revision" data-popularity="89" data-subject="Exam Prep" data-title="Exam Prep: Data Structures" data-type="Question Bank">
+<a aria-label="View Data Structures exam prep" class="explore-card-visual visual-exam" href="resource-details.html"><span class="visual-file">PDF</span><span class="visual-chip">EXAM READY</span><div class="exam-visual-badge">A<span>+</span></div></a>
+<div class="explore-card-body"><div class="explore-card-tags"><span class="mini-tag orange-tag">EXAM PREP</span><span class="file-type">PDF</span></div><h3><a href="resource-details.html">Exam Prep: Data Structures</a></h3><p>Practice arrays, linked lists, trees and graphs.</p><div class="explore-card-meta"><span class="mini-avatar">SK</span><span>Sahil K.</span><span class="meta-spacer"></span><span>↓ 198</span></div><div class="explore-card-bottom"><span>Updated a week ago</span><a href="resource-details.html">View resource <span>→</span></a></div></div>
+</article>
+<article class="explore-resource-card" data-date="2026-10-09" data-format="PPT" data-keywords="html css javascript responsive design frontend" data-popularity="69" data-subject="Programming" data-title="Web Development Quick Guide" data-type="Revision Guide">
+<a aria-label="View Web Development guide" class="explore-card-visual visual-web" href="resource-details.html"><span class="visual-file ppt-file">PPT</span><span class="visual-chip">QUICK GUIDE</span><div class="web-visual-window"><div><i></i><i></i><i></i></div><b>&lt;/&gt;</b><span></span><span></span></div></a>
+<div class="explore-card-body"><div class="explore-card-tags"><span class="mini-tag purple-tag">PROGRAMMING</span><span class="file-type">PPT</span></div><h3><a href="resource-details.html">Web Development Quick Guide</a></h3><p>HTML, CSS and JavaScript fundamentals.</p><div class="explore-card-meta"><span class="mini-avatar avatar-purple">PS</span><span>Priya S.</span><span class="meta-spacer"></span><span>↓ 116</span></div><div class="explore-card-bottom"><span>Updated a week ago</span><a href="resource-details.html">View resource <span>→</span></a></div></div>
+</article>
+</div>
+<div class="no-results" hidden="" id="noResults"><span>⌕</span><h3>No resources found</h3><p>Try another keyword or clear filters. New resources appear here when students publish them.</p><button class="button button-primary" id="resetFromEmpty" type="button">Clear filters</button></div>
+<div class="explore-load-more"><span>You're viewing resources published by NotesPix students.</span><button id="loadMoreButton" type="button">That's all for now <span>✓</span></button></div>
+</section>
+</div>
+<section class="explore-bottom-cta"><div><span class="cta-spark">✦</span><h2>Have notes that could help someone?</h2><p>Share what you've learned and make studying a little easier for another student.</p></div><a class="button button-primary" data-auth-aware-cta="" href="signup.html">Join the community <span>→</span></a></section>
+</main>
+<footer class="page-footer"><div class="container"><span>© 2026 NotesPix. Built for students, together.</span><span><a href="index.html">Home</a><a href="login.html">Log in</a><a data-auth-aware-cta="" href="signup.html">Join NotesPix</a></span></div></footer>
+<div aria-live="polite" class="page-toast" id="pageToast" role="status"></div>
+<script defer="" src="js/responsive-nav.js"></script>
 </body>
 </html>

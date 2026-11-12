@@ -1,0 +1,25 @@
+/* NotesPix animated login/signup panel swap */
+.auth-layout{position:relative;overflow:hidden;grid-template-columns:1fr 1fr!important}
+.auth-layout>.auth-visual,.auth-layout>.auth-form-side{grid-row:1;min-width:0;transition:transform .78s cubic-bezier(.22,.8,.2,1);will-change:transform}
+.auth-layout>.auth-visual{grid-column:1;transform:translateX(0)}
+.auth-layout>.auth-form-side{grid-column:2;transform:translateX(0)}
+.auth-layout.is-signup>.auth-visual{transform:translateX(100%)}
+.auth-layout.is-signup>.auth-form-side{transform:translateX(-100%)}
+.auth-layout>.auth-visual{z-index:2}
+.auth-layout>.auth-form-side{z-index:1}
+.auth-layout.is-signup>.auth-visual{z-index:1}
+.auth-layout.is-signup>.auth-form-side{z-index:2}
+.auth-form-wrap{transition:opacity .25s ease,transform .45s ease}
+.auth-form-wrap.panel-changing{opacity:.35;transform:scale(.985)}
+.auth-form-side [hidden]{display:none!important}
+@media(max-width:760px){
+ .auth-layout{display:flex!important;flex-direction:column;overflow:visible}
+ .auth-layout>.auth-visual,.auth-layout>.auth-form-side{transform:none!important;transition:none}
+ .auth-layout>.auth-visual{min-height:390px;order:1}
+ .auth-layout>.auth-form-side{order:2}
+ .auth-layout.is-signup>.auth-visual{order:1}
+ .auth-layout.is-signup>.auth-form-side{order:2}
+}
+@media(prefers-reduced-motion:reduce){
+ .auth-layout>.auth-visual,.auth-layout>.auth-form-side,.auth-form-wrap{transition:none!important}
+}

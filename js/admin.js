@@ -37,8 +37,8 @@
     return true;
   }
 
-  async function count(table, filters) {
-    let query = db.from(table).select('*', { count: 'exact', head: true });
+  async function count(table, filters, column = '*') {
+    let query = db.from(table).select(column, { count: 'exact', head: true });
     if (filters) query = filters(query);
     const { count: total, error } = await query;
     if (error) throw error;
@@ -47,7 +47,8 @@
 
   async function loadOverview() {
     const [students, resources, support, reports] = await Promise.all([
-      count('profiles'),
+      // profiles has column-level SELECT grants; count only its permitted id column.
+      count('profiles', null, 'id'),
       count('resources'),
       count('support_requests', q => q.eq('status','open')),
       count('resource_reports', q => q.eq('status','open'))
