@@ -145,6 +145,11 @@
           window.location.hash.includes('access_token=') ||
           window.location.search.includes('code=');
 
+        if (profile && sessionStorage.getItem('notespix_google_intent') === 'signup' && isAuthPage()) {
+          // google-auth.js must save registration consent before granting dashboard access.
+          return;
+        }
+
         if (profile && (isAuthPage() || confirmationCallback)) {
           if (confirmationCallback) history.replaceState({}, document.title, window.location.pathname);
           redirectAfterAuth();

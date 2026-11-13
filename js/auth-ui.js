@@ -33,6 +33,7 @@
     loginHeading.hidden = isSignup;
     signupHeading.hidden = !isSignup;
     visual.innerHTML = isSignup ? signupVisual : originalVisual;
+    window.NotesPixCaptcha?.renderVisible().catch(() => {});
     document.title = isSignup ? 'Create an account — NotesPix' : 'Log in — NotesPix';
     history.replaceState(null, '', isSignup ? 'signup.html' : 'login.html');
     window.setTimeout(() => layout.querySelector('.auth-form-wrap')?.classList.remove('panel-changing'), 280);

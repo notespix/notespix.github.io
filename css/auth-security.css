@@ -1,0 +1,7 @@
+.np-turnstile{min-height:66px;margin:14px 0 10px;display:flex;justify-content:flex-start;align-items:center;overflow:hidden}
+.signup-consents{display:grid;gap:12px;margin:16px 0}
+.signup-consents .checkbox-row{align-items:flex-start;line-height:1.55}
+.signup-consents .checkbox-row input{flex:0 0 auto;margin-top:4px}
+@media(max-width:420px){.np-turnstile{transform-origin:left center;max-width:100%;overflow-x:auto}}
+
+.form-message{display:block;min-height:1.2em;margin:10px 0;font-size:13px;line-height:1.5}.form-message.error{color:#c62828}.form-message.success{color:#16834a}

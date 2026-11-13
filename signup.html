@@ -14,7 +14,9 @@
   <script src="js/supabase-config.js"></script>
   <script src="js/supabase-data.js"></script>
   <script src="js/supabase-session-ui.js" defer></script>
+  <script src="js/turnstile-captcha.js" defer></script>
   <script src="js/supabase-auth.js" defer></script>
+  <script src="js/google-auth.js" defer></script>
   <link rel="stylesheet" href="css/style.css"><link rel="stylesheet" href="css/pages.css">
   <link rel="stylesheet" href="css/theme.css">
   <script src="js/theme.js" defer></script>
@@ -22,6 +24,8 @@
   <script src="js/profile.js" defer></script>
 
   <link rel="stylesheet" href="css/auth-switch.css">
+  <link rel="stylesheet" href="css/auth-security.css">
+  <link rel="stylesheet" href="css/google-auth.css">
   <script src="js/auth-ui.js" defer></script>
   <link rel="stylesheet" href="css/responsive.css">
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
@@ -49,6 +53,11 @@
           <div class="form-message" id="loginMessage" role="status" aria-live="polite"></div>
           <button class="button button-primary auth-submit" type="submit">Log in <span>→</span></button>
         </form>
+
+          <button class="google-auth-button" type="button" data-google-auth>
+            <svg viewBox="0 0 48 48" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.5 0 6.6 1.2 9 3.5l6.7-6.7C35.6 2.4 30.3 0 24 0 14.6 0 6.5 5.4 2.5 13.2l7.8 6.1C12.2 13.1 17.6 9.5 24 9.5Z"/><path fill="#4285F4" d="M46.1 24.5c0-1.6-.1-3.1-.4-4.5H24v9h12.4c-.5 2.9-2.1 5.4-4.5 7.1l7.3 5.7c4.3-4 6.9-9.9 6.9-17.3Z"/><path fill="#FBBC05" d="M10.3 28.7a14.5 14.5 0 0 1 0-9.4l-7.8-6.1a24 24 0 0 0 0 21.6l7.8-6.1Z"/><path fill="#34A853" d="M24 48c6.5 0 12-2.1 16-6.2l-7.3-5.7c-2 1.4-4.7 2.3-8.7 2.3-6.4 0-11.8-3.6-13.7-9.2l-7.8 6.1C6.5 43 14.6 48 24 48Z"/></svg>
+            Continue with Google
+          </button>
           <div class="auth-divider"><span>OR</span></div>
           <p class="auth-switch">New to NotesPix? <a href="signup.html" data-auth-switch="signup">Create an account</a></p>
           <p class="auth-legal">By continuing, you agree to our <a href="terms.html" target="_blank" rel="noopener">Terms &amp; Conditions</a> and <a href="privacy-policy.html" target="_blank" rel="noopener">Privacy Policy</a>.</p>
@@ -59,10 +68,19 @@
           <label for="signupRole">I am a...</label><select id="signupRole" name="role" required><option value="">Choose your role</option><option value="school">School student</option><option value="college">College student</option><option value="university">University student</option><option value="other">Other learner</option></select>
           <label for="signupPassword">Create password</label><div class="password-field"><input id="signupPassword" name="password" type="password" placeholder="At least 8 characters" autocomplete="new-password" required minlength="8" maxlength="72"><button type="button" class="password-toggle" data-toggle-password="signupPassword" aria-label="Show password">Show</button></div>
           <label for="signupConfirm">Confirm password</label><input id="signupConfirm" name="confirmPassword" type="password" placeholder="Re-enter your password" autocomplete="new-password" required minlength="8" maxlength="72">
-          <label class="checkbox-row"><input id="signupTerms" type="checkbox" required><span>I agree to the <a href="terms.html" target="_blank" rel="noopener noreferrer">Terms &amp; Conditions</a> and <a href="privacy-policy.html" target="_blank" rel="noopener noreferrer">Privacy Policy</a>.</span></label>
+          <div class="signup-consents">
+            <label class="checkbox-row"><input id="signupTerms" type="checkbox" required><span>I have read and agree to the <a href="terms.html" target="_blank" rel="noopener noreferrer">Terms &amp; Conditions</a> and acknowledge the <a href="privacy-policy.html" target="_blank" rel="noopener noreferrer">Privacy Policy</a>.</span></label>
+            <label class="checkbox-row"><input id="signupAgeConsent" type="checkbox" required><span>I confirm that I am 18 or older, or that I have permission from my parent or legal guardian to use NotesPix.</span></label>
+          </div>
+          <div class="np-turnstile" id="signupCaptcha" aria-label="Security verification"></div>
           <div class="form-message" id="signupMessage" role="status" aria-live="polite"></div>
           <button class="button button-primary auth-submit" type="submit">Create account <span>→</span></button>
         </form>
+
+          <button class="google-auth-button" type="button" data-google-auth>
+            <svg viewBox="0 0 48 48" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.5 0 6.6 1.2 9 3.5l6.7-6.7C35.6 2.4 30.3 0 24 0 14.6 0 6.5 5.4 2.5 13.2l7.8 6.1C12.2 13.1 17.6 9.5 24 9.5Z"/><path fill="#4285F4" d="M46.1 24.5c0-1.6-.1-3.1-.4-4.5H24v9h12.4c-.5 2.9-2.1 5.4-4.5 7.1l7.3 5.7c4.3-4 6.9-9.9 6.9-17.3Z"/><path fill="#FBBC05" d="M10.3 28.7a14.5 14.5 0 0 1 0-9.4l-7.8-6.1a24 24 0 0 0 0 21.6l7.8-6.1Z"/><path fill="#34A853" d="M24 48c6.5 0 12-2.1 16-6.2l-7.3-5.7c-2 1.4-4.7 2.3-8.7 2.3-6.4 0-11.8-3.6-13.7-9.2l-7.8 6.1C6.5 43 14.6 48 24 48Z"/></svg>
+            Continue with Google
+          </button>
           <p class="auth-switch signup-switch">Already have an account? <a href="login.html" data-auth-switch="login">Log in</a></p>
         </div>
       </div>

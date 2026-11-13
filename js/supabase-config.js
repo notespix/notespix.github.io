@@ -5,3 +5,6 @@
 window.NOTESPIX_SUPABASE_URL = "https://corbwhebbnrbibhqsmwx.supabase.co";
 window.NOTESPIX_SUPABASE_PUBLISHABLE_KEY = "sb_publishable_mEM338VQPq2VsRAHLkM9MQ_voYDxzQ4";
 window.notesPixAuthEnabled = true;
+
+// Cloudflare Turnstile public site key (safe to expose in browser).
+window.NOTESPIX_TURNSTILE_SITE_KEY = '0x4AAAAAAF_FjtBf_NL3lyC1';

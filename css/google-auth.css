@@ -1,0 +1,13 @@
+/* Google sign-in button — matches NotesPix auth form styling. */
+.google-auth-button{
+  width:100%;min-height:48px;margin:14px 0 4px;padding:0 18px;
+  display:flex;align-items:center;justify-content:center;gap:12px;
+  border:1px solid var(--auth-border,#dce3ef);border-radius:12px;
+  background:var(--auth-card,#fff);color:var(--auth-text,#24324b);
+  font:600 14px/1.2 "DM Sans",sans-serif;cursor:pointer;
+  transition:border-color .2s ease,box-shadow .2s ease,transform .2s ease;
+}
+.google-auth-button:hover{border-color:#9bb4ee;box-shadow:0 6px 18px rgba(35,76,160,.10);transform:translateY(-1px)}
+.google-auth-button:focus-visible{outline:3px solid rgba(66,133,244,.3);outline-offset:2px}
+.google-auth-button:disabled{opacity:.65;cursor:wait;transform:none}
+.google-auth-button svg{width:18px;height:18px;flex:0 0 18px}
